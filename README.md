@@ -5,7 +5,6 @@ An open-source Python platform for managing and executing AI agents, integrating
 The project combines a web application with a FastAPI gateway and PostgreSQL database to support agent management, model access, API authentication, usage tracking, and decision history.
 
 > **Status:** Under development. Review the security notes and verify the complete project structure before deploying to production.
-> See [`https://github.com/elBichon/ai-agent-paltform/blob/main/src/test.py`](test.py) for an example of how to use the platform as a consumer.
 
 ### Coming features
 
