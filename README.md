@@ -9,7 +9,8 @@ The project combines a web application with a FastAPI gateway and PostgreSQL dat
 ### Coming features
 
 - [ ] Openrouter based pricing
-- [ ] Coest estimation and cost based segmentation
+- [ ] Cost estimation and cost based segmentation
+- [ ] Rework agent generation system to better follow the best practices
 - [ ] Agent based prompt evaluation and optimisation (adding the related sql)
 - [ ] Dynamic model suggestions based on prompt system
 
