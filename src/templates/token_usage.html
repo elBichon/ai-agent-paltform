@@ -1,0 +1,1542 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<div class="control-room-wrapper">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <div class="header-card">
+        <div class="header-top">
+            <div class="header-left">
+                <div class="header-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <div class="header-title-wrap">
+                    <h2>Token Consumption Control Room</h2>
+                    <p>
+                        Global LLM token usage, cost and consumption
+                        analytics across users, agents, groups and models.
+                    </p>
+                    <div class="mt-2 d-flex flex-wrap gap-2">
+                        <span class="badge-soft badge-soft-tag-info">
+                            <i class="fas fa-calendar-alt"></i>
+                            {{ start_date }} → {{ end_date }}
+                        </span>
+                        <span class="badge-soft badge-soft-tag-dark">
+                            <i class="fas fa-database"></i>
+                            API Gateway Telemetry
+                        </span>
+                        {% if selected_user %}
+                        <span class="badge-soft badge-soft-tag-muted">
+                            <i class="fas fa-user"></i>
+                            {{ selected_user }}
+                        </span>
+                        {% endif %}
+                        {% if selected_group %}
+                        <span class="badge-soft badge-soft-tag-muted">
+                            <i class="fas fa-users"></i>
+                            {{ selected_group }}
+                        </span>
+                        {% endif %}
+                        {% if selected_model %}
+                        <span class="badge-soft badge-soft-tag-muted">
+                            <i class="fas fa-brain"></i>
+                            {{ selected_model }}
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="header-right">
+                <a href="/dashboard" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Dashboard
+                </a>
+                <span class="badge-soft badge-soft-tag-success">
+                    <i class="fas fa-shield-alt"></i>
+                    Admin Analytics
+                </span>
+            </div>
+        </div>
+
+
+        <!-- =================================================
+             FILTERS
+             ================================================= -->
+
+        <div class="filter-panel">
+            <div class="filter-title">
+                <i class="fas fa-sliders-h"></i>
+                Analytics Filters
+            </div>
+            <form
+                method="GET"
+                action="{{ url_for('token_usage_dashboard') }}"
+            >
+                <div class="row g-3">
+                    <!-- Start date -->
+                    <div class="col-6 col-md-2">
+                        <label class="filter-label">
+                            Start Date
+                        </label>
+                        <input
+                            type="date"
+                            name="start_date"
+                            class="filter-control"
+                            value="{{ start_date }}"
+                        >
+                    </div>
+
+                    <!-- End date -->
+                    <div class="col-6 col-md-2">
+                        <label class="filter-label">
+                            End Date
+                        </label>
+                        <input
+                            type="date"
+                            name="end_date"
+                            class="filter-control"
+                            value="{{ end_date }}"
+                        >
+                    </div>
+                    <!-- User -->
+                    <div class="col-12 col-md-2">
+                        <label class="filter-label">
+                            User
+                        </label>
+                        <select
+                            name="user_email"
+                            class="filter-control"
+                        >
+                            <option value="">
+                                All Users
+                            </option>
+                            {% for user in filter_users %}
+                            <option
+                                value="{{ user }}"
+                                {% if selected_user == user %}
+                                selected
+                                {% endif %}
+                            >
+                                {{ user }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Group -->
+                    <div class="col-12 col-md-2">
+                        <label class="filter-label">
+                            Group
+                        </label>
+                        <select
+                            name="group_name"
+                            class="filter-control"
+                        >
+                            <option value="">
+                                All Groups
+                            </option>
+                            {% for group in filter_groups %}
+                            <option
+                                value="{{ group }}"
+                                {% if selected_group == group %}
+                                selected
+                                {% endif %}
+                            >
+                                {{ group }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Agent -->
+                    <div class="col-12 col-md-2">
+                        <label class="filter-label">
+                            Agent
+                        </label>
+                        <select
+                            name="agent_id"
+                            class="filter-control"
+                        >
+                            <option value="">
+                                All Agents
+                            </option>
+                            {% for agent in filter_agents %}
+                            <option
+                                value="{{ agent.id }}"
+                                {% if selected_agent == agent.id|string %}
+                                selected
+                                {% endif %}
+                            >
+                                {{ agent.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Model -->
+                    <div class="col-12 col-md-2">
+                        <label class="filter-label">
+                            Model
+                        </label>
+                        <select
+                            name="model_name"
+                            class="filter-control"
+                        >
+                            <option value="">
+                                All Models
+                            </option>
+                            {% for model in filter_models %}
+                            <option
+                                value="{{ model }}"
+                                {% if selected_model == model %}
+                                selected
+                                {% endif %}
+                            >
+                                {{ model }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Buttons -->
+                    <div class="col-12 d-flex gap-2 justify-content-end">
+
+                        <a
+                            href="{{ url_for('token_usage_dashboard') }}"
+                            class="btn-outline-soft"
+                        >
+                            <i class="fas fa-undo"></i>
+                            Reset
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="btn-primary-sleek"
+                        >
+                            <i class="fas fa-filter"></i>
+                            Apply Filters
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- =================================================
+             SUMMARY
+             ================================================= -->
+
+        <div class="summary-strip">
+
+            <div class="summary-item">
+                <i class="fas fa-chart-line"></i>
+                <span>
+                    Showing telemetry from
+                    <strong>{{ start_date }}</strong>
+                    through
+                    <strong>{{ end_date }}</strong>
+                </span>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+
+                {% if totals.successful_calls > 0 %}
+                <span class="badge-soft badge-soft-tag-success">
+                    <i class="fas fa-check-circle"></i>
+                    {{ "{:,}".format(totals.successful_calls) }}
+                    successful
+                </span>
+                {% endif %}
+
+                {% if totals.error_calls > 0 %}
+                <span class="badge-soft badge-soft-tag-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    {{ "{:,}".format(totals.error_calls) }}
+                    errors
+                </span>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         KPI CARDS
+         ===================================================== -->
+
+    <div class="row g-3 mb-4">
+
+        <!-- Total Tokens -->
+        <div class="col-6 col-md-4 col-xl-2">
+
+            <div class="stat-card stat-blue">
+
+                <div class="stat-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+
+                <div class="stat-number">
+                    {{ "{:,}".format(totals.total_tokens) }}
+                </div>
+
+                <div class="stat-label">
+                    Total Tokens
+                </div>
+
+                <div class="stat-sub">
+                    Prompt + completion
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Prompt -->
+        <div class="col-6 col-md-4 col-xl-2">
+
+            <div class="stat-card stat-purple">
+
+                <div class="stat-icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+
+                <div class="stat-number">
+                    {{ "{:,}".format(totals.prompt_tokens) }}
+                </div>
+
+                <div class="stat-label">
+                    Prompt Tokens
+                </div>
+
+                <div class="stat-sub">
+                    Input consumption
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Completion -->
+        <div class="col-6 col-md-4 col-xl-2">
+
+            <div class="stat-card stat-green">
+
+                <div class="stat-icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+
+                <div class="stat-number">
+                    {{ "{:,}".format(totals.completion_tokens) }}
+                </div>
+
+                <div class="stat-label">
+                    Completion Tokens
+                </div>
+
+                <div class="stat-sub">
+                    Output consumption
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- API Calls -->
+        <div class="col-6 col-md-4 col-xl-2">
+
+            <div class="stat-card stat-dark">
+
+                <div class="stat-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+
+                <div class="stat-number">
+                    {{ "{:,}".format(totals.total_calls) }}
+                </div>
+
+                <div class="stat-label">
+                    API Calls
+                </div>
+
+                <div class="stat-sub">
+                    Gateway requests
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Cost -->
+        <div class="col-6 col-md-4 col-xl-2">
+
+            <div class="stat-card stat-orange">
+
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+
+                <div class="stat-number">
+                    ${{ "%.2f"|format(totals.total_cost) }}
+                </div>
+
+                <div class="stat-label">
+                    Estimated Cost
+                </div>
+
+                <div class="stat-sub">
+                    Recorded USD estimate
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Average -->
+        <div class="col-6 col-md-4 col-xl-2">
+
+            <div class="stat-card stat-blue">
+
+                <div class="stat-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+
+                <div class="stat-number">
+                    {{ "{:,.0f}".format(totals.avg_tokens_per_call) }}
+                </div>
+
+                <div class="stat-label">
+                    Avg Tokens / Call
+                </div>
+
+                <div class="stat-sub">
+                    Per gateway request
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         LEADERS
+         ===================================================== -->
+
+    <div class="row g-3 mb-4">
+
+        <div class="col-12 col-md-4">
+
+            <div class="leader-card">
+
+                <div class="leader-label">
+                    Top Token Consumer
+
+                    <i class="fas fa-user leader-icon"></i>
+                </div>
+
+                <div
+                    class="leader-value"
+                    title="{{ totals.top_user }}"
+                >
+                    {{ totals.top_user }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-md-4">
+
+            <div class="leader-card">
+
+                <div class="leader-label">
+                    Top Agent
+
+                    <i class="fas fa-robot leader-icon"></i>
+                </div>
+
+                <div
+                    class="leader-value"
+                    title="{{ totals.top_agent }}"
+                >
+                    {{ totals.top_agent }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-md-4">
+
+            <div class="leader-card">
+
+                <div class="leader-label">
+                    Top Model
+
+                    <i class="fas fa-brain leader-icon"></i>
+                </div>
+
+                <div
+                    class="leader-value"
+                    title="{{ totals.top_model }}"
+                >
+                    {{ totals.top_model }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         GROUP ALLOCATION NOTICE
+         ===================================================== -->
+
+    <div class="allocation-notice">
+
+        <i class="fas fa-info-circle"></i>
+
+        <div>
+            <strong>Group allocation:</strong>
+            group analytics use the
+            <code>evaluated_groups</code>
+            captured at request time.
+            A single API request can belong to multiple evaluated groups,
+            so group totals are allocation metrics and should not be
+            summed to calculate the global token total.
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN TOKEN TREND
+         ===================================================== -->
+
+    <div class="chart-card mb-4">
+
+        <div class="card-header">
+
+            <div class="chart-header-content">
+
+                <div>
+
+                    <h5 class="chart-title">
+                        Token Consumption Over Time
+                    </h5>
+
+                    <p class="chart-description">
+                        Daily prompt, completion and total token usage.
+                    </p>
+
+                </div>
+
+                <span class="badge-soft badge-soft-tag-info">
+                    <i class="fas fa-chart-area"></i>
+                    Daily
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if chart_data.dates %}
+
+            <div class="chart-wrap chart-wrap-lg">
+                <canvas id="tokenTrendChart"></canvas>
+            </div>
+
+            {% else %}
+
+            <div class="empty-state">
+                <i class="fas fa-chart-line"></i>
+                <strong>No token usage found</strong>
+                <span>
+                    Try expanding the selected date range or removing filters.
+                </span>
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         USER + MODEL
+         ===================================================== -->
+
+    <div class="row g-4 mb-4">
+
+        <!-- Users -->
+        <div class="col-12 col-xl-6">
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <div class="chart-header-content">
+
+                        <div>
+
+                            <h5 class="chart-title">
+                                Tokens by User
+                            </h5>
+
+                            <p class="chart-description">
+                                Top users ranked by total token consumption.
+                            </p>
+
+                        </div>
+
+                        <span class="badge-soft badge-soft-tag-info">
+                            <i class="fas fa-users"></i>
+                            Users
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    {% if chart_data.user_labels %}
+
+                    <div class="chart-wrap">
+                        <canvas id="userTokenChart"></canvas>
+                    </div>
+
+                    {% else %}
+
+                    <div class="empty-state">
+                        <i class="fas fa-users"></i>
+                        <strong>No user data</strong>
+                        <span>No usage exists for this selection.</span>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Models -->
+        <div class="col-12 col-xl-6">
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <div class="chart-header-content">
+
+                        <div>
+
+                            <h5 class="chart-title">
+                                Tokens by Model
+                            </h5>
+
+                            <p class="chart-description">
+                                Resolved model consumption across gateway calls.
+                            </p>
+
+                        </div>
+
+                        <span class="badge-soft badge-soft-tag-info">
+                            <i class="fas fa-brain"></i>
+                            Models
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    {% if chart_data.model_labels %}
+
+                    <div class="chart-wrap">
+                        <canvas id="modelTokenChart"></canvas>
+                    </div>
+
+                    {% else %}
+
+                    <div class="empty-state">
+                        <i class="fas fa-brain"></i>
+                        <strong>No model data</strong>
+                        <span>No usage exists for this selection.</span>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         AGENT + GROUP
+         ===================================================== -->
+
+    <div class="row g-4 mb-4">
+
+        <!-- Agents -->
+        <div class="col-12 col-xl-6">
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <div class="chart-header-content">
+
+                        <div>
+
+                            <h5 class="chart-title">
+                                Tokens by Agent
+                            </h5>
+
+                            <p class="chart-description">
+                                Agents ranked by recorded token consumption.
+                            </p>
+
+                        </div>
+
+                        <span class="badge-soft badge-soft-tag-success">
+                            <i class="fas fa-robot"></i>
+                            Agents
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    {% if chart_data.agent_labels %}
+
+                    <div class="chart-wrap">
+                        <canvas id="agentTokenChart"></canvas>
+                    </div>
+
+                    {% else %}
+
+                    <div class="empty-state">
+                        <i class="fas fa-robot"></i>
+                        <strong>No agent data</strong>
+                        <span>No usage exists for this selection.</span>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Groups -->
+        <div class="col-12 col-xl-6">
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <div class="chart-header-content">
+
+                        <div>
+
+                            <h5 class="chart-title">
+                                Tokens by Group
+                            </h5>
+
+                            <p class="chart-description">
+                                Request-time group allocation.
+                            </p>
+
+                        </div>
+
+                        <span class="badge-soft badge-soft-tag-warning">
+                            <i class="fas fa-users-cog"></i>
+                            Allocation
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    {% if chart_data.group_labels %}
+
+                    <div class="chart-wrap">
+                        <canvas id="groupTokenChart"></canvas>
+                    </div>
+
+                    {% else %}
+
+                    <div class="empty-state">
+                        <i class="fas fa-users-cog"></i>
+                        <strong>No group data</strong>
+                        <span>
+                            No evaluated groups were recorded for this selection.
+                        </span>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         COMPOSITION + COST BY MODEL
+         ===================================================== -->
+
+    <div class="row g-4 mb-4">
+
+        <!-- Composition -->
+        <div class="col-12 col-xl-5">
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <div class="chart-header-content">
+
+                        <div>
+
+                            <h5 class="chart-title">
+                                Token Composition
+                            </h5>
+
+                            <p class="chart-description">
+                                Prompt versus completion token distribution.
+                            </p>
+
+                        </div>
+
+                        <span class="badge-soft badge-soft-tag-dark">
+                            <i class="fas fa-chart-pie"></i>
+                            Mix
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    {% if totals.total_tokens > 0 %}
+
+                    <div class="chart-wrap chart-wrap-doughnut">
+                        <canvas id="compositionChart"></canvas>
+                    </div>
+
+                    {% else %}
+
+                    <div class="empty-state">
+                        <i class="fas fa-chart-pie"></i>
+                        <strong>No token data</strong>
+                        <span>Nothing to visualize for this selection.</span>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Cost by model -->
+        <div class="col-12 col-xl-7">
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <div class="chart-header-content">
+
+                        <div>
+
+                            <h5 class="chart-title">
+                                Estimated Cost by Model
+                            </h5>
+
+                            <p class="chart-description">
+                                Recorded estimated USD cost across resolved models.
+                            </p>
+
+                        </div>
+
+                        <span class="badge-soft badge-soft-tag-success">
+                            <i class="fas fa-dollar-sign"></i>
+                            USD
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    {% if chart_data.model_labels %}
+
+                    <div class="chart-wrap">
+                        <canvas id="modelCostChart"></canvas>
+                    </div>
+
+                    {% else %}
+
+                    <div class="empty-state">
+                        <i class="fas fa-dollar-sign"></i>
+                        <strong>No cost data</strong>
+                        <span>No model usage exists for this selection.</span>
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         DETAILED TABLE
+         ===================================================== -->
+
+    <div class="logs-card">
+
+        <div class="logs-card-header">
+
+            <div class="logs-card-header-content">
+
+                <div>
+
+                    <h5>
+                        <i class="fas fa-table me-2"></i>
+                        Detailed Token Usage
+                    </h5>
+
+                    <p>
+                        Aggregated usage by user, agent, evaluated groups and model.
+                    </p>
+
+                </div>
+
+                <span class="badge-soft badge-soft-tag-dark">
+                    {{ "{:,}".format(usage_table|length) }} rows
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-responsive">
+
+            {% if usage_table %}
+
+            <table class="table-sleek">
+
+                <thead>
+
+                    <tr>
+
+                        <th>User</th>
+
+                        <th>Agent</th>
+
+                        <th>Groups</th>
+
+                        <th>Model</th>
+
+                        <th class="text-end">
+                            Calls
+                        </th>
+
+                        <th class="text-end">
+                            Prompt
+                        </th>
+
+                        <th class="text-end">
+                            Completion
+                        </th>
+
+                        <th class="text-end">
+                            Total
+                        </th>
+
+                        <th class="text-end">
+                            Cost
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for row in usage_table %}
+
+                    <tr>
+
+                        <td>
+                            <span class="table-user">
+                                {{ row.user_email }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="table-agent">
+                                {{ row.agent_name }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span
+                                class="group-badge"
+                                title="{{ row.groups }}"
+                            >
+                                <i class="fas fa-users me-1"></i>
+                                {{ row.groups }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="model-badge">
+                                <i class="fas fa-brain me-1"></i>
+                                {{ row.model_name }}
+                            </span>
+                        </td>
+
+                        <td class="text-end">
+                            <span class="token-value">
+                                {{ "{:,}".format(row.call_count) }}
+                            </span>
+                        </td>
+
+                        <td class="text-end">
+                            <span class="token-value">
+                                {{ "{:,}".format(row.prompt_tokens) }}
+                            </span>
+                        </td>
+
+                        <td class="text-end">
+                            <span class="token-value">
+                                {{ "{:,}".format(row.completion_tokens) }}
+                            </span>
+                        </td>
+
+                        <td class="text-end">
+                            <span class="token-value">
+                                {{ "{:,}".format(row.total_tokens) }}
+                            </span>
+                        </td>
+
+                        <td class="text-end">
+                            <span class="cost-value">
+                                ${{ "%.4f"|format(row.cost) }}
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <div class="empty-state">
+
+                <i class="fas fa-database"></i>
+
+                <strong>
+                    No token usage found
+                </strong>
+
+                <span>
+                    Adjust the filters or date range and try again.
+                </span>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     CHART.JS
+     ========================================================= -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    /* =========================================================
+       SERVER DATA
+       ========================================================= */
+    const tokenChartData = {{ chart_data | tojson }};
+    /* =========================================================
+       GLOBAL CHART DEFAULTS
+       ========================================================= */
+    Chart.defaults.font.family ="'Inter', 'Segoe UI', Arial, sans-serif";
+    Chart.defaults.font.size = 11;
+    Chart.defaults.color = '#64748b';
+    Chart.defaults.borderColor = '#e2e8f0';
+    /* =========================================================
+       HELPERS
+       ========================================================= */
+    function formatNumber(value) {return Number(value || 0).toLocaleString();}
+    
+    function formatCost(value) {return '$' + Number(value || 0).toFixed(4);}
+    
+    function tokenTooltip(context, calls, costs) {
+        const index = context.dataIndex;
+        return ['Tokens: ' + formatNumber(context.raw),'Calls: ' + formatNumber(calls[index]),'Cost: ' + formatCost(costs[index])];
+    }
+
+    function buildHorizontalTokenChart(canvasId,labels,tokens,calls,costs,label) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas || !labels || !labels.length) {
+            return;
+        }
+        new Chart(canvas, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: label,
+                        data: tokens,
+                        borderRadius: 7,
+                        borderSkipped: false,
+                        backgroundColor: 'rgba(37, 99, 235, 0.72)',
+                        hoverBackgroundColor:
+                            'rgba(37, 99, 235, 0.88)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#172033',
+                        titleColor: '#fff',
+                        bodyColor: '#cbd5e1',
+                        borderColor: '#334155',
+                        borderWidth: 1,
+                        padding: 11,
+                        callbacks: {
+                            label: function(context) {
+                                return tokenTooltip(context, calls, costs);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#f1f5f9'
+                        },
+                        ticks: {
+                            color: '#94a3b8',
+                            callback: function(value) {
+                                return Number(value).toLocaleString();
+                            }
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#475569'
+                        }
+                    }
+                }
+            }
+        });
+    }
+    /* =========================================================
+       TOKEN TREND
+       ========================================================= */
+    const trendCanvas =
+        document.getElementById('tokenTrendChart');
+    if (
+        trendCanvas &&
+        tokenChartData.dates &&
+        tokenChartData.dates.length
+    ) {
+        new Chart(trendCanvas, {
+            type: 'line',
+            data: {
+                labels: tokenChartData.dates,
+                datasets: [
+                    {
+                        label: 'Prompt Tokens',
+                        data:
+                            tokenChartData.daily_prompt_tokens,
+                        borderColor:
+                            'rgba(124, 58, 237, 1)',
+                        backgroundColor:
+                            'rgba(124, 58, 237, 0.08)',
+                        borderWidth: 2,
+                        tension: 0.35,
+                        fill: true,
+                        pointRadius: 2,
+                        pointHoverRadius: 5
+                    },
+                    {
+                        label: 'Completion Tokens',
+                        data:
+                            tokenChartData.daily_completion_tokens,
+                        borderColor:
+                            'rgba(5, 150, 105, 1)',
+                        backgroundColor:
+                            'rgba(5, 150, 105, 0.08)',
+                        borderWidth: 2,
+                        tension: 0.35,
+                        fill: true,
+                        pointRadius: 2,
+                        pointHoverRadius: 5
+                    },
+                    {
+                        label: 'Total Tokens',
+                        data:
+                            tokenChartData.daily_total_tokens,
+                        borderColor:
+                            'rgba(37, 99, 235, 1)',
+                        backgroundColor:
+                            'rgba(37, 99, 235, 0.02)',
+                        borderWidth: 3,
+                        tension: 0.35,
+                        fill: false,
+                        pointRadius: 2,
+                        pointHoverRadius: 5
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        align: 'end',
+                        labels: {
+                            usePointStyle: true,
+                            boxWidth: 7,
+                            padding: 16
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#172033',
+                        titleColor: '#fff',
+                        bodyColor: '#cbd5e1',
+                        borderColor: '#334155',
+                        borderWidth: 1,
+                        padding: 11,
+                        callbacks: {
+                            label: function(context) {
+                                return (context.dataset.label +': ' +formatNumber(context.raw) +' tokens');
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#94a3b8',
+                            maxRotation: 0
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#f1f5f9'
+                        },
+                        ticks: {
+                            color: '#94a3b8',
+                            callback: function(value) {
+                                return Number(value).toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    /* =========================================================
+       USER CHART
+       ========================================================= */
+    buildHorizontalTokenChart(
+        'userTokenChart',
+        tokenChartData.user_labels,
+        tokenChartData.user_tokens,
+        tokenChartData.user_calls,
+        tokenChartData.user_costs,
+        'Tokens'
+    );
+    /* =========================================================
+       MODEL CHART
+       ========================================================= */
+    buildHorizontalTokenChart(
+        'modelTokenChart',
+        tokenChartData.model_labels,
+        tokenChartData.model_tokens,
+        tokenChartData.model_calls,
+        tokenChartData.model_costs,
+        'Tokens'
+    );
+    /* =========================================================
+       AGENT CHART
+       ========================================================= */
+    buildHorizontalTokenChart(
+        'agentTokenChart',
+        tokenChartData.agent_labels,
+        tokenChartData.agent_tokens,
+        tokenChartData.agent_calls,
+        tokenChartData.agent_costs,
+        'Tokens'
+    );
+    /* =========================================================
+       GROUP CHART
+       ========================================================= */
+    buildHorizontalTokenChart(
+        'groupTokenChart',
+        tokenChartData.group_labels,
+        tokenChartData.group_tokens,
+        tokenChartData.group_calls,
+        tokenChartData.group_costs,
+        'Tokens'
+    );
+    /* =========================================================
+       TOKEN COMPOSITION
+       ========================================================= */
+    const compositionCanvas =
+        document.getElementById('compositionChart');
+    if (
+        compositionCanvas &&
+        tokenChartData.daily_total_tokens
+    ) {
+        const promptTotal =
+            {{ totals.prompt_tokens }};
+        const completionTotal =
+            {{ totals.completion_tokens }};
+        new Chart(compositionCanvas, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Prompt Tokens',
+                    'Completion Tokens'
+                ],
+                datasets: [
+                    {
+                        data: [promptTotal,completionTotal],
+                        backgroundColor: ['rgba(124, 58, 237, 0.78)','rgba(5, 150, 105, 0.78)'],
+                        borderColor: '#ffffff',
+                        borderWidth: 4,
+                        hoverOffset: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '68%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            boxWidth: 8,
+                            padding: 15
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#172033',
+                        titleColor: '#fff',
+                        bodyColor: '#cbd5e1',
+                        padding: 11,
+                        callbacks: {
+                            label: function(context) {
+                                const total =
+                                    promptTotal +
+                                    completionTotal;
+                                const percentage =
+                                    total > 0
+                                        ? (
+                                            context.raw /
+                                            total *
+                                            100
+                                        ).toFixed(1)
+                                        : 0;
+                                return (context.label +': ' +formatNumber(context.raw) +' (' +percentage +'%)'
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+    /* =========================================================
+       MODEL COST CHART
+       ========================================================= */
+    const modelCostCanvas =
+        document.getElementById('modelCostChart');
+    if (
+        modelCostCanvas &&
+        tokenChartData.model_labels &&
+        tokenChartData.model_labels.length
+    ) {
+        new Chart(modelCostCanvas, {
+            type: 'bar',
+            data: {
+                labels:
+                    tokenChartData.model_labels,
+                datasets: [
+                    {
+                        label: 'Estimated Cost',
+                        data:
+                            tokenChartData.model_costs,
+                        borderRadius: 7,
+                        borderSkipped: false,
+                        backgroundColor:
+                            'rgba(5, 150, 105, 0.72)',
+                        hoverBackgroundColor:
+                            'rgba(5, 150, 105, 0.88)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#172033',
+                        titleColor: '#fff',
+                        bodyColor: '#cbd5e1',
+                        borderColor: '#334155',
+                        borderWidth: 1,
+                        padding: 11,
+                        callbacks: {
+                            label: function(context) {
+                                const index =
+                                    context.dataIndex;
+                                return [
+                                    'Cost: ' +
+                                    formatCost(context.raw),
+                                    'Calls: ' +
+                                    formatNumber(
+                                        tokenChartData.model_calls[index]
+                                    ),
+                                    'Tokens: ' +
+                                    formatNumber(
+                                        tokenChartData.model_tokens[index]
+                                    )
+                                ];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#f1f5f9'
+                        },
+                        ticks: {
+                            color: '#94a3b8',
+                            callback: function(value) {
+                                return '$' +
+                                    Number(value).toFixed(2);
+                            }
+                        }
+                    },
+                    y: {
+
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#475569'
+                        }
+                    }
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}

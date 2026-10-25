@@ -1,0 +1,635 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% if user.access_level == 'admin' %}
+
+
+<div class="admin-wrapper">
+  <div class="page-header">
+    <div>
+      <h1><i class="fas fa-shield-alt"></i> IAM Admin Panel</h1>
+      <div class="subtitle"><i class="fas fa-rocket"></i> Manage users, agents, groups & constraints</div>
+    </div>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; position: relative; z-index: 1;">
+      <span class="stat-mini"><i class="fas fa-users"></i> <span class="num">{{ users | length }}</span> <span class="label">users</span></span>
+      <span class="stat-mini"><i class="fas fa-robot"></i> <span class="num">{{ agents | length }}</span> <span class="label">agents</span></span>
+      <button type="button" class="btn-primary-sleek" data-bs-toggle="modal" data-bs-target="#addUserModal">
+        <i class="fas fa-plus-circle"></i> Add New User
+      </button>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card-sleek">
+        <div class="card-header-sleek">
+          <h5><i class="fas fa-users"></i> Users & Access Levels</h5>
+          <span class="badge-count"><i class="fas fa-circle" style="color: #22c55e; font-size: 0.4rem;"></i> {{ users | length }} active</span>
+        </div>
+        <div class="card-body-slim">
+          <div class="table-responsive">
+            <table class="table table-sleek">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Access Level</th>
+                  <th>Groups</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for u in users %}
+                <tr>
+                  <td><span class="fw-600">{{ u.user_email }}</span></td>
+                  <td>
+                    <span class="badge-soft
+                      {% if u.access_level == 'admin' %}badge-soft-admin
+                      {% elif u.access_level == 'editor' %}badge-soft-editor
+                      {% else %}badge-soft-user{% endif %}">
+                      <i class="fas {% if u.access_level == 'admin' %}fa-crown{% elif u.access_level == 'editor' %}fa-pen-fancy{% else %}fa-user{% endif %}"></i>
+                      {{ u.access_level.upper() }}
+                    </span>
+                  </td>
+                  <td>
+                    {% if u.groups %}
+                      {% for group in u.groups %}
+                        <span class="badge-soft badge-soft-group">{{ group }}</span>
+                      {% endfor %}
+                    {% endif %}
+                  </td>
+                  <td class="text-end text-nowrap">
+                    <button class="btn-soft-icon edit-user-btn"
+                            data-email="{{ u.user_email }}"
+                            data-level="{{ u.access_level }}"
+                            data-groups='{{ u.groups | tojson if u.groups else "[]" }}'
+                            title="Update">
+                      <i class="fas fa-pen"></i>
+                    </button>
+                    <form action="/admin/delete_user/{{ u.user_email }}" method="POST" class="d-inline">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                      <button type="submit" class="btn-soft-icon danger" onclick="return confirm('Are you sure?')" title="Remove">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card-sleek">
+        <div class="card-header-sleek">
+          <h5><i class="fas fa-robot"></i> Global System Agents Directory</h5>
+          <span class="badge-count"><i class="fas fa-circle" style="color: #22c55e; font-size: 0.4rem;"></i> {{ agents | length }} Live Clusters</span>
+        </div>
+        <div class="card-body-slim">
+          <div class="table-responsive">
+            <table class="table table-sleek">
+              <thead>
+                <tr>
+                  <th>Agent Name</th>
+                  <th>Description</th>
+                  <th>Created At</th>
+                  <th>Identity Tags</th>
+                  <th class="text-center">Capabilities</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for agent in agents %}
+                <tr>
+                  <td>
+                    <a href="/agent_dashboard/{{ agent.id }}" class="link-agent">🚀 {{ agent.name }}</a>
+                  </td>
+                  <td>
+                    <div class="text-muted-soft small text-truncate" style="max-width: 280px;" title="{{ agent.description or 'No description provided.' }}">
+                      {{ agent.description or 'No description provided.' }}
+                    </div>
+                  </td>
+                  <td class="text-muted-soft small text-nowrap">
+                    {{ agent.creation_date.strftime('%Y-%m-%d') if agent.creation_date else 'Legacy Instance' }}
+                  </td>
+                  <td>
+                    {% if agent.tags %}
+                      {% for tag in agent.tags %}
+                        <span class="badge-soft badge-soft-group">{{ tag }}</span>
+                      {% endfor %}
+                    {% else %}
+                      <span class="text-muted-soft small">-</span>
+                    {% endif %}
+                  </td>
+                  <td class="text-center text-nowrap">
+                    <span class="badge-soft {% if agent.linked_servers and agent.linked_servers | length > 0 %}badge-soft-tool{% else %}text-muted-soft{% endif %}">
+                      <i class="fas fa-wrench"></i> Tool
+                    </span>
+                    <span class="badge-soft {% if agent.linked_servers and agent.linked_servers | length > 0 %}badge-soft-mcp{% else %}text-muted-soft{% endif %}">
+                      <i class="fas fa-plug"></i> MCP
+                    </span>
+                    <span class="badge-soft {% if 'rag' in agent.tags or agent.rag_enabled %}badge-soft-rag{% else %}text-muted-soft{% endif %}">
+                      <i class="fas fa-database"></i> RAG
+                    </span>
+                  </td>
+                  <td class="text-end text-nowrap">
+                    <a href="/update_agent/{{ agent.id }}" class="btn-outline-soft btn-sm"><i class="fas fa-pen"></i> Update</a>
+                    <form action="/admin/toggle_pause_agent/{{ agent.id }}" method="POST" style="display:inline;">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    {% if agent.paused == True %}
+                        <button type="submit" class="btn-outline-soft btn-light"> <i class="fas fa-play"></i> Resume</button>
+                      {% else %}
+                        <button type="submit" class="btn-outline-soft btn-secondary"><i class="fas fa-pause"></i> Pause</button>
+                      {% endif %}
+                    </form>
+                    <form action="/admin/delete_agent/{{ agent.id }}" method="POST" class="d-inline">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                      <button type="submit" class="btn-outline-soft btn-outline-soft-danger btn-sm" onclick="return confirm('CRITICAL WARN: Are you sure you want to permanently remove this agent configuration?');"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </form>
+                  </td>
+                </tr>
+                {% else %}
+                <tr>
+                  <td colspan="6" class="text-center py-4 text-muted-soft">No operational agents exist on the platform.</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card-sleek">
+        <div class="card-header-sleek">
+          <h5><i class="fas fa-server"></i> MCP Framework Infrastructure Network</h5>
+        </div>
+        <div class="card-body-slim">
+<div class="table-responsive">
+          <table class="table table-sleek">
+            <thead>
+              <tr>
+                <th>Server Registry Name</th>
+                <th>Visibility Status</th>
+                <th>Component Tool Frameworks</th>
+                <th>Routed Agents Pool</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for server in mcp_infrastructure %}
+              <tr>
+                <td>
+                  <span class="fw-600"><i class="fas fa-cube text-primary" style="margin-right: 6px;"></i> {{ server.name }}</span>
+                </td>
+                <td>
+                  <span class="badge-soft {% if server.status == 'public' %}badge-soft-group{% else %}badge-soft-user{% endif %}">
+                    {{ server.status.upper() }}
+                  </span>
+                </td>
+                <td>
+                  {% if server.tool_names and server.tool_names | length > 0 %}
+                    {% for tool in server.tool_names %}
+                      <span class="badge-soft badge-soft-tool" style="font-size: 0.75rem; margin-bottom: 2px; display: inline-block;">
+                        <i class="fas fa-wrench" style="font-size: 0.7rem;"></i> {{ tool }}
+                      </span>
+                    {% endfor %}
+                  {% else %}
+                    <span class="text-muted-soft small"><i>No individual tools declared</i></span>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if server.connected_agents and server.connected_agents | length > 0 %}
+                    <div class="small fw-600 text-truncate" style="max-width: 320px;" title="{{ server.connected_agents | join(', ') }}">
+                      {{ server.connected_agents | join(', ') }}
+                    </div>
+                  {% else %}
+                    <span class="text-muted-soft small">None connected</span>
+                  {% endif %}
+                </td>
+                <td class="text-end text-nowrap">
+                  <form action="/admin/delete_mcp/{{ server.id }}" method="POST" class="d-inline">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn-outline-soft btn-outline-soft-danger btn-sm"
+                            onclick="return confirm('CRITICAL WARN: Removing this MCP server node will break capability bindings across {{ server.connection_count }} active agents. Proceed?');">
+                      <i class="fas fa-trash-alt"></i> Delete
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              {% else %}
+              <tr>
+                <td colspan="5" class="text-center py-4 text-muted-soft">No active server clusters mapped in the runtime system.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 g-4">
+    <div class="col-md-6">
+      <div class="card-sleek h-100">
+        <div class="card-header-sleek">
+          <h5><i class="fas fa-tags"></i> Groups Management</h5>
+          <div>
+            <button type="button" class="btn-primary-sleek-accent" data-bs-toggle="modal" data-bs-target="#addGroupModal">
+              <i class="fas fa-plus"></i> Add Group
+            </button>
+          </div>
+        </div>
+        <div class="card-body-slim">
+          <ul class="list-group list-group-slim">
+            {% for g in groups %}
+            <li class="list-group-item">
+              <div>
+                <span class="fw-600"><i class="fas fa-folder" style="color: #2563eb; margin-right: 6px;"></i> {{ g.name }}</span>
+                <span class="text-muted-soft small d-block">{{ g.member_count }} members</span>
+              </div>
+              <form action="/admin/delete_group/{{ g.name }}" method="POST" class="d-inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn-soft-icon danger" onclick="return confirm('Are you sure?')" title="Delete Group">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </form>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card-sleek h-100">
+        <div class="card-header-sleek">
+          <h5><i class="fas fa-link"></i> Group-Agent Overview</h5>
+          <span class="badge-count"><i class="fas fa-layer-group"></i> {{ groups | length }} groups</span>
+        </div>
+        <div class="card-body-slim">
+          <ul class="list-group list-group-slim">
+            {% set groups_map = {} %}
+            {% for agent in agents %}
+              {% if agent.tags %}
+                {% for tag in agent.tags %}
+                  {% if tag not in groups_map %}
+                    {% set _ = groups_map.update({tag: []}) %}
+                  {% endif %}
+                  {% set _ = groups_map[tag].append(agent.name) %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+
+            {% for group_obj in groups %}
+            {% set group = group_obj.name %}
+            {% set agent_names = groups_map.get(group, []) %}
+            <li class="list-group-item">
+              <div>
+                <span class="fw-600"><i class="fas fa-tag" style="color: #60a5fa; margin-right: 6px;"></i> {{ group }}</span>
+                <div class="text-muted-soft small">{{ agent_names | join(', ') if agent_names else 'No agents' }}</div>
+              </div>
+              <span class="badge-soft badge-soft-group"><i class="fas fa-robot"></i> {{ agent_names | length }} agents</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card-sleek">
+        <div class="card-header-sleek">
+          <h5><i class="fas fa-cube"></i> Models Management</h5>
+          <button type="button" class="btn-primary-sleek-accent" data-bs-toggle="modal" data-bs-target="#addModelModal">
+            <i class="fas fa-plus"></i> Add Model
+          </button>
+        </div>
+        <div class="card-body-slim">
+          <div class="table-responsive">
+            <table class="table table-sleek">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Base URL</th>
+                  <th>API Key (Encrypted)</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for m in models %}
+                <tr>
+                  <td><span class="fw-600"><i class="fas fa-microchip" style="color: #2563eb; margin-right: 6px;"></i> {{ m.name }}</span></td>
+                  <td><code style="background: #f1f4f9; padding: 4px 14px; border-radius: 40px; font-size: 0.75rem; border: 1px solid #e2e8f0;">{{ m.base_url }}</code></td>
+                  <td><span class="text-muted-soft">••••••••</span></td>
+                  <td class="text-end">
+                    <form action="/admin/delete_model/{{ m.id }}" method="POST" class="d-inline">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                      <button type="submit" class="btn-soft-icon danger" onclick="return confirm('Are you sure?')" title="Delete">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card-sleek">
+        <div class="card-header-sleek">
+          <h5><i class="fas fa-ban"></i> Model Constraints</h5>
+          <button type="button" class="btn-primary-sleek-accent" data-bs-toggle="modal" data-bs-target="#addConstraintModal">
+            <i class="fas fa-plus"></i> Add Constraint
+          </button>
+        </div>
+        <div class="card-body-slim">
+          <div class="table-responsive">
+            <table class="table table-sleek">
+              <thead>
+                <tr>
+                  <th>Group</th>
+                  <th>Model</th>
+                  <th>Max Calls</th>
+                  <th>Max Amount ($)</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for c in constraints %}
+                <tr>
+                  <td><span class="badge-soft badge-soft-group"><i class="fas fa-folder"></i> {{ c.group_name }}</span></td>
+                  <td><span class="fw-600">{{ c.model_name }}</span></td>
+                  <td><span class="{% if c.max_calls %}badge-soft badge-soft-tool{% else %}text-muted-soft{% endif %}">{{ c.max_calls if c.max_calls else 'None' }}</span></td>
+                  <td><span class="{% if c.max_amount %}badge-soft badge-soft-editor{% else %}text-muted-soft{% endif %}">${{ c.max_amount if c.max_amount else 'None' }}</span></td>
+                  <td class="text-end text-nowrap">
+                    <button class="btn-soft-icon edit-constraint-btn"
+                            data-id="{{ c.id }}"
+                            data-group="{{ c.group_name }}"
+                            data-model="{{ c.model_id }}"
+                            data-calls="{{ c.max_calls if c.max_calls else '' }}"
+                            data-amount="{{ c.max_amount if c.max_amount else '' }}"
+                            title="Update">
+                      <i class="fas fa-pen"></i>
+                    </button>
+                    <form action="/admin/delete_constraint/{{ c.id }}" method="POST" class="d-inline">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                      <button type="submit" class="btn-soft-icon danger" onclick="return confirm('Are you sure?')" title="Delete">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addUserModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-sleek">
+        <form action="/admin/add_user" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div class="modal-header modal-header-sleek">
+            <h5 class="modal-title"><i class="fas fa-user-plus" style="color: #2563eb; margin-right: 8px;"></i> Manage User IAM</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body modal-body-sleek">
+            <div class="mb-3">
+              <label for="email" class="form-label fw-600">User Email</label>
+              <input type="email" class="form-control form-control-sleek" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="access_level" class="form-label fw-600">Access Level</label>
+              <select class="form-select form-select-sleek" id="access_level" name="access_level">
+                <option value="user">User</option>
+                <option value="editor">Editor</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-600">Groups</label>
+              <div class="form-check-group">
+                {% for group in groups %}
+                <div class="form-check">
+                  <input class="form-check-input group-checkbox" type="checkbox" name="groups" value="{{ group.name }}" id="user_group_{{ group.name }}">
+                  <label class="form-check-label" for="user_group_{{ group.name }}">{{ group.name }}</label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer modal-footer-sleek">
+            <button type="button" class="btn-outline-soft" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn-primary-sleek" style="padding: 8px 28px;">Save User</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addGroupModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-sleek">
+        <form action="/admin/add_group" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div class="modal-header modal-header-sleek">
+            <h5 class="modal-title"><i class="fas fa-tag" style="color: #2563eb; margin-right: 8px;"></i> Add New Group</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body modal-body-sleek">
+            <div class="mb-3">
+              <label for="group_name" class="form-label fw-600">Group Name</label>
+              <input type="text" class="form-control form-control-sleek" id="group_name" name="name" required>
+            </div>
+          </div>
+          <div class="modal-footer modal-footer-sleek">
+            <button type="button" class="btn-outline-soft" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn-primary-sleek" style="padding: 8px 28px;">Add Group</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addModelModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-sleek">
+        <form action="/admin/add_model" method="POST">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div class="modal-header modal-header-sleek">
+            <h5 class="modal-title"><i class="fas fa-cube" style="color: #2563eb; margin-right: 8px;"></i> Add New Model</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body modal-body-sleek">
+            <div class="mb-3">
+              <label for="model_name" class="form-label fw-600">Model Name</label>
+              <input type="text" class="form-control form-control-sleek" id="model_name" name="name" placeholder="e.g. gemini/gemini-2.5-flash" required>
+            </div>
+            <div class="mb-3">
+              <label for="base_url" class="form-label fw-600">Base URL</label>
+              <input type="url" class="form-control form-control-sleek" id="base_url" name="base_url" placeholder="https://generativelanguage.googleapis.com/v1beta" required>
+            </div>
+            <div class="mb-3">
+              <label for="api_key" class="form-label fw-600">API Key</label>
+              <input type="password" class="form-control form-control-sleek" id="api_key" name="api_key" required>
+            </div>
+          </div>
+          <div class="modal-footer modal-footer-sleek">
+            <button type="button" class="btn-outline-soft" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn-primary-sleek" style="padding: 8px 28px;">Add Model</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addConstraintModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-sleek">
+        <form action="/admin/add_constraint" method="POST" id="constraintForm">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <div class="modal-header modal-header-sleek">
+            <h5 class="modal-title" id="constraintModalLabel"><i class="fas fa-ban" style="color: #2563eb; margin-right: 8px;"></i> Add Model Constraint</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body modal-body-sleek">
+            <div class="mb-3">
+              <label for="constraint_group" class="form-label fw-600">Group</label>
+              <select class="form-select form-select-sleek" id="constraint_group" name="group_name" required>
+                {% for g in groups %}
+                <option value="{{ g.name }}">{{ g.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="constraint_model" class="form-label fw-600">Model</label>
+              <select class="form-select form-select-sleek" id="constraint_model" name="model_id" required>
+                {% for m in models %}
+                <option value="{{ m.id }}">{{ m.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="max_calls" class="form-label fw-600">Max Calls</label>
+              <input type="number" class="form-control form-control-sleek" id="max_calls" name="max_calls" placeholder="Optional">
+            </div>
+            <div class="mb-3">
+              <label for="max_amount" class="form-label fw-600">Max Amount ($)</label>
+              <input type="number" step="0.01" class="form-control form-control-sleek" id="max_amount" name="max_amount" placeholder="Optional">
+            </div>
+          </div>
+          <div class="modal-footer modal-footer-sleek">
+            <button type="button" class="btn-outline-soft" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn-primary-sleek" id="constraintSubmitBtn" style="padding: 8px 28px;">Add Constraint</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // User Modal Logic
+    const editUserBtns = document.querySelectorAll('.edit-user-btn');
+    const userModalElement = document.getElementById('addUserModal');
+    if (userModalElement) {
+      const userModal = new bootstrap.Modal(userModalElement);
+
+      editUserBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const email = this.getAttribute('data-email');
+          const level = this.getAttribute('data-level');
+          const groupsRaw = this.getAttribute('data-groups');
+          let groups = [];
+          try {
+            groups = JSON.parse(groupsRaw);
+          } catch (e) {
+            console.error("Error parsing groups:", e);
+          }
+
+          document.getElementById('email').value = email;
+          document.getElementById('access_level').value = level;
+
+          document.querySelectorAll('.group-checkbox').forEach(cb => {
+            cb.checked = groups.includes(cb.value);
+          });
+
+          userModal.show();
+        });
+      });
+    }
+
+    // Constraint Modal Logic
+    const addConstraintBtn = document.querySelector('[data-bs-target="#addConstraintModal"]');
+    const editConstraintBtns = document.querySelectorAll('.edit-constraint-btn');
+    const constraintModalElement = document.getElementById('addConstraintModal');
+    const constraintForm = document.getElementById('constraintForm');
+    const constraintModalLabel = document.getElementById('constraintModalLabel');
+    const constraintSubmitBtn = document.getElementById('constraintSubmitBtn');
+
+    if (constraintModalElement) {
+      const constraintModal = new bootstrap.Modal(constraintModalElement);
+
+      if (addConstraintBtn) {
+        addConstraintBtn.addEventListener('click', function() {
+          constraintForm.action = "/admin/add_constraint";
+          constraintModalLabel.innerText = "Add Model Constraint";
+          constraintSubmitBtn.innerText = "Add Constraint";
+          constraintForm.reset();
+        });
+      }
+
+      editConstraintBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          const group = this.getAttribute('data-group');
+          const model = this.getAttribute('data-model');
+          const calls = this.getAttribute('data-calls');
+          const amount = this.getAttribute('data-amount');
+
+          constraintForm.action = "/admin/update_constraint/" + id;
+          constraintModalLabel.innerText = "Update Model Constraint";
+          constraintSubmitBtn.innerText = "Update Constraint";
+
+          document.getElementById('constraint_group').value = group;
+          document.getElementById('constraint_model').value = model;
+          document.getElementById('max_calls').value = calls;
+          document.getElementById('max_amount').value = amount;
+
+          constraintModal.show();
+        });
+      });
+    }
+  });
+  </script>
+
+</div>
+
+{% else %}
+<div class="text-center py-5">
+  <h2>Admin access required.</h2>
+  <a href="/dashboard" class="btn btn-primary mt-3">Back to Dashboard</a>
+</div>
+{% endif %}
+{% endblock %}

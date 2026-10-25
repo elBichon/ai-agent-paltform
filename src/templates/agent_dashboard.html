@@ -1,0 +1,636 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="control-room-wrapper">
+  <div class="header-card">
+    <div class="header-top">
+      <div class="header-left">
+        <a href="/dashboard" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+
+        <div class="agent-title-wrap">
+          <h2><i class="fas fa-robot"></i> Control Room: {{ agent.name }}</h2>
+             <a href="/semantica/{{ agent.id }}" class="btn-primary-sleek">Semantic analytics</a>
+          <div class="d-flex flex-wrap gap-1">
+            {% if agent.tags %}
+              {% for tag in agent.tags %}
+                {% if agent.group_tags and tag not in agent.group_tags %}
+                  <span class="badge-soft-tag badge-soft-tag-info"><i class="fas fa-tag"></i> {{ tag }}</span>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            {% if agent.group_tags %}
+              {% for group in agent.group_tags %}
+                <span class="badge-soft-tag badge-soft-tag-dark"><i class="fas fa-lock"></i> {{ group }}</span>
+              {% endfor %}
+            {% endif %}
+            {% if not agent.tags and not agent.group_tags %}
+              <span class="badge-soft-tag badge-soft-tag-muted">No Assignment Tags</span>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="agent-meta">
+          <span>Agent ID: <code id="agentIdStr">{{ agent.id }}</code>
+            <button class="btn-copy-id" onclick="copyAgentId()" title="Copy ID to Clipboard">
+              <i class="far fa-copy"></i> Copy ID
+            </button>
+          </span>
+          <span class="divider">|</span>
+          <span>
+            <strong>Created by:</strong>
+            <span class="fw-semibold text-dark">{{ agent.creator_name or 'System' }}</span>
+          </span>
+          <span class="divider">|</span>
+          <span>
+            <strong>Created on:</strong>
+            <span class="fw-semibold text-dark">
+              {% if agent.creation_date %}
+                {{ agent.creation_date.strftime('%Y-%m-%d') }}
+              {% elif agent.created_at %}
+                {{ agent.created_at.strftime('%Y-%m-%d') }}
+              {% else %}
+                <span class="text-muted fst-italic">Legacy Platform Instance</span>
+              {% endif %}
+            </span>
+          </span>
+        </div>
+
+<div class="architecture-summary">
+  <div class="arch-node">
+    <strong>RAG Integration:
+      {% if agent.rag_enabled %}
+        <span class="badge-soft-tag badge-soft-tag-success"><i class="fas fa-check-circle"></i> Active</span>
+      {% else %}
+        <span class="badge-soft-tag badge-soft-tag-muted"><i class="fas fa-ban"></i> Offline</span>
+      {% endif %}
+    </strong>
+    <div class="arch-subtext mt-2">
+      {% if agent.rag_enabled and agent.rag_sources %}
+        <span class="text-dark fw-semibold">Target Vector Index Scope:</span>
+        <div class="text-muted small">{{ agent.rag_sources | join(', ') }}</div>
+      {% elif agent.rag_enabled %}
+        <span class="text-muted fst-italic">Standard vector database synchronization active.</span>
+      {% else %}
+        No isolated knowledge base sources are connected to this instance.
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="arch-node">
+    <strong>MCP Extensions & Custom Tools:
+      {% if mcp_servers or standalone_tools %}
+        <span class="badge-soft-tag badge-soft-tag-success"><i class="fas fa-plug"></i> Connected</span>
+      {% else %}
+        <span class="badge-soft-tag badge-soft-tag-muted"><i class="fas fa-link-slash"></i> Unlinked</span>
+      {% endif %}
+    </strong>
+    <div class="arch-subtext mt-2">
+      {% if mcp_servers %}
+        {% for server in mcp_servers %}
+          <div class="mb-1">
+            <span class="fw-semibold text-dark">
+              <i class="fas fa-server text-primary small"></i> {{ server.name }}:
+            </span>
+            <span class="text-muted small">
+              {% if server.tool_names %}
+                {{ server.tool_names | join(', ') }}
+              {% else %}
+                Active (No functional tools exported)
+              {% endif %}
+            </span>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if standalone_tools %}
+        <div class="mt-2 pt-2 border-top">
+          <span class="fw-semibold text-dark">
+            <i class="fas fa-tools text-secondary small"></i> Standalone Tools:
+          </span>
+          <span class="text-muted small">{{ standalone_tools | join(', ') }}</span>
+        </div>
+      {% endif %}
+
+      {% if not mcp_servers and not standalone_tools %}
+        No external runtime extensions or API tool configurations attached.
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+        <div class="description-box">
+          <h6><i class="fas fa-align-left"></i> Agent Core Description</h6>
+          <p>{{ agent.description or 'No operational system description provided for this engine node.' }}</p>
+        </div>
+      </div>
+
+      <div class="header-right">
+      <form action="/admin/toggle_pause_agent/{{ agent.id }}" method="POST" style="display:inline;">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        {% if agent.paused == True %}
+          <button type="submit" class="btn-outline-soft btn-light"><i class="fas fa-play"></i> Resume</button>
+        {% else %}
+          <button type="submit" class="btn-outline-soft btn-secondary"><i class="fas fa-pause"></i> Pause</button>
+        {% endif %}
+      </form>
+        <a href="/update_agent/{{ agent.id }}" class="btn-primary-sleek">
+          <i class="fas fa-pen"></i> Edit Agent Settings
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 g-3">
+    <div class="col-6 col-md-2">
+      <div class="stat-card">
+        <h6><i class="fas fa-chart-line"></i> Total Runs</h6>
+        <div class="stat-number text-dark">{{ totals.total_runs }}</div>
+        <small class="fw-semibold text-primary">Prompt v{{ agent.current_version or 1 }}</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-2">
+      <div class="stat-card">
+        <h6><i class="fas fa-exclamation-triangle"></i> Error Rate</h6>
+        <div class="stat-number {{ 'text-danger' if totals.error_rate_pct > 5 else 'text-success' }}">{{ totals.error_rate_pct }}%</div>
+        <small>Stability Index</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-2">
+      <div class="stat-card">
+        <h6><i class="fas fa-clock"></i> P95 Latency</h6>
+        <div class="stat-number text-info">{{ totals.p95_latency }}s</div>
+        <small>95% of users ≤ speed</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-2">
+      <div class="stat-card">
+        <h6><i class="fas fa-microchip"></i> Tokens Volume</h6>
+        <div class="stat-number text-warning text-truncate" title="{{ totals.total_tokens }}">{{ totals.total_tokens }}</div>
+        <small>Total prompt + comp</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-2">
+      <div class="stat-card">
+        <h6><i class="fas fa-dollar-sign"></i> Estimated Cost</h6>
+        <div class="stat-number text-success">${{ totals.total_cost }}</div>
+        <small>Upstream provider billing</small>
+      </div>
+    </div>
+    <div class="col-6 col-md-2">
+      <div class="stat-card">
+        <h6><i class="fas fa-gem"></i> Value Density</h6>
+        <div class="stat-number text-secondary" style="font-size: 1.2rem;">{{ totals.tokens_per_dollar }}</div>
+        <small>Tokens per $1.00 spent</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 g-4">
+    <div class="col-md-4">
+      <div class="chart-card">
+        <div class="card-header"><i class="fas fa-chart-line"></i> Traffic Metrics Over Time</div>
+        <div class="card-body">
+          {% if chart_data.dates %}
+            <canvas id="trafficChart"></canvas>
+          {% else %}
+            <div class="text-muted small py-4">No baseline activity trends found.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="chart-card">
+        <div class="card-header"><i class="fas fa-wave-square"></i> Token Consumption Trend</div>
+        <div class="card-body">
+          {% if chart_data.dates %}
+            <canvas id="dailyTokenChart"></canvas>
+          {% else %}
+            <div class="text-muted small py-4">No token consumption history tracking found.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="chart-card">
+        <div class="card-header"><i class="fas fa-fire"></i> Financial Burn Trend (Daily USD)</div>
+        <div class="card-body">
+          {% if chart_data.dates %}
+            <canvas id="dailyCostChart"></canvas>
+          {% else %}
+            <div class="text-muted small py-4">No upstream cost overhead tracking found.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 g-4">
+    <div class="col-md-12">
+      <div class="chart-card">
+        <div class="card-header"><i class="fas fa-chart-bar"></i> Total System Runtime Execution Ratio (Cumulative Status)</div>
+        <div class="card-body" style="min-height: 120px;">
+          {% if chart_data.dates %}
+            <canvas id="statusRatioChart"></canvas>
+          {% else %}
+            <div class="text-muted small py-4">No execution metrics records generated.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 g-4">
+    <div class="col-md-6">
+      <div class="chart-card">
+        <div class="card-header"><i class="fas fa-users"></i> Successful Calls per Corporate Group</div>
+        <div class="card-body">
+          {% if chart_data.groups %}
+            <canvas id="groupCallsChart"></canvas>
+          {% else %}
+            <div class="text-muted small py-4">No corporate groups have invoked this system profile.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="chart-card">
+        <div class="card-header"><i class="fas fa-database"></i> Token Consumption per Corporate Group</div>
+        <div class="card-body">
+          {% if chart_data.groups %}
+            <canvas id="groupTokensChart"></canvas>
+          {% else %}
+            <div class="text-muted small py-4">No metrics allocation matching group scopes found.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 g-4">
+    <div class="col-md-12">
+      <div class="chart-card">
+        <div class="card-header"><i class="fas fa-history"></i> Token Consumption Allocation Over Time per Corporate Group</div>
+        <div class="card-body">
+          {% if chart_data.dates and chart_data.groups %}
+            <canvas id="groupTokenTimeChart"></canvas>
+          {% else %}
+            <div class="text-muted small py-4">Insufficient transactional timeline details to distribute group metrics.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 g-4">
+    <div class="col-md-6">
+      <div class="chart-card">
+        <div class="card-header"><i class="fas fa-chart-area"></i> High-Resolution Latency Distribution Histogram</div>
+        <div class="card-body">
+          {% if totals.total_runs > 0 %}
+            <canvas id="latencyHistogramChart"></canvas>
+          {% else %}
+            <div class="text-muted small py-4">No processing traces detected to evaluate latency.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="chart-card">
+        <div class="card-header"><i class="fas fa-bug"></i> Root Cause Error Class Distribution</div>
+        <div class="card-body">
+          {% if chart_data.error_labels %}
+            <canvas id="errorProfileChart"></canvas>
+          {% else %}
+            <div class="text-center py-4">
+              <span class="badge-soft-tag badge-soft-tag-success" style="background: linear-gradient(135deg, #dcfce7, #86efac); color: #15803d; padding: 6px 20px; font-size: 0.8rem;">
+                <i class="fas fa-check-circle"></i> Stable Engine
+              </span>
+              <p class="small text-muted mt-2 mb-0">No API execution errors have occurred on this agent's stack.</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 g-4">
+    <div class="col-md-12">
+      <div class="chart-card">
+        <div class="card-header"><i class="fas fa-stopwatch"></i> Operational Engine Response Latency Timeline (Seconds)</div>
+        <div class="card-body">
+          {% if chart_data.dates %}
+            <canvas id="latencyTimelineChart"></canvas>
+          {% else %}
+            <div class="text-muted small py-4">No data logs available to build latency processing trends.</div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="logs-card">
+    <div class="card-header">
+      <h5><i class="fas fa-scroll"></i> Recent Execution Trace Logs (Last 100 Calls)</h5>
+      <span class="badge-log"><i class="fas fa-code"></i> api_gateway.log</span>
+    </div>
+    <div class="log-scroll">
+      <table class="table table-log">
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>User Email</th>
+            <th>Model Used</th>
+            <th>Status</th>
+            <th>Latency</th>
+            <th>Tokens (P/C)</th>
+            <th>Query Input</th>
+            <th>Response Output / Error Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in logs %}
+          <tr>
+            <td class="text-nowrap"><span class="text-muted small">{{ log.timestamp }}</span></td>
+            <td><span class="fw-medium">{{ log.user_email }}</span></td>
+            <td><span class="badge-model">{{ log.resolved_model_name }}</span></td>
+            <td>
+              <span class="badge-status {{ 'badge-status-success' if log.status == 'success' else 'badge-status-error' }}">
+                {{ log.status.upper() }}
+              </span>
+            </td>
+            <td>{{ log.latency_seconds }}s</td>
+            <td><span class="text-muted">{{ log.prompt_tokens }}/{{ log.completion_tokens }}</span></td>
+            <td><span class="text-truncate-custom" title="{{ log.input_query }}">{{ log.input_query }}</span></td>
+            <td>
+              {% if log.status == 'success' %}
+                <span title="{{ log.output_response }}">{{ log.output_response }}</span>
+              {% else %}
+                <span class="text-danger text-truncate-custom-wide" title="{{ log.error_message }}">
+                  <strong>[{{ log.error_type }}]</strong> {{ log.error_message }}
+                </span>
+              {% endif %}
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="8" class="text-center py-5 text-muted">No analytics data logs found for this agent.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+  <!-- Agent Version Performance Table Component -->
+<div class="card card-dashboard mb-4">
+  <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+    <h5 class="fw-bold mb-0">
+      <i class="fas fa-code-branch text-primary me-2"></i>Prompt System Version Performance Statistics
+    </h5>
+    <span class="badge bg-light text-dark border">
+      <i class="fas fa-trophy text-warning me-1"></i> Green Row = Optimal Model & Prompt Performance
+    </span>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0 text-sm">
+        <thead class="table-light">
+          <tr>
+            <th class="ps-3">Version</th>
+            <th>Created Date</th>
+            <th>Primary Model</th>
+            <th class="text-center">Total Runs</th>
+            <th class="text-center">Success / Error</th>
+            <th>Input Length <small class="text-muted">(Avg ± Std)</small></th>
+            <th>Latency <small class="text-muted">(Avg ± Std)</small></th>
+            <th>Prompt Tokens <small class="text-muted">(Avg ± Std)</small></th>
+            <th class="pe-3">Completion Tokens <small class="text-muted">(Avg ± Std)</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if version_stats %}
+            {% for item in version_stats %}
+            <tr class="{% if item.is_best %}table-success border-start border-4 border-success{% endif %}">
+              <td class="ps-3 fw-bold">
+                v{{ item.version }}
+                {% if item.is_best %}
+                  <span class="badge bg-success ms-1">
+                    <i class="fas fa-check-circle me-1"></i> Best
+                  </span>
+                {% endif %}
+              </td>
+              <td class="text-muted">{{ item.creation_date }}</td>
+              <td><span class="badge bg-secondary">{{ item.primary_model }}</span></td>
+              <td class="text-center fw-semibold">{{ item.total_runs }}</td>
+              <td class="text-center">
+                <span class="text-success fw-semibold">{{ item.success_count }}</span>
+                <span class="text-muted">/</span>
+                <span class="text-danger fw-semibold">{{ item.error_count }}</span>
+              </td>
+              <td>
+                <div>{{ item.avg_input_len }} <small class="text-muted">chars</small></div>
+                <small class="text-muted">± {{ item.std_input_len }}</small>
+              </td>
+              <td>
+                <div>{{ item.avg_latency }}s</div>
+                <small class="text-muted">± {{ item.std_latency }}s</small>
+              </td>
+              <td>
+                <div>{{ item.avg_prompt_tokens }}</div>
+                <small class="text-muted">± {{ item.std_prompt_tokens }}</small>
+              </td>
+              <td class="pe-3">
+                <div>{{ item.avg_completion_tokens }}</div>
+                <small class="text-muted">± {{ item.std_completion_tokens }}</small>
+              </td>
+            </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="9" class="text-center py-4 text-muted">No version performance statistics available.</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  // ===== CLIPBOARD COPY HELPER =====
+  function copyAgentId() {
+    const textNode = document.getElementById("agentIdStr").innerText;
+    navigator.clipboard.writeText(textNode).then(() => {
+      const copyBtn = document.querySelector(".btn-copy-id");
+      const savedHtml = copyBtn.innerHTML;
+      copyBtn.innerHTML = '<i class="fas fa-check text-success"></i> Copied!';
+      setTimeout(() => { copyBtn.innerHTML = savedHtml; }, 1800);
+    }).catch(err => {
+      console.error("Could not complete clip allocation write sequence: ", err);
+    });
+  }
+
+  // ===== CHART DATA TRACES =====
+  const dates = {{ chart_data.dates | tojson if chart_data.dates else '[]' }};
+  const successCounts = {{ chart_data.success_counts | tojson if chart_data.success_counts else '[]' }};
+  const errorCounts = {{ chart_data.error_counts | tojson if chart_data.error_counts else '[]' }};
+  const dailyTokens = {{ chart_data.daily_tokens | tojson if chart_data.daily_tokens else '[]' }};
+  const dailyCosts = {{ chart_data.daily_costs | tojson if chart_data.daily_costs else '[]' }};
+
+  const groups = {{ chart_data.groups | tojson if chart_data.groups else '[]' }};
+  const groupCalls = {{ chart_data.group_calls | tojson if chart_data.group_calls else '[]' }};
+  const groupTokens = {{ chart_data.group_tokens | tojson if chart_data.group_tokens else '[]' }};
+
+  const histogramLabels = {{ chart_data.histogram_labels | tojson if chart_data.histogram_labels else '[]' }};
+  const histogramValues = {{ chart_data.histogram_values | tojson if chart_data.histogram_values else '[]' }};
+
+  const errorLabels = {{ chart_data.error_labels | tojson if chart_data.error_labels else '[]' }};
+  const errorCountsDist = {{ chart_data.error_counts_dist | tojson if chart_data.error_counts_dist else '[]' }};
+
+  const groupTimelineData = {{ chart_data.group_timeline_data | tojson if chart_data.group_timeline_data else '{}' }};
+  const historicalLatencies = {{ chart_data.historical_latencies | tojson if chart_data.historical_latencies else '[]' }};
+
+  const totalCumulativeSuccess = successCounts.reduce((a, b) => a + b, 0);
+  const totalCumulativeErrors = errorCounts.reduce((a, b) => a + b, 0);
+
+  // --- CHART 1: Dual Line Graph (Calls vs Errors Over Time) ---
+  if (dates.length > 0 && document.getElementById('trafficChart')) {
+    new Chart(document.getElementById('trafficChart'), {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [
+          { label: 'Success', data: successCounts, borderColor: '#22c55e', backgroundColor: 'rgba(34, 197, 94, 0.04)', tension: 0.2, fill: true, borderWidth: 2 },
+          { label: 'Errors', data: errorCounts, borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.04)', tension: 0.2, fill: true, borderWidth: 2 }
+        ]
+      },
+      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+    });
+  }
+
+  // --- NEW STATUS RATIO CHART: Horizontal Success vs Error Blocks ---
+  if (dates.length > 0 && document.getElementById('statusRatioChart')) {
+    new Chart(document.getElementById('statusRatioChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Cumulative Runs Profile'],
+        datasets: [
+          { label: 'Total Success', data: [totalCumulativeSuccess], backgroundColor: '#22c55e', borderRadius: 6 },
+          { label: 'Total Fails', data: [totalCumulativeErrors], backgroundColor: '#ef4444', borderRadius: 6 }
+        ]
+      },
+      options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } }, scales: { x: { beginAtZero: true }, y: { stacked: false } } }
+    });
+  }
+
+  // --- CHART 2: Daily Token Consumption ---
+  if (dates.length > 0 && document.getElementById('dailyTokenChart')) {
+    new Chart(document.getElementById('dailyTokenChart'), {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [{ label: 'Tokens', data: dailyTokens, borderColor: '#eab308', backgroundColor: 'rgba(234, 179, 8, 0.08)', tension: 0.15, fill: true, borderWidth: 2 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+    });
+  }
+
+  // --- CHART 3: Daily Cost ---
+  if (dates.length > 0 && document.getElementById('dailyCostChart')) {
+    new Chart(document.getElementById('dailyCostChart'), {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [{ label: 'USD Cost', data: dailyCosts, borderColor: '#22c55e', backgroundColor: 'rgba(34, 197, 94, 0.08)', tension: 0.15, fill: true, borderWidth: 2 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+    });
+  }
+
+  // --- CHART 4: Group Calls ---
+  if (groups.length > 0 && document.getElementById('groupCallsChart')) {
+    new Chart(document.getElementById('groupCallsChart'), {
+      type: 'bar',
+      data: {
+        labels: groups,
+        datasets: [{ data: groupCalls, backgroundColor: '#3b82f6', borderRadius: 4 }]
+      },
+      options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+    });
+  }
+
+  // --- CHART 5: Group Tokens ---
+  if (groups.length > 0 && document.getElementById('groupTokensChart')) {
+    new Chart(document.getElementById('groupTokensChart'), {
+      type: 'bar',
+      data: {
+        labels: groups,
+        datasets: [{ data: groupTokens, backgroundColor: '#64748b', borderRadius: 4 }]
+      },
+      options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } }
+    });
+  }
+
+  // --- NEW CHART: Group Token Metrics Distribution Over Line Timeline ---
+  if (dates.length > 0 && groups.length > 0 && document.getElementById('groupTokenTimeChart')) {
+    const linePalette = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#64748b'];
+    const corporateDatasets = groups.map((groupName, index) => {
+      return {
+        label: groupName,
+        data: groupTimelineData[groupName] || new Array(dates.length).fill(0),
+        borderColor: linePalette[index % linePalette.length],
+        backgroundColor: 'transparent',
+        tension: 0.15,
+        borderWidth: 2
+      };
+    });
+
+    new Chart(document.getElementById('groupTokenTimeChart'), {
+      type: 'line',
+      data: { labels: dates, datasets: corporateDatasets },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: true } } }
+    });
+  }
+
+  // --- CHART 6: Latency Histogram ---
+  if (histogramValues.some(val => val > 0) && document.getElementById('latencyHistogramChart')) {
+    new Chart(document.getElementById('latencyHistogramChart'), {
+      type: 'bar',
+      data: {
+        labels: histogramLabels,
+        datasets: [{ data: histogramValues, backgroundColor: '#0ea5e9', borderRadius: 2, barPercentage: 1.0, categoryPercentage: 1.0 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+    });
+  }
+
+  // --- NEW CHART: High-Resolution Sequential Response Latency Line Timeline ---
+  if (dates.length > 0 && document.getElementById('latencyTimelineChart')) {
+    new Chart(document.getElementById('latencyTimelineChart'), {
+      type: 'line',
+      data: {
+        labels: dates.length === historicalLatencies.length ? dates : Array.from({length: historicalLatencies.length}, (_, i) => `Call ${i+1}`),
+        datasets: [{ label: 'Processing Latency', data: historicalLatencies, borderColor: '#0ea5e9', backgroundColor: 'rgba(14, 165, 233, 0.05)', tension: 0.1, fill: true, borderWidth: 2 }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, title: { display: true, text: 'Seconds' } } } }
+    });
+  }
+
+  // --- CHART 7: Error Profile Doughnut ---
+  if (errorLabels.length > 0 && document.getElementById('errorProfileChart')) {
+    new Chart(document.getElementById('errorProfileChart'), {
+      type: 'doughnut',
+      data: {
+        labels: errorLabels,
+        datasets: [{
+          data: errorCountsDist,
+          backgroundColor: ['#ef4444', '#f97316', '#eab308', '#8b5cf6', '#ec4899']
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } } } }
+    });
+  }
+</script>
+{% endblock %}

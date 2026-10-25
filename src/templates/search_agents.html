@@ -1,0 +1,142 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="search-wrapper">
+  <!-- ===== SEARCH FORM ===== -->
+  <div class="card-sleek">
+    <div class="card-body-sleek">
+      <form action="/search_agents" method="GET" class="row g-3">
+        <div class="col-md-5">
+          <label for="q" class="form-label-sleek">
+            <i class="fas fa-search"></i> Search Agents
+          </label>
+          <input type="text" class="form-control form-control-sleek" name="q" id="q" value="{{ query }}" placeholder="Search by name or description...">
+        </div>
+
+        <div class="col-md-5">
+          <label class="form-label-sleek">
+            <i class="fas fa-folder-open"></i> Filter by Groups
+          </label>
+          <div class="dropdown">
+            <button class="dropdown-sleek" type="button" id="tagsDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+              <span id="tagsLabel">
+                {% if selected_tags %}
+                  {{ selected_tags | join(', ') }}
+                {% else %}
+                  Select Groups
+                {% endif %}
+              </span>
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-sleek" aria-labelledby="tagsDropdown">
+              {% for tag in all_tags %}
+              <li>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="tags" value="{{ tag }}" id="tag_{{ tag }}" {% if tag in selected_tags %}checked{% endif %}>
+                  <label class="form-check-label" for="tag_{{ tag }}">
+                    <i class="fas fa-folder text-muted" style="font-size: 0.8rem;"></i> {{ tag }}
+                  </label>
+                </div>
+              </li>
+              {% else %}
+              <li class="px-3 py-2 text-muted small">No global groups defined.</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-2 d-flex align-items-end">
+          <button type="submit" class="btn-primary-sleek">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== RESULTS ===== -->
+  <div class="row g-4">
+    {% for agent in agents %}
+    <div class="col-md-6 col-lg-4">
+      <div class="agent-card">
+        <div class="card-top">
+          <h5>{{ agent.name }}</h5>
+          <span class="user-badge"><i class="fas fa-users"></i> {{ agent.user_count }}</span>
+        </div>
+
+        <p class="description">{{ agent.description }}</p>
+
+        <div class="tags-wrap">
+          {% if agent.tags %}
+            {% for tag in agent.tags %}
+              <span class="badge-soft-tag">{{ tag }}</span>
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        <ul class="stats">
+          <li><i class="fas fa-wrench"></i> <strong>{{ agent.tools_count }}</strong> Tools</li>
+          <li><i class="fas fa-plug"></i> <strong>{{ agent.mcps_count }}</strong> MCPs</li>
+          <li><i class="fas fa-database"></i> {{ 'Enabled' if agent.rag_enabled else 'Disabled' }}</li>
+          <li><i class="fas {{ 'fa-pause-circle text-warning' if agent.paused else 'fa-play-circle text-success' }}"></i>{{ 'Paused' if agent.paused else 'Active' }}</li>
+        </ul>
+
+        <div class="card-footer-actions">
+          {% if agent.in_suite %}
+            <button class="btn btn-suite-success" disabled>
+              <i class="fas fa-check-circle"></i> In Your Suite
+            </button>
+          {% elif agent.can_add %}
+            <form action="/add_to_suite/{{ agent.id }}" method="POST">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit" class="btn btn-suite-primary">
+                <i class="fas fa-plus-circle"></i> Add to Suite
+              </button>
+            </form>
+          {% else %}
+            <button class="btn btn-suite-locked" disabled title="You must be in the correct group to add this agent.">
+              <i class="fas fa-lock"></i> Locked (Group Only)
+            </button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+      <div class="empty-state">
+        <i class="fas fa-inbox"></i>
+        <h4>No agents found</h4>
+        <p>No agents match your search criteria. Try adjusting your filters.</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  // Update dropdown label with selected tags
+  document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('input[name="tags"]');
+    const label = document.getElementById('tagsLabel');
+
+    function updateLabel() {
+      const checked = document.querySelectorAll('input[name="tags"]:checked');
+      if (checked.length === 0) {
+        label.textContent = 'Select Groups';
+      } else {
+        const values = [];
+        checked.forEach(cb => values.push(cb.value));
+        label.textContent = values.join(', ');
+      }
+    }
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', updateLabel);
+    });
+
+    // Initial update
+    updateLabel();
+  });
+</script>
+{% endblock %}

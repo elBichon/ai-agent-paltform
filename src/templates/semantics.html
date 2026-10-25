@@ -1,0 +1,495 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div class="container-fluid my-4 forensics-wrapper">
+
+  <!-- ============ HEADER ============ -->
+  <div class="forensics-header">
+    <div class="row align-items-center g-3">
+      <div class="col-lg-8">
+        <h2><i class="fas fa-fingerprint"></i> Semantica Operational Intelligence &amp; Forensics</h2>
+      </div>
+      <div class="col-lg-4">
+        <div class="header-badges">
+          <span class="badge-soft-tag badge-soft-tag-danger">
+            <i class="fas fa-exclamation-triangle"></i> Anomalies: {{ kpi_metrics.anomaly_count }}
+          </span>
+          <span class="badge-soft-tag badge-soft-tag-dark">
+            <i class="fas fa-project-diagram"></i> Nodes: {{ node_count }} &nbsp;|&nbsp; Edges: {{ edge_count }}
+          </span>
+        </div>
+      </div>
+    </div>
+        <div class="agent-title-wrap">
+          <h2><i class="fas fa-robot"></i>  Agent: {{ agent.name }}</h2>
+          <div class="d-flex flex-wrap gap-1">
+            {% if agent.tags %}
+              {% for tag in agent.tags %}
+                {% if agent.group_tags and tag not in agent.group_tags %}
+                  <span class="badge-soft-tag badge-soft-tag-info"><i class="fas fa-tag"></i> {{ tag }}</span>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            {% if agent.group_tags %}
+              {% for group in agent.group_tags %}
+                <span class="badge-soft-tag badge-soft-tag-dark"><i class="fas fa-lock"></i> {{ group }}</span>
+              {% endfor %}
+            {% endif %}
+            {% if not agent.tags and not agent.group_tags %}
+              <span class="badge-soft-tag badge-soft-tag-muted">No Assignment Tags</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="agent-meta">
+          <span>Agent ID: <code id="agentIdStr">{{ agent.id }}</code>
+            <button class="btn-copy-id" onclick="copyAgentId()" title="Copy ID to Clipboard">
+              <i class="far fa-copy"></i> Copy ID
+            </button>
+          </span>
+          <span class="divider">|</span>
+          <span>
+            <strong>Created by:</strong>
+            <span class="fw-semibold text-dark">{{ agent.creator_name or 'System' }}</span>
+          </span>
+          <span class="divider">|</span>
+          <span>
+            <strong>Created on:</strong>
+            <span class="fw-semibold text-dark">
+              {% if agent.creation_date %}
+                {{ agent.creation_date.strftime('%Y-%m-%d') }}
+              {% elif agent.created_at %}
+                {{ agent.created_at.strftime('%Y-%m-%d') }}
+              {% else %}
+                <span class="text-muted fst-italic">Legacy Platform Instance</span>
+              {% endif %}
+            </span>
+          </span>
+        </div>
+  </div>
+
+
+  <!-- ============ KPI CARDS ============ -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-4">
+      <div class="kpi-card kpi-primary">
+        <h6><i class="fas fa-clipboard-check me-1"></i> Total Decisions Audited</h6>
+        <p class="kpi-value">{{ kpi_metrics.total_decisions }}</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="kpi-card kpi-success">
+        <h6><i class="fas fa-bullseye me-1"></i> Mean Decision Confidence</h6>
+        <p class="kpi-value text-success">
+          {{ "%.2f"|format(kpi_metrics.avg_confidence | default(0, true) * 100) }}%
+        </p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="kpi-card kpi-danger">
+        <h6><i class="fas fa-bell me-1"></i> Forensic Alert Triggers</h6>
+        <p class="kpi-value text-danger">{{ kpi_metrics.anomaly_count }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CHARTS ROW ============ -->
+  <div class="row g-4 mb-4">
+    <div class="col-md-6">
+      <div class="card-sleek">
+        <div class="card-header">
+          <h5><i class="fas fa-chart-bar"></i> Decision Confidence Distribution</h5>
+        </div>
+        <div class="card-body chart-body">
+          <div style="width: 100%; height: 260px;">
+            <canvas id="confidenceChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card-sleek">
+        <div class="card-header">
+          <h5><i class="fas fa-chart-pie"></i> Top Execution Outcomes</h5>
+        </div>
+        <div class="card-body chart-body">
+          <div style="width: 100%; height: 260px;">
+            <canvas id="outcomeChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ ONTOLOGY + ORPHANS ============ -->
+  <div class="row g-4 mb-4">
+    <!-- Ontology Entity Tracking -->
+    <div class="col-md-6">
+      <div class="card-sleek">
+        <div class="card-header">
+          <h5><i class="fas fa-cubes"></i> Ontology Entity Tracking</h5>
+          <span class="badge-soft-tag badge-soft-tag-info">Cross-Run References</span>
+        </div>
+        <div class="card-body">
+          {% if top_entities %}
+          <div class="entity-list">
+            {% for ent in top_entities %}
+            <div class="list-group-item">
+              <div class="entity-name">
+                <i class="fas fa-box-seam"></i> {{ ent.entity_name }}
+              </div>
+              <span class="badge-status badge-status-muted">{{ ent.reference_count }} detections</span>
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <p class="text-muted mb-0 small fst-italic">No entity payloads extracted yet.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Orphaned Graph Nodes -->
+    <div class="col-md-6">
+      <div class="card-sleek card-warning">
+        <div class="card-header">
+          <h5><i class="fas fa-unlink"></i> Graph Topology Warning: Orphaned Nodes</h5>
+          <span class="badge-soft-tag badge-soft-tag-dark">Zero-Edge Silos</span>
+        </div>
+        <div class="card-body p-0">
+          {% if orphaned_nodes %}
+          <div class="table-responsive">
+            <table class="table table-sleek align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Node ID</th>
+                  <th>Label</th>
+                  <th>Discovered</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for node in orphaned_nodes %}
+                <tr>
+                  <td><code>{{ node.id }}</code></td>
+                  <td><strong>{{ node.label }}</strong></td>
+                  <td><small class="text-muted">{{ node.created_at }}</small></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+          <p class="text-muted mb-0 small fst-italic p-3">
+            <i class="fas fa-check-circle text-success me-1"></i>
+            Zero orphaned nodes detected. Knowledge graph topology is fully connected.
+          </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ RCA PANEL ============ -->
+  <div class="card-sleek card-danger mb-5">
+    <div class="card-header">
+      <h5><i class="fas fa-fire"></i> Root Cause Analysis (RCA) &amp; Incident Forensics</h5>
+      <small><i class="fas fa-filter me-1"></i> Low-confidence (&lt;0.75) or failing executions</small>
+    </div>
+    <div class="card-body p-0">
+      {% if rca_forensics %}
+      <div class="table-responsive">
+        <table class="table table-sleek align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Timestamp / Agent</th>
+              <th>Scenario &amp; Reasoning Trace</th>
+              <th>Confidence</th>
+              <th>Gateway Status</th>
+              <th>Diagnostics &amp; Artifacts</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rca in rca_forensics %}
+            <tr>
+              <td>
+                <strong>{{ rca.agent_name }}</strong>
+                <br><small class="text-muted">{{ rca.created_at }}</small>
+                <br><span class="badge-status badge-status-muted mt-1">{{ rca.model_name or 'Unknown Model' }}</span>
+              </td>
+              <td>
+                <p class="mb-1 small"><strong>Scenario:</strong> {{ rca.scenario }}</p>
+                <p class="mb-0 text-danger font-monospace small"><strong>Reasoning Failure:</strong> {{ rca.reasoning }}</p>
+              </td>
+              <td>
+                <span class="badge-status badge-status-warning">{{ rca.confidence }}</span>
+              </td>
+              <td>
+                <span class="badge-status {{ 'badge-status-success' if rca.gateway_status == 'success' else 'badge-status-error' }}">
+                  {{ rca.gateway_status or 'Unknown' }}
+                </span>
+                {% if rca.error_message %}
+                <br><small class="text-danger text-truncate d-inline-block" style="max-width: 150px;" title="{{ rca.error_message }}">{{ rca.error_message }}</small>
+                {% endif %}
+              </td>
+              <td>
+                <button class="btn-sleek-outline danger" type="button" data-bs-toggle="collapse" data-bs-target="#rca-detail-{{ rca.id }}">
+                  <i class="fas fa-search"></i> Inspect Trace
+                </button>
+                <div class="collapse mt-2" id="rca-detail-{{ rca.id }}">
+                  <div class="trace-box">
+                    <strong>Outcome:</strong> {{ rca.outcome }}<br>
+                    <strong>Trace ID:</strong> <code>{{ rca.trace_id }}</code><br>
+                    <strong>Knowledge Snapshot:</strong> {{ rca.knowledge_snapshot | tojson }}<br>
+                    <strong>Tool Calls:</strong> {{ rca.tool_calls_made or 'None' }}<br>
+                    <strong>Tool Results:</strong> {{ rca.tool_results_received or 'None' }}
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="text-muted mb-0 small fst-italic p-3">
+        <i class="fas fa-shield-alt text-success me-1"></i>
+        No active RCA anomalies or failures recorded.
+      </p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- ============ GRANULAR TABLE EXPLORER ============ -->
+  <div class="card-sleek">
+    <div class="card-header">
+      <h5><i class="fas fa-database"></i> Granular Table Data Explorer</h5>
+      <span class="badge-soft-tag badge-soft-tag-muted">Raw DB Inspection</span>
+    </div>
+    <div class="card-body">
+
+      <!-- Nav Tabs -->
+      <ul class="nav nav-tabs nav-tabs-sleek" id="tableExplorerTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="tab-decisions" data-bs-toggle="tab" data-bs-target="#pane-decisions" type="button" role="tab">
+            <i class="fas fa-gavel me-1"></i> agent_decisions
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-nodes" data-bs-toggle="tab" data-bs-target="#pane-nodes" type="button" role="tab">
+            <i class="fas fa-circle-nodes me-1"></i> semantica_nodes
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-edges" data-bs-toggle="tab" data-bs-target="#pane-edges" type="button" role="tab">
+            <i class="fas fa-link me-1"></i> semantica_edges
+          </button>
+        </li>
+      </ul>
+
+      <!-- Tab Panes -->
+      <div class="tab-content" id="tableExplorerContent">
+
+        <!-- 1. AGENT DECISIONS TAB -->
+        <div class="tab-pane fade show active" id="pane-decisions" role="tabpanel">
+          {% if agent_decisions %}
+          <div class="table-responsive">
+            <table class="table table-sleek align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>ID / Agent</th>
+                  <th>Category &amp; Scenario</th>
+                  <th>Reasoning &amp; Outcome</th>
+                  <th>Confidence</th>
+                  <th>JSON Artifacts</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for dec in agent_decisions %}
+                <tr>
+                  <td>
+                    <code>{{ dec.id[:8] }}...</code>
+                    <br><strong>{{ dec.agent_name }}</strong>
+                    <br><small class="text-muted">{{ dec.created_at }}</small>
+                  </td>
+                  <td>
+                    <span class="badge-status badge-status-muted">{{ dec.category }}</span>
+                    <p class="mb-0 small mt-1">{{ dec.scenario }}</p>
+                  </td>
+                  <td>
+                    <p class="mb-1 small font-monospace"><strong>Reasoning:</strong> {{ dec.reasoning }}</p>
+                    <small class="text-muted"><strong>Outcome:</strong> {{ dec.outcome }}</small>
+                  </td>
+                  <td><span class="badge-status badge-status-success">{{ dec.confidence }}</span></td>
+                  <td>
+                    <button class="btn-sleek-outline" type="button" data-bs-toggle="collapse" data-bs-target="#dec-json-{{ dec.id }}">
+                      <i class="fas fa-code"></i> View JSON
+                    </button>
+                    <div class="collapse mt-2" id="dec-json-{{ dec.id }}">
+                      <div class="trace-box">
+                        <strong>Knowledge Snapshot:</strong> {{ dec.knowledge_snapshot | tojson }}<br>
+                        <strong>Tool Calls:</strong> {{ dec.tool_calls_made | tojson }}<br>
+                        <strong>Entities:</strong> {{ dec.entities | tojson }}
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+          <p class="text-muted mb-0 small fst-italic">No records found in <code>agent_decisions</code>.</p>
+          {% endif %}
+        </div>
+
+        <!-- 2. SEMANTICA NODES TAB -->
+        <div class="tab-pane fade" id="pane-nodes" role="tabpanel">
+          {% if semantica_nodes %}
+          <div class="table-responsive">
+            <table class="table table-sleek align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Node ID</th>
+                  <th>Label</th>
+                  <th>Attributes (JSONB)</th>
+                  <th>Created At</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for node in semantica_nodes %}
+                <tr>
+                  <td><code>{{ node.id }}</code></td>
+                  <td><strong>{{ node.label }}</strong></td>
+                  <td><pre>{{ node.attributes | tojson(indent=2) }}</pre></td>
+                  <td><small class="text-muted">{{ node.created_at }}</small></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+          <p class="text-muted mb-0 small fst-italic">No records found in <code>semantica_nodes</code>.</p>
+          {% endif %}
+        </div>
+
+        <!-- 3. SEMANTICA EDGES TAB -->
+        <div class="tab-pane fade" id="pane-edges" role="tabpanel">
+          {% if semantica_edges %}
+          <div class="table-responsive">
+            <table class="table table-sleek align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>Source Node</th>
+                  <th>Relationship Type</th>
+                  <th>Target Node</th>
+                  <th>Properties (JSONB)</th>
+                  <th>Created At</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for edge in semantica_edges %}
+                <tr>
+                  <td><span class="badge-status badge-status-dark">{{ edge.source_label }}</span></td>
+                  <td><span class="badge-status badge-status-info">{{ edge.edge_type }}</span></td>
+                  <td><span class="badge-status badge-status-dark">{{ edge.target_label }}</span></td>
+                  <td><pre>{{ edge.properties | tojson(indent=2) }}</pre></td>
+                  <td><small class="text-muted">{{ edge.created_at }}</small></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+          <p class="text-muted mb-0 small fst-italic">No records found in <code>semantica_edges</code>.</p>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Chart.js CDN & Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Confidence Chart
+  const ctxConfidence = document.getElementById('confidenceChart').getContext('2d');
+  new Chart(ctxConfidence, {
+    type: 'bar',
+    data: {
+      labels: {{ confidence_labels | tojson }},
+      datasets: [{
+        label: 'Decisions Count',
+        data: {{ confidence_counts | tojson }},
+        backgroundColor: ['#2563eb', '#22c55e', '#eab308', '#dc2626'],
+        borderRadius: 6,
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#0f1825',
+          titleColor: '#fff',
+          bodyColor: '#cbd5e1',
+          padding: 10,
+          cornerRadius: 8
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: { color: '#f1f4f9' },
+          ticks: { color: '#94a3b8', font: { size: 11 } }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { color: '#64748b', font: { size: 11 } }
+        }
+      }
+    }
+  });
+
+  // Outcomes Chart
+  const ctxOutcome = document.getElementById('outcomeChart').getContext('2d');
+  new Chart(ctxOutcome, {
+    type: 'doughnut',
+    data: {
+      labels: {{ outcome_labels | tojson }},
+      datasets: [{
+        data: {{ outcome_counts | tojson }},
+        backgroundColor: ['#22c55e', '#8b5cf6', '#f97316', '#0ea5e9', '#94a3b8'],
+        borderWidth: 0,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '62%',
+      plugins: {
+        legend: {
+          position: 'right',
+          labels: {
+            boxWidth: 12,
+            font: { size: 11 },
+            color: '#475569',
+            padding: 12
+          }
+        },
+        tooltip: {
+          backgroundColor: '#0f1825',
+          titleColor: '#fff',
+          bodyColor: '#cbd5e1',
+          padding: 10,
+          cornerRadius: 8
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}

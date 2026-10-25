@@ -1,0 +1,183 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+
+<div class="create-agent-wrapper">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                    <div class="alert-sleek {% if 'Warning' in message or 'Unauthorized' in message %}alert-sleek-warning{% else %}alert-sleek-info{% endif %}">
+                        <i class="fas {% if 'Warning' in message or 'Unauthorized' in message %}fa-exclamation-triangle{% else %}fa-info-circle{% endif %}"></i>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+      {% endwith %}
+
+      <!-- ===== CORE REGISTRATION CARD ===== -->
+      <div class="card-sleek">
+
+        <div class="card-header-sleek">
+          <h3>
+            <i class="fas fa-server"></i>
+            Register Framework / MCP Server
+          </h3>
+        </div>
+
+        <div class="card-body-sleek">
+          <form action="/new_tools_mcp" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+            <!-- SECTION 1: INFRASTRUCTURE SETTINGS -->
+            <div class="section-title">
+              <i class="fas fa-sliders-h"></i> 1. Server Infrastructure Settings
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="form-label-sleek">
+                  Server Name <span class="required-star">*</span>
+                </label>
+                <input type="text" name="name" required placeholder="e.g., Enterprise Database Gateway" class="form-control-sleek">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-sleek">
+                  Endpoint URL <span class="required-star">*</span>
+                </label>
+                <input type="url" name="endpoint" required placeholder="http://127.0.0.1:5000/mcp" class="form-control-sleek">
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label-sleek">Server Cluster Description</label>
+              <textarea name="server_description" placeholder="Provide a summary explanation details describing what system logic this server connection architecture isolates..." class="form-control-sleek" rows="2" style="resize: none;"></textarea>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="form-label-sleek">Master API Authentication Key (Optional)</label>
+                <input type="password" name="api_key" placeholder="••••••••••••••••" class="form-control-sleek">
+                <span class="text-muted-sleek"><i class="fas fa-lock"></i> This key will be automatically encrypted at rest using Fernet ciphers.</span>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-sleek">Default Availability Status</label>
+                <select name="status" class="form-select form-select-sleek">
+                  <option value="private">Private (Restricted to tagged boundary groups)</option>
+                  <option value="public">Public (Available across the enterprise cluster)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label-sleek">Organizational Governance Boundaries</label>
+              <div class="form-check-group">
+                {% for group in groups %}
+                  {% set is_disabled = (user.access_level == 'editor' and group not in user.groups) %}
+                  <div class="form-check-sleek-item {% if is_disabled %}disabled{% endif %}">
+                    <input type="checkbox" name="tags" value="{{ group }}" id="tag_group_{{ group }}" {% if is_disabled %} disabled {% endif %}>
+                    <label for="tag_group_{{ group }}" style="cursor: {% if is_disabled %}not-allowed{% else %}pointer{% endif %}; margin: 0;">
+                      <i class="fas fa-folder text-muted" style="margin-right: 4px; font-size: 0.8rem;"></i> {{ group }}
+                    </label>
+                  </div>
+                {% else %}
+                  <div class="text-muted small py-2">No global groups defined.</div>
+                {% endfor %}
+              </div>
+              {% if user.access_level == 'editor' %}
+                <span class="text-alert-warning">
+                  <i class="fas fa-exclamation-circle"></i> Note: As an Editor, you can only allocate packages to your assigned structural units ({{ ', '.join(user.groups) }}).
+                </span>
+              {% endif %}
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- SECTION 2: TOOL CAPABILITIES -->
+            <div class="section-title emerald">
+              <i class="fas fa-tools"></i> 2. Declared Tool Capabilities
+            </div>
+            
+            <p class="text-muted-sleek" style="font-size: 0.85rem; margin-bottom: 16px;">
+              List individual actions this server endpoint provides so that your AI models can index and locate specific function payloads.
+            </p>
+
+            <div id="tools-container" class="mb-4" style="display: flex; flex-direction: column; gap: 16px;">
+              <!-- Dynamic Rows Target Mount point -->
+              <div class="cascade-row">
+                <div class="row g-3 w-100 m-0">
+                  <div class="col-md-4 p-0 pe-md-2">
+                    <label class="form-label-sleek" style="color: #64748b; font-size: 0.75rem;">Tool Action Name</label>
+                    <input type="text" name="tool_name[]" required placeholder="fetch_financial_ledger" class="form-control-sleek">
+                  </div>
+                  <div class="col-md-8 p-0 pe-md-4">
+                    <label class="form-label-sleek" style="color: #64748b; font-size: 0.75rem;">Tool Capabilities Description (Read by LLMs)</label>
+                    <textarea name="tool_description[]" required rows="1" placeholder="Retrieves the system ledger summaries balance sheet parameters for Q3 analytics." class="form-control-sleek" style="resize: none;"></textarea>
+                  </div>
+                </div>
+                <button type="button" onclick="removeRow(this)" class="btn-delete-row" title="Remove Tool Row">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <button class="btn-add-sleek" type="button" id="add-tool-btn">
+                <i class="fas fa-plus"></i> Add Tool Capability Field
+              </button>
+            </div>
+
+            <!-- BUTTON LAYOUT TRACK -->
+            <div class="form-actions-right">
+              <a href="/dashboard" class="btn-secondary-sleek">Cancel</a>
+              <button type="submit" class="btn-success-sleek-lg">
+                <i class="fas fa-cloud-upload-alt"></i> Commit Registration
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.getElementById('add-tool-btn').addEventListener('click', function() {
+        const container = document.getElementById('tools-container');
+
+        const newRow = document.createElement('div');
+        newRow.className = "cascade-row";
+        newRow.innerHTML = `
+            <div class="row g-3 w-100 m-0">
+                <div class="col-md-4 p-0 pe-md-2">
+                    <label class="form-label-sleek" style="color: #64748b; font-size: 0.75rem;">Tool Action Name</label>
+                    <input type="text" name="tool_name[]" required placeholder="e.g., query_user_records" class="form-control-sleek">
+                </div>
+                <div class="col-md-8 p-0 pe-md-4">
+                    <label class="form-label-sleek" style="color: #64748b; font-size: 0.75rem;">Tool Capabilities Description (Read by LLMs)</label>
+                    <textarea name="tool_description[]" required rows="1" placeholder="Enter clean operational details describing what execution logs are parsed." class="form-control-sleek" style="resize: none;"></textarea>
+                </div>
+            </div>
+            <button type="button" onclick="removeRow(this)" class="btn-delete-row" title="Remove Tool Row">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        `;
+        container.appendChild(newRow);
+    });
+
+    function removeRow(button) {
+        const rows = document.querySelectorAll('.cascade-row');
+        if (rows.length > 1) {
+            button.closest('.cascade-row').remove();
+        } else {
+            alert("Every active infrastructure deployment context must define at least one active capability tool.");
+        }
+    }
+</script>
+{% endblock %}

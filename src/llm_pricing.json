@@ -1,0 +1,4620 @@
+{
+  "source": "https://openrouter.ai/api/v1/models",
+  "updated_at": "2026-10-21T13:39:49.802048+00:00",
+  "models": [
+    {
+      "model": "minimax",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "minimax/minimax-m3.1-flash:free",
+          "name": "MiniMax: MiniMax M3.1 Flash (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "minimax/minimax-m3",
+          "name": "MiniMax: MiniMax M3",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 1.2e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 1.2,
+          "context_length": 1048576
+        },
+        {
+          "id": "minimax/minimax-m2.7",
+          "name": "MiniMax: MiniMax M2.7",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 1.2e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 1.2,
+          "context_length": 204800
+        },
+        {
+          "id": "minimax/minimax-m2.5",
+          "name": "MiniMax: MiniMax M2.5",
+          "input_price_per_token": 2.7e-07,
+          "output_price_per_token": 9.5e-07,
+          "input_price_per_million_tokens": 0.27,
+          "output_price_per_million_tokens": 0.95,
+          "context_length": 204800
+        },
+        {
+          "id": "minimax/minimax-m2-her",
+          "name": "MiniMax: MiniMax M2-her",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 1.2e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 1.2,
+          "context_length": 65536
+        },
+        {
+          "id": "minimax/minimax-m2.1",
+          "name": "MiniMax: MiniMax M2.1",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 1.2e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 1.2,
+          "context_length": 204800
+        },
+        {
+          "id": "minimax/minimax-m2",
+          "name": "MiniMax: MiniMax M2",
+          "input_price_per_token": 2.55e-07,
+          "output_price_per_token": 1.02e-06,
+          "input_price_per_million_tokens": 0.255,
+          "output_price_per_million_tokens": 1.02,
+          "context_length": 204800
+        },
+        {
+          "id": "minimax/minimax-m1",
+          "name": "MiniMax: MiniMax M1",
+          "input_price_per_token": 5.5e-07,
+          "output_price_per_token": 2.2e-06,
+          "input_price_per_million_tokens": 0.55,
+          "output_price_per_million_tokens": 2.2,
+          "context_length": 1000000
+        },
+        {
+          "id": "minimax/minimax-01",
+          "name": "MiniMax: MiniMax-01",
+          "input_price_per_token": 2e-07,
+          "output_price_per_token": 1.1e-06,
+          "input_price_per_million_tokens": 0.19999999999999998,
+          "output_price_per_million_tokens": 1.1,
+          "context_length": 1000192
+        }
+      ]
+    },
+    {
+      "model": "deepseek",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "deepseek/deepseek-v4.1-flash-1017",
+          "name": "DeepSeek: DeepSeek V4.1 Flash 1017",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 1048576
+        },
+        {
+          "id": "deepseek/deepseek-v4.1-flash",
+          "name": "DeepSeek: DeepSeek V4.1 Flash",
+          "input_price_per_token": 2.394e-08,
+          "output_price_per_token": 3.75e-07,
+          "input_price_per_million_tokens": 0.023940000000000003,
+          "output_price_per_million_tokens": 0.375,
+          "context_length": 1048576
+        },
+        {
+          "id": "deepseek/deepseek-v4.1-flash:batch",
+          "name": "DeepSeek: DeepSeek V4.1 Flash (batch)",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 1.5e-07,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.15,
+          "context_length": 1048576
+        },
+        {
+          "id": "deepseek/deepseek-v4-flash-vision-exp",
+          "name": "DeepSeek: DeepSeek V4 Flash Vision Exp",
+          "input_price_per_token": 2.156e-07,
+          "output_price_per_token": 6.468e-07,
+          "input_price_per_million_tokens": 0.21559999999999999,
+          "output_price_per_million_tokens": 0.6468,
+          "context_length": 1048576
+        },
+        {
+          "id": "deepseek/deepseek-v4-pro-0813",
+          "name": "DeepSeek: DeepSeek V4 Pro 0813",
+          "input_price_per_token": 6.6e-07,
+          "output_price_per_token": 1.98e-06,
+          "input_price_per_million_tokens": 0.66,
+          "output_price_per_million_tokens": 1.9800000000000002,
+          "context_length": 1048576
+        },
+        {
+          "id": "deepseek/deepseek-v4-flash-0731",
+          "name": "DeepSeek: DeepSeek V4 Flash 0731",
+          "input_price_per_token": 4.708e-08,
+          "output_price_per_token": 1.4124e-07,
+          "input_price_per_million_tokens": 0.047080000000000004,
+          "output_price_per_million_tokens": 0.14124,
+          "context_length": 1048576
+        },
+        {
+          "id": "deepseek/deepseek-v4-pro",
+          "name": "DeepSeek: DeepSeek V4 Pro 0423",
+          "input_price_per_token": 4.42656e-07,
+          "output_price_per_token": 8.85312e-07,
+          "input_price_per_million_tokens": 0.442656,
+          "output_price_per_million_tokens": 0.885312,
+          "context_length": 1048576
+        },
+        {
+          "id": "deepseek/deepseek-v4-flash",
+          "name": "DeepSeek: DeepSeek V4 Flash 0423",
+          "input_price_per_token": 9.1e-08,
+          "output_price_per_token": 1.82e-07,
+          "input_price_per_million_tokens": 0.091,
+          "output_price_per_million_tokens": 0.182,
+          "context_length": 1048576
+        },
+        {
+          "id": "deepseek/deepseek-v3.2",
+          "name": "DeepSeek: DeepSeek V3.2",
+          "input_price_per_token": 2.8e-07,
+          "output_price_per_token": 4.2e-07,
+          "input_price_per_million_tokens": 0.28,
+          "output_price_per_million_tokens": 0.42,
+          "context_length": 163840
+        },
+        {
+          "id": "deepseek/deepseek-v3.2-exp",
+          "name": "DeepSeek: DeepSeek V3.2 Exp",
+          "input_price_per_token": 2.7e-07,
+          "output_price_per_token": 4.1e-07,
+          "input_price_per_million_tokens": 0.27,
+          "output_price_per_million_tokens": 0.41,
+          "context_length": 163840
+        },
+        {
+          "id": "deepseek/deepseek-v3.1-terminus",
+          "name": "DeepSeek: DeepSeek V3.1 Terminus",
+          "input_price_per_token": 2.7e-07,
+          "output_price_per_token": 1e-06,
+          "input_price_per_million_tokens": 0.27,
+          "output_price_per_million_tokens": 1.0,
+          "context_length": 163840
+        },
+        {
+          "id": "deepseek/deepseek-chat-v3.1",
+          "name": "DeepSeek: DeepSeek V3.1",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 9.5e-07,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 0.95,
+          "context_length": 163840
+        },
+        {
+          "id": "deepseek/deepseek-r1-0528",
+          "name": "DeepSeek: R1 0528",
+          "input_price_per_token": 5e-07,
+          "output_price_per_token": 2.15e-06,
+          "input_price_per_million_tokens": 0.5,
+          "output_price_per_million_tokens": 2.1500000000000004,
+          "context_length": 163840
+        },
+        {
+          "id": "deepseek/deepseek-chat-v3-0324",
+          "name": "DeepSeek: DeepSeek V3 0324",
+          "input_price_per_token": 2.9e-07,
+          "output_price_per_token": 1.14e-06,
+          "input_price_per_million_tokens": 0.29,
+          "output_price_per_million_tokens": 1.1400000000000001,
+          "context_length": 163840
+        },
+        {
+          "id": "deepseek/deepseek-chat",
+          "name": "DeepSeek: DeepSeek V3",
+          "input_price_per_token": 2.574e-07,
+          "output_price_per_token": 1.0287e-06,
+          "input_price_per_million_tokens": 0.2574,
+          "output_price_per_million_tokens": 1.0287,
+          "context_length": 163840
+        }
+      ]
+    },
+    {
+      "model": "elorian",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "elorian/glimpse",
+          "name": "Elorian: Glimpse",
+          "input_price_per_token": 6e-07,
+          "output_price_per_token": 3e-06,
+          "input_price_per_million_tokens": 0.6,
+          "output_price_per_million_tokens": 3.0,
+          "context_length": 262144
+        }
+      ]
+    },
+    {
+      "model": "xingchen-agi",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "xingchen-agi/xing4.0-29b-a4b:free",
+          "name": "XingChen: Xing4.0 29B A4B (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 262144
+        }
+      ]
+    },
+    {
+      "model": "reflection",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "reflection/beam-1.0-501b-a23b",
+          "name": "Reflection: Beam 1.0 501B A23B",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 1e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 1.0,
+          "context_length": 1048576
+        }
+      ]
+    },
+    {
+      "model": "inception",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "inception/mercury-3",
+          "name": "Inception: Mercury 3",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 3.5e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.35,
+          "context_length": 1000000
+        },
+        {
+          "id": "inception/mercury-2.5",
+          "name": "Inception: Mercury 2.5",
+          "input_price_per_token": 4e-08,
+          "output_price_per_token": 1.5e-07,
+          "input_price_per_million_tokens": 0.04,
+          "output_price_per_million_tokens": 0.15,
+          "context_length": 260000
+        },
+        {
+          "id": "inception/mercury-2",
+          "name": "Inception: Mercury 2",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 7.5e-07,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 0.75,
+          "context_length": 128000
+        }
+      ]
+    },
+    {
+      "model": "moondream",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "moondream/moondream3-preview",
+          "name": "Moondream: Moondream 3 Preview",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 32000
+        },
+        {
+          "id": "moondream/moondream3.1-9b-a2b",
+          "name": "Moondream: Moondream 3.1",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 32000
+        }
+      ]
+    },
+    {
+      "model": "meta",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "meta/muse-spark-open",
+          "name": "Meta: Muse Spark Open",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 4.25e-06,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 4.25,
+          "context_length": 1048576
+        },
+        {
+          "id": "meta/muse-wonder",
+          "name": "Meta: Muse Wonder",
+          "input_price_per_token": 4e-06,
+          "output_price_per_token": 2e-05,
+          "input_price_per_million_tokens": 4.0,
+          "output_price_per_million_tokens": 20.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "meta/muse-spark-1.3-contributor",
+          "name": "Meta: Muse Spark 1.3 Contributor",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 2e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.19999999999999998,
+          "context_length": 1048576
+        },
+        {
+          "id": "meta/muse-spark-1.3",
+          "name": "Meta: Muse Spark 1.3",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 4.25e-06,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 4.25,
+          "context_length": 1048576
+        },
+        {
+          "id": "meta/muse-spark-1.2-contributor",
+          "name": "Meta: Muse Spark 1.2 Contributor",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 2e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.19999999999999998,
+          "context_length": 1048576
+        },
+        {
+          "id": "meta/muse-glimmer-30b",
+          "name": "Meta: Muse Glimmer 30B",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 1.2e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 1.2,
+          "context_length": 131072
+        },
+        {
+          "id": "meta/muse-spark-1.2",
+          "name": "Meta: Muse Spark 1.2",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 4.25e-06,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 4.25,
+          "context_length": 1048576
+        },
+        {
+          "id": "meta/muse-spark-1.1",
+          "name": "Meta: Muse Spark 1.1",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 4.25e-06,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 4.25,
+          "context_length": 1048576
+        }
+      ]
+    },
+    {
+      "model": "nvidia",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "nvidia/nemotron-3.5-super-vl",
+          "name": "NVIDIA: Nemotron 3.5 Super VL",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 5e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.5,
+          "context_length": 1048576
+        },
+        {
+          "id": "nvidia/nemotron-3.5-super-vl:free",
+          "name": "NVIDIA: Nemotron 3.5 Super VL (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "nvidia/switchyard",
+          "name": "NVIDIA: Switchyard",
+          "input_price_per_token": -1.0,
+          "output_price_per_token": -1.0,
+          "input_price_per_million_tokens": -1000000.0,
+          "output_price_per_million_tokens": -1000000.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "nvidia/nemotron-3.5-lightning",
+          "name": "NVIDIA: Nemotron 3.5 Lightning",
+          "input_price_per_token": 7e-08,
+          "output_price_per_token": 2e-07,
+          "input_price_per_million_tokens": 0.07,
+          "output_price_per_million_tokens": 0.19999999999999998,
+          "context_length": 262144
+        },
+        {
+          "id": "nvidia/nemotron-3.5-lightning:free",
+          "name": "NVIDIA: Nemotron 3.5 Lightning (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "nvidia/nemotron-3.5-content-safety",
+          "name": "NVIDIA: Nemotron 3.5 Content Safety",
+          "input_price_per_token": 2e-07,
+          "output_price_per_token": 2e-07,
+          "input_price_per_million_tokens": 0.19999999999999998,
+          "output_price_per_million_tokens": 0.19999999999999998,
+          "context_length": 131072
+        },
+        {
+          "id": "nvidia/nemotron-3.5-content-safety:free",
+          "name": "NVIDIA: Nemotron 3.5 Content Safety (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 128000
+        },
+        {
+          "id": "nvidia/nemotron-3-ultra-550b-a55b",
+          "name": "NVIDIA: Nemotron 3 Ultra",
+          "input_price_per_token": 6e-07,
+          "output_price_per_token": 2.4e-06,
+          "input_price_per_million_tokens": 0.6,
+          "output_price_per_million_tokens": 2.4,
+          "context_length": 262144
+        },
+        {
+          "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
+          "name": "NVIDIA: Nemotron 3 Ultra (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+          "name": "NVIDIA: Nemotron 3 Nano Omni (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 256000
+        },
+        {
+          "id": "nvidia/nemotron-3-super-120b-a12b",
+          "name": "NVIDIA: Nemotron 3 Super",
+          "input_price_per_token": 8e-08,
+          "output_price_per_token": 4.5e-07,
+          "input_price_per_million_tokens": 0.08,
+          "output_price_per_million_tokens": 0.44999999999999996,
+          "context_length": 262144
+        },
+        {
+          "id": "nvidia/nemotron-3-super-120b-a12b:free",
+          "name": "NVIDIA: Nemotron 3 Super (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 262144
+        },
+        {
+          "id": "nvidia/nemotron-3-nano-30b-a3b",
+          "name": "NVIDIA: Nemotron 3 Nano 30B A3B",
+          "input_price_per_token": 6e-08,
+          "output_price_per_token": 2.4e-07,
+          "input_price_per_million_tokens": 0.06,
+          "output_price_per_million_tokens": 0.24,
+          "context_length": 262144
+        }
+      ]
+    },
+    {
+      "model": "unbiased",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "unbiased/pareto-26.10",
+          "name": "Pareto 26.10",
+          "input_price_per_token": 8e-07,
+          "output_price_per_token": 3.2e-06,
+          "input_price_per_million_tokens": 0.7999999999999999,
+          "output_price_per_million_tokens": 3.1999999999999997,
+          "context_length": 1048576
+        },
+        {
+          "id": "unbiased/pareto-26.9",
+          "name": "Pareto 26.9",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 7.5e-06,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 7.5,
+          "context_length": 262144
+        }
+      ]
+    },
+    {
+      "model": "~unbiased",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "~unbiased/pareto-latest",
+          "name": "Pareto Latest",
+          "input_price_per_token": 8e-07,
+          "output_price_per_token": 3.2e-06,
+          "input_price_per_million_tokens": 0.7999999999999999,
+          "output_price_per_million_tokens": 3.1999999999999997,
+          "context_length": 1048576
+        }
+      ]
+    },
+    {
+      "model": "liquid",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "liquid/lfm-2.5-24b-a2b",
+          "name": "LiquidAI: LFM2.5-24B-A2B",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 7e-07,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.7,
+          "context_length": 128000
+        },
+        {
+          "id": "liquid/lfm-2.5-2.6b:free",
+          "name": "LiquidAI: LFM2.5-2.6B (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 65536
+        }
+      ]
+    },
+    {
+      "model": "google",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "google/gemini-4-argon",
+          "name": "Google: Gemini 4 Argon",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-4-argon:batch",
+          "name": "Google: Gemini 4 Argon (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 5e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 5.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-nano-banana-2.1",
+          "name": "Google: Nano Banana 2.1",
+          "input_price_per_token": 1.5e-06,
+          "output_price_per_token": 7.5e-06,
+          "input_price_per_million_tokens": 1.5,
+          "output_price_per_million_tokens": 7.5,
+          "context_length": 65536
+        },
+        {
+          "id": "google/gemini-3.8-flash",
+          "name": "Google: Gemini 3.8 Flash",
+          "input_price_per_token": 8.25e-07,
+          "output_price_per_token": 4.125e-06,
+          "input_price_per_million_tokens": 0.8250000000000001,
+          "output_price_per_million_tokens": 4.125,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.8-flash:batch",
+          "name": "Google: Gemini 3.8 Flash (batch)",
+          "input_price_per_token": 3.75e-07,
+          "output_price_per_token": 1.875e-06,
+          "input_price_per_million_tokens": 0.375,
+          "output_price_per_million_tokens": 1.875,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.7-flash",
+          "name": "Google: Gemini 3.7 Flash",
+          "input_price_per_token": 7.5e-07,
+          "output_price_per_token": 3.75e-06,
+          "input_price_per_million_tokens": 0.75,
+          "output_price_per_million_tokens": 3.75,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.7-flash:batch",
+          "name": "Google: Gemini 3.7 Flash (batch)",
+          "input_price_per_token": 3.75e-07,
+          "output_price_per_token": 1.875e-06,
+          "input_price_per_million_tokens": 0.375,
+          "output_price_per_million_tokens": 1.875,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.6-flash",
+          "name": "Google: Gemini 3.6 Flash",
+          "input_price_per_token": 7.5e-07,
+          "output_price_per_token": 3.75e-06,
+          "input_price_per_million_tokens": 0.75,
+          "output_price_per_million_tokens": 3.75,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.6-flash:batch",
+          "name": "Google: Gemini 3.6 Flash (batch)",
+          "input_price_per_token": 3.75e-07,
+          "output_price_per_token": 1.875e-06,
+          "input_price_per_million_tokens": 0.375,
+          "output_price_per_million_tokens": 1.875,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.5-flash-lite",
+          "name": "Google: Gemini 3.5 Flash Lite",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.5-flash-lite:batch",
+          "name": "Google: Gemini 3.5 Flash Lite (batch)",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 1.25e-06,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 1.25,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.1-flash-lite-image",
+          "name": "Google: Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image)",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 1.5e-06,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 1.5,
+          "context_length": 65536
+        },
+        {
+          "id": "google/gemini-3.1-flash-image",
+          "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image)",
+          "input_price_per_token": 5e-07,
+          "output_price_per_token": 3e-06,
+          "input_price_per_million_tokens": 0.5,
+          "output_price_per_million_tokens": 3.0,
+          "context_length": 131072
+        },
+        {
+          "id": "google/gemini-3-pro-image",
+          "name": "Google: Nano Banana Pro (Gemini 3 Pro Image)",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1.2e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 12.0,
+          "context_length": 131072
+        },
+        {
+          "id": "google/gemini-3.5-flash",
+          "name": "Google: Gemini 3.5 Flash",
+          "input_price_per_token": 1.5e-06,
+          "output_price_per_token": 9e-06,
+          "input_price_per_million_tokens": 1.5,
+          "output_price_per_million_tokens": 9.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.5-flash:batch",
+          "name": "Google: Gemini 3.5 Flash (batch)",
+          "input_price_per_token": 7.5e-07,
+          "output_price_per_token": 4.5e-06,
+          "input_price_per_million_tokens": 0.75,
+          "output_price_per_million_tokens": 4.5,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.1-flash-lite",
+          "name": "Google: Gemini 3.1 Flash Lite",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 1.5e-06,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 1.5,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.1-flash-lite:batch",
+          "name": "Google: Gemini 3.1 Flash Lite (batch)",
+          "input_price_per_token": 1.25e-07,
+          "output_price_per_token": 7.5e-07,
+          "input_price_per_million_tokens": 0.125,
+          "output_price_per_million_tokens": 0.75,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemma-4-26b-a4b-it",
+          "name": "Google: Gemma 4 26B A4B ",
+          "input_price_per_token": 9e-08,
+          "output_price_per_token": 3e-07,
+          "input_price_per_million_tokens": 0.09,
+          "output_price_per_million_tokens": 0.3,
+          "context_length": 262144
+        },
+        {
+          "id": "google/gemma-4-26b-a4b-it:free",
+          "name": "Google: Gemma 4 26B A4B  (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 262144
+        },
+        {
+          "id": "google/gemma-4-31b-it",
+          "name": "Google: Gemma 4 31B",
+          "input_price_per_token": 2e-07,
+          "output_price_per_token": 4e-07,
+          "input_price_per_million_tokens": 0.19999999999999998,
+          "output_price_per_million_tokens": 0.39999999999999997,
+          "context_length": 262144
+        },
+        {
+          "id": "google/gemma-4-31b-it:free",
+          "name": "Google: Gemma 4 31B (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 262144
+        },
+        {
+          "id": "google/lyria-3-pro-preview",
+          "name": "Google: Lyria 3 Pro Preview",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/lyria-3-clip-preview",
+          "name": "Google: Lyria 3 Clip Preview",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.1-flash-lite-preview",
+          "name": "Google: Gemini 3.1 Flash Lite Preview",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 1.5e-06,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 1.5,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.1-flash-image-preview",
+          "name": "Google: Nano Banana 2 (Gemini 3.1 Flash Image Preview)",
+          "input_price_per_token": 5e-07,
+          "output_price_per_token": 3e-06,
+          "input_price_per_million_tokens": 0.5,
+          "output_price_per_million_tokens": 3.0,
+          "context_length": 65536
+        },
+        {
+          "id": "google/gemini-3.1-pro-preview-customtools",
+          "name": "Google: Gemini 3.1 Pro Preview Custom Tools",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1.2e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 12.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.1-pro-preview",
+          "name": "Google: Gemini 3.1 Pro Preview",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1.2e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 12.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3.1-pro-preview:batch",
+          "name": "Google: Gemini 3.1 Pro Preview (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3-flash-preview",
+          "name": "Google: Gemini 3 Flash Preview",
+          "input_price_per_token": 5e-07,
+          "output_price_per_token": 3e-06,
+          "input_price_per_million_tokens": 0.5,
+          "output_price_per_million_tokens": 3.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3-flash-preview:batch",
+          "name": "Google: Gemini 3 Flash Preview (batch)",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 1.5e-06,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 1.5,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-3-pro-image-preview",
+          "name": "Google: Nano Banana Pro (Gemini 3 Pro Image Preview)",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1.2e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 12.0,
+          "context_length": 65536
+        },
+        {
+          "id": "google/gemini-2.5-flash-image",
+          "name": "Google: Nano Banana (Gemini 2.5 Flash Image)",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 32768
+        },
+        {
+          "id": "google/gemini-2.5-flash-lite",
+          "name": "Google: Gemini 2.5 Flash Lite",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 4e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.39999999999999997,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-2.5-flash-lite:batch",
+          "name": "Google: Gemini 2.5 Flash Lite (batch)",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 2e-07,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.19999999999999998,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-2.5-flash",
+          "name": "Google: Gemini 2.5 Flash",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-2.5-pro",
+          "name": "Google: Gemini 2.5 Pro",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemini-2.5-pro-preview",
+          "name": "Google: Gemini 2.5 Pro Preview 06-05",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "google/gemma-3-4b-it",
+          "name": "Google: Gemma 3 4B",
+          "input_price_per_token": 4e-08,
+          "output_price_per_token": 5e-08,
+          "input_price_per_million_tokens": 0.04,
+          "output_price_per_million_tokens": 0.049999999999999996,
+          "context_length": 131072
+        },
+        {
+          "id": "google/gemma-3-12b-it",
+          "name": "Google: Gemma 3 12B",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 1.5e-07,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.15,
+          "context_length": 131072
+        },
+        {
+          "id": "google/gemma-3-27b-it",
+          "name": "Google: Gemma 3 27B",
+          "input_price_per_token": 8e-08,
+          "output_price_per_token": 3.5e-07,
+          "input_price_per_million_tokens": 0.08,
+          "output_price_per_million_tokens": 0.35,
+          "context_length": 131072
+        },
+        {
+          "id": "google/gemma-2-27b-it",
+          "name": "Google: Gemma 2 27B",
+          "input_price_per_token": 6.5e-07,
+          "output_price_per_token": 6.5e-07,
+          "input_price_per_million_tokens": 0.65,
+          "output_price_per_million_tokens": 0.65,
+          "context_length": 8192
+        }
+      ]
+    },
+    {
+      "model": "scaledown",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "scaledown/summarize",
+          "name": "ScaleDown: Summarize",
+          "input_price_per_token": 4e-08,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.04,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "scaledown/extract",
+          "name": "ScaleDown: Extract",
+          "input_price_per_token": 4e-08,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.04,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 1000000
+        }
+      ]
+    },
+    {
+      "model": "stepfun",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "stepfun/step-5-preview",
+          "name": "StepFun: Step 5 Preview",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 2.7e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 2.7,
+          "context_length": 1048576
+        },
+        {
+          "id": "stepfun/step-3.7-flash",
+          "name": "StepFun: Step 3.7 Flash",
+          "input_price_per_token": 2e-07,
+          "output_price_per_token": 1.15e-06,
+          "input_price_per_million_tokens": 0.19999999999999998,
+          "output_price_per_million_tokens": 1.15,
+          "context_length": 262144
+        },
+        {
+          "id": "stepfun/step-3.5-flash",
+          "name": "StepFun: Step 3.5 Flash",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 3e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.3,
+          "context_length": 262144
+        }
+      ]
+    },
+    {
+      "model": "anthropic",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "anthropic/claude-haiku-5.5",
+          "name": "Anthropic: Claude Haiku 5.5",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 5e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.5,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-haiku-5.5:batch",
+          "name": "Anthropic: Claude Haiku 5.5 (batch)",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 2.5e-07,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.25,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-sonnet-5.5",
+          "name": "Anthropic: Claude Sonnet 5.5",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-sonnet-5.5:batch",
+          "name": "Anthropic: Claude Sonnet 5.5 (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 5e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 5.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-opus-5.5",
+          "name": "Anthropic: Claude Opus 5.5",
+          "input_price_per_token": 4e-06,
+          "output_price_per_token": 2e-05,
+          "input_price_per_million_tokens": 4.0,
+          "output_price_per_million_tokens": 20.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-opus-5.5:batch",
+          "name": "Anthropic: Claude Opus 5.5 (batch)",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-fable-5.1",
+          "name": "Anthropic: Claude Fable 5.1",
+          "input_price_per_token": 1e-05,
+          "output_price_per_token": 5e-05,
+          "input_price_per_million_tokens": 10.0,
+          "output_price_per_million_tokens": 50.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-fable-5.1:batch",
+          "name": "Anthropic: Claude Fable 5.1 (batch)",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 2.5e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 25.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-opus-5",
+          "name": "Anthropic: Claude Opus 5",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 2.5e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 25.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-opus-5:batch",
+          "name": "Anthropic: Claude Opus 5 (batch)",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1.25e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 12.5,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-sonnet-5",
+          "name": "Anthropic: Claude Sonnet 5",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-sonnet-5:batch",
+          "name": "Anthropic: Claude Sonnet 5 (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 5e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 5.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-fable-5",
+          "name": "Anthropic: Claude Fable 5",
+          "input_price_per_token": 1e-05,
+          "output_price_per_token": 5e-05,
+          "input_price_per_million_tokens": 10.0,
+          "output_price_per_million_tokens": 50.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-fable-5:batch",
+          "name": "Anthropic: Claude Fable 5 (batch)",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 2.5e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 25.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-opus-4.8",
+          "name": "Anthropic: Claude Opus 4.8",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 2.5e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 25.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-opus-4.8:batch",
+          "name": "Anthropic: Claude Opus 4.8 (batch)",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1.25e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 12.5,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-opus-4.7",
+          "name": "Anthropic: Claude Opus 4.7",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 2.5e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 25.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-opus-4.7:batch",
+          "name": "Anthropic: Claude Opus 4.7 (batch)",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1.25e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 12.5,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-sonnet-4.6",
+          "name": "Anthropic: Claude Sonnet 4.6",
+          "input_price_per_token": 3e-06,
+          "output_price_per_token": 1.5e-05,
+          "input_price_per_million_tokens": 3.0,
+          "output_price_per_million_tokens": 15.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-sonnet-4.6:batch",
+          "name": "Anthropic: Claude Sonnet 4.6 (batch)",
+          "input_price_per_token": 1.5e-06,
+          "output_price_per_token": 7.5e-06,
+          "input_price_per_million_tokens": 1.5,
+          "output_price_per_million_tokens": 7.5,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-opus-4.6",
+          "name": "Anthropic: Claude Opus 4.6",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 2.5e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 25.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-opus-4.6:batch",
+          "name": "Anthropic: Claude Opus 4.6 (batch)",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1.25e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 12.5,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-opus-4.5",
+          "name": "Anthropic: Claude Opus 4.5",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 2.5e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 25.0,
+          "context_length": 200000
+        },
+        {
+          "id": "anthropic/claude-opus-4.5:batch",
+          "name": "Anthropic: Claude Opus 4.5 (batch)",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1.25e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 12.5,
+          "context_length": 200000
+        },
+        {
+          "id": "anthropic/claude-haiku-4.5",
+          "name": "Anthropic: Claude Haiku 4.5",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 5e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 5.0,
+          "context_length": 200000
+        },
+        {
+          "id": "anthropic/claude-haiku-4.5:batch",
+          "name": "Anthropic: Claude Haiku 4.5 (batch)",
+          "input_price_per_token": 5e-07,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 0.5,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 200000
+        },
+        {
+          "id": "anthropic/claude-sonnet-4.5",
+          "name": "Anthropic: Claude Sonnet 4.5",
+          "input_price_per_token": 3e-06,
+          "output_price_per_token": 1.5e-05,
+          "input_price_per_million_tokens": 3.0,
+          "output_price_per_million_tokens": 15.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-sonnet-4.5:batch",
+          "name": "Anthropic: Claude Sonnet 4.5 (batch)",
+          "input_price_per_token": 1.5e-06,
+          "output_price_per_token": 7.5e-06,
+          "input_price_per_million_tokens": 1.5,
+          "output_price_per_million_tokens": 7.5,
+          "context_length": 1000000
+        },
+        {
+          "id": "anthropic/claude-opus-4.1",
+          "name": "Anthropic: Claude Opus 4.1",
+          "input_price_per_token": 1.5e-05,
+          "output_price_per_token": 7.5e-05,
+          "input_price_per_million_tokens": 15.0,
+          "output_price_per_million_tokens": 75.0,
+          "context_length": 200000
+        },
+        {
+          "id": "anthropic/claude-opus-4.1:batch",
+          "name": "Anthropic: Claude Opus 4.1 (batch)",
+          "input_price_per_token": 7.5e-06,
+          "output_price_per_token": 3.75e-05,
+          "input_price_per_million_tokens": 7.5,
+          "output_price_per_million_tokens": 37.5,
+          "context_length": 200000
+        }
+      ]
+    },
+    {
+      "model": "mistralai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "mistralai/mistral-large-4-0",
+          "name": "Mistral: Mistral Large 4",
+          "input_price_per_token": 1.36e-06,
+          "output_price_per_token": 4.18e-06,
+          "input_price_per_million_tokens": 1.3599999999999999,
+          "output_price_per_million_tokens": 4.18,
+          "context_length": 1048576
+        },
+        {
+          "id": "mistralai/mistral-medium-3-5",
+          "name": "Mistral: Mistral Medium 3.5",
+          "input_price_per_token": 1.5e-06,
+          "output_price_per_token": 7.5e-06,
+          "input_price_per_million_tokens": 1.5,
+          "output_price_per_million_tokens": 7.5,
+          "context_length": 262144
+        },
+        {
+          "id": "mistralai/mistral-medium-3-5:batch",
+          "name": "Mistral: Mistral Medium 3.5 (batch)",
+          "input_price_per_token": 7.5e-07,
+          "output_price_per_token": 3.75e-06,
+          "input_price_per_million_tokens": 0.75,
+          "output_price_per_million_tokens": 3.75,
+          "context_length": 262144
+        },
+        {
+          "id": "mistralai/mistral-small-2603",
+          "name": "Mistral: Mistral Small 4",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 262144
+        },
+        {
+          "id": "mistralai/mistral-small-2603:batch",
+          "name": "Mistral: Mistral Small 4 (batch)",
+          "input_price_per_token": 7.5e-08,
+          "output_price_per_token": 3e-07,
+          "input_price_per_million_tokens": 0.075,
+          "output_price_per_million_tokens": 0.3,
+          "context_length": 262144
+        },
+        {
+          "id": "mistralai/devstral-2512",
+          "name": "Mistral: Devstral 2 2512",
+          "input_price_per_token": 4e-07,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 0.39999999999999997,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 262144
+        },
+        {
+          "id": "mistralai/ministral-14b-2512",
+          "name": "Mistral: Ministral 3 14B 2512",
+          "input_price_per_token": 2e-07,
+          "output_price_per_token": 2e-07,
+          "input_price_per_million_tokens": 0.19999999999999998,
+          "output_price_per_million_tokens": 0.19999999999999998,
+          "context_length": 262144
+        },
+        {
+          "id": "mistralai/ministral-8b-2512",
+          "name": "Mistral: Ministral 3 8B 2512",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 1.5e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.15,
+          "context_length": 262144
+        },
+        {
+          "id": "mistralai/ministral-8b-2512:batch",
+          "name": "Mistral: Ministral 3 8B 2512 (batch)",
+          "input_price_per_token": 7.5e-08,
+          "output_price_per_token": 7.5e-08,
+          "input_price_per_million_tokens": 0.075,
+          "output_price_per_million_tokens": 0.075,
+          "context_length": 262144
+        },
+        {
+          "id": "mistralai/ministral-3b-2512",
+          "name": "Mistral: Ministral 3 3B 2512",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 1e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.09999999999999999,
+          "context_length": 131072
+        },
+        {
+          "id": "mistralai/mistral-large-2512",
+          "name": "Mistral: Mistral Large 3 2512",
+          "input_price_per_token": 5e-07,
+          "output_price_per_token": 1.5e-06,
+          "input_price_per_million_tokens": 0.5,
+          "output_price_per_million_tokens": 1.5,
+          "context_length": 262144
+        },
+        {
+          "id": "mistralai/mistral-large-2512:batch",
+          "name": "Mistral: Mistral Large 3 2512 (batch)",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 7.5e-07,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 0.75,
+          "context_length": 262144
+        },
+        {
+          "id": "mistralai/voxtral-small-24b-2507",
+          "name": "Mistral: Voxtral Small 24B 2507",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 3e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.3,
+          "context_length": 32768
+        },
+        {
+          "id": "mistralai/mistral-medium-3.1",
+          "name": "Mistral: Mistral Medium 3.1",
+          "input_price_per_token": 4e-07,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 0.39999999999999997,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 131072
+        },
+        {
+          "id": "mistralai/mistral-medium-3.1:batch",
+          "name": "Mistral: Mistral Medium 3.1 (batch)",
+          "input_price_per_token": 2e-07,
+          "output_price_per_token": 1e-06,
+          "input_price_per_million_tokens": 0.19999999999999998,
+          "output_price_per_million_tokens": 1.0,
+          "context_length": 131072
+        },
+        {
+          "id": "mistralai/codestral-2508",
+          "name": "Mistral: Codestral 2508",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 9e-07,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 0.8999999999999999,
+          "context_length": 256000
+        },
+        {
+          "id": "mistralai/codestral-2508:batch",
+          "name": "Mistral: Codestral 2508 (batch)",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 4.5e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.44999999999999996,
+          "context_length": 256000
+        },
+        {
+          "id": "mistralai/mistral-small-3.2-24b-instruct",
+          "name": "Mistral: Mistral Small 3.2 24B",
+          "input_price_per_token": 9.375e-08,
+          "output_price_per_token": 2.5e-07,
+          "input_price_per_million_tokens": 0.09375,
+          "output_price_per_million_tokens": 0.25,
+          "context_length": 256000
+        },
+        {
+          "id": "mistralai/mistral-medium-3",
+          "name": "Mistral: Mistral Medium 3",
+          "input_price_per_token": 4e-07,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 0.39999999999999997,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 131072
+        },
+        {
+          "id": "mistralai/mistral-small-3.1-24b-instruct",
+          "name": "Mistral: Mistral Small 3.1 24B",
+          "input_price_per_token": 3.51e-07,
+          "output_price_per_token": 5.55e-07,
+          "input_price_per_million_tokens": 0.351,
+          "output_price_per_million_tokens": 0.5549999999999999,
+          "context_length": 128000
+        },
+        {
+          "id": "mistralai/mistral-saba",
+          "name": "Mistral: Saba",
+          "input_price_per_token": 2e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.19999999999999998,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 32768
+        },
+        {
+          "id": "mistralai/mistral-small-24b-instruct-2501",
+          "name": "Mistral: Mistral Small 3",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 8e-08,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.08,
+          "context_length": 32768
+        },
+        {
+          "id": "mistralai/mistral-large-2407",
+          "name": "Mistral Large 2407",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 131072
+        },
+        {
+          "id": "mistralai/mistral-nemo",
+          "name": "Mistral: Mistral Nemo",
+          "input_price_per_token": 2.9e-08,
+          "output_price_per_token": 3e-08,
+          "input_price_per_million_tokens": 0.029,
+          "output_price_per_million_tokens": 0.03,
+          "context_length": 131072
+        },
+        {
+          "id": "mistralai/mixtral-8x22b-instruct",
+          "name": "Mistral: Mixtral 8x22B Instruct",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 65536
+        },
+        {
+          "id": "mistralai/mistral-large",
+          "name": "Mistral Large",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 128000
+        }
+      ]
+    },
+    {
+      "model": "inclusionai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "inclusionai/ling-3.1-flash",
+          "name": "inclusionAI: Ling 3.1 Flash",
+          "input_price_per_token": 7.5e-08,
+          "output_price_per_token": 2.25e-07,
+          "input_price_per_million_tokens": 0.075,
+          "output_price_per_million_tokens": 0.22499999999999998,
+          "context_length": 262144
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash-vl",
+          "name": "inclusionAI: Ling 3.0 Flash VL",
+          "input_price_per_token": 6e-08,
+          "output_price_per_token": 1.8e-07,
+          "input_price_per_million_tokens": 0.06,
+          "output_price_per_million_tokens": 0.18,
+          "context_length": 131072
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash",
+          "name": "inclusionAI: Ling 3.0 Flash",
+          "input_price_per_token": 2.1e-08,
+          "output_price_per_token": 6.3e-08,
+          "input_price_per_million_tokens": 0.020999999999999998,
+          "output_price_per_million_tokens": 0.063,
+          "context_length": 262144
+        }
+      ]
+    },
+    {
+      "model": "openai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "openai/gpt-6.1-sol-pro",
+          "name": "OpenAI: GPT-6.1 Sol Pro",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6.1-sol-pro:batch",
+          "name": "OpenAI: GPT-6.1 Sol Pro (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 5e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 5.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6.1-sol",
+          "name": "OpenAI: GPT-6.1 Sol",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6.1-sol:batch",
+          "name": "OpenAI: GPT-6.1 Sol (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 5e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 5.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6-luna-pro",
+          "name": "OpenAI: GPT-6 Luna Pro",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 5e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.5,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6-luna-pro:batch",
+          "name": "OpenAI: GPT-6 Luna Pro (batch)",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 2.5e-07,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.25,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6-luna",
+          "name": "OpenAI: GPT-6 Luna",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 5e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.5,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6-luna:batch",
+          "name": "OpenAI: GPT-6 Luna (batch)",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 2.5e-07,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.25,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6-sol-pro",
+          "name": "OpenAI: GPT-6 Sol Pro",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6-sol-pro:batch",
+          "name": "OpenAI: GPT-6 Sol Pro (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 5e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 5.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6-sol",
+          "name": "OpenAI: GPT-6 Sol",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6-sol:batch",
+          "name": "OpenAI: GPT-6 Sol (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 5e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 5.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6-astra",
+          "name": "OpenAI: GPT-6 Astra",
+          "input_price_per_token": 1e-05,
+          "output_price_per_token": 5e-05,
+          "input_price_per_million_tokens": 10.0,
+          "output_price_per_million_tokens": 50.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6-astra:batch",
+          "name": "OpenAI: GPT-6 Astra (batch)",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 2.5e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 25.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6-astra-pro",
+          "name": "OpenAI: GPT-6 Astra Pro",
+          "input_price_per_token": 1e-05,
+          "output_price_per_token": 5e-05,
+          "input_price_per_million_tokens": 10.0,
+          "output_price_per_million_tokens": 50.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-6-astra-pro:batch",
+          "name": "OpenAI: GPT-6 Astra Pro (batch)",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 2.5e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 25.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.6-luna-pro",
+          "name": "OpenAI: GPT-5.6 Luna Pro",
+          "input_price_per_token": 2e-07,
+          "output_price_per_token": 1.2e-06,
+          "input_price_per_million_tokens": 0.19999999999999998,
+          "output_price_per_million_tokens": 1.2,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.6-luna-pro:batch",
+          "name": "OpenAI: GPT-5.6 Luna Pro (batch)",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.6-luna",
+          "name": "OpenAI: GPT-5.6 Luna",
+          "input_price_per_token": 2e-07,
+          "output_price_per_token": 1.2e-06,
+          "input_price_per_million_tokens": 0.19999999999999998,
+          "output_price_per_million_tokens": 1.2,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.6-luna:batch",
+          "name": "OpenAI: GPT-5.6 Luna (batch)",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.6-terra-pro",
+          "name": "OpenAI: GPT-5.6 Terra Pro",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1.2e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 12.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.6-terra-pro:batch",
+          "name": "OpenAI: GPT-5.6 Terra Pro (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.6-terra",
+          "name": "OpenAI: GPT-5.6 Terra",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1.2e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 12.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.6-terra:batch",
+          "name": "OpenAI: GPT-5.6 Terra (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.6-sol-pro",
+          "name": "OpenAI: GPT-5.6 Sol Pro",
+          "input_price_per_token": 4e-06,
+          "output_price_per_token": 2e-05,
+          "input_price_per_million_tokens": 4.0,
+          "output_price_per_million_tokens": 20.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.6-sol-pro:batch",
+          "name": "OpenAI: GPT-5.6 Sol Pro (batch)",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.6-sol",
+          "name": "OpenAI: GPT-5.6 Sol",
+          "input_price_per_token": 4e-06,
+          "output_price_per_token": 2e-05,
+          "input_price_per_million_tokens": 4.0,
+          "output_price_per_million_tokens": 20.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.6-sol:batch",
+          "name": "OpenAI: GPT-5.6 Sol (batch)",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-chat-latest",
+          "name": "OpenAI: GPT Chat Latest",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 3e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 30.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.5-pro",
+          "name": "OpenAI: GPT-5.5 Pro",
+          "input_price_per_token": 3e-05,
+          "output_price_per_token": 0.00018,
+          "input_price_per_million_tokens": 30.0,
+          "output_price_per_million_tokens": 180.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.5-pro:batch",
+          "name": "OpenAI: GPT-5.5 Pro (batch)",
+          "input_price_per_token": 1.5e-05,
+          "output_price_per_token": 9e-05,
+          "input_price_per_million_tokens": 15.0,
+          "output_price_per_million_tokens": 90.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.5",
+          "name": "OpenAI: GPT-5.5",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 3e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 30.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.5:batch",
+          "name": "OpenAI: GPT-5.5 (batch)",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1.5e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 15.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.4-image-2",
+          "name": "OpenAI: GPT-5.4 Image 2",
+          "input_price_per_token": 8e-06,
+          "output_price_per_token": 1.5e-05,
+          "input_price_per_million_tokens": 8.0,
+          "output_price_per_million_tokens": 15.0,
+          "context_length": 272000
+        },
+        {
+          "id": "openai/gpt-5.4-nano",
+          "name": "OpenAI: GPT-5.4 Nano",
+          "input_price_per_token": 2e-07,
+          "output_price_per_token": 1.25e-06,
+          "input_price_per_million_tokens": 0.19999999999999998,
+          "output_price_per_million_tokens": 1.25,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.4-nano:batch",
+          "name": "OpenAI: GPT-5.4 Nano (batch)",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 6.25e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.625,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.4-mini",
+          "name": "OpenAI: GPT-5.4 Mini",
+          "input_price_per_token": 7.5e-07,
+          "output_price_per_token": 4.5e-06,
+          "input_price_per_million_tokens": 0.75,
+          "output_price_per_million_tokens": 4.5,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.4-mini:batch",
+          "name": "OpenAI: GPT-5.4 Mini (batch)",
+          "input_price_per_token": 3.75e-07,
+          "output_price_per_token": 2.25e-06,
+          "input_price_per_million_tokens": 0.375,
+          "output_price_per_million_tokens": 2.25,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.4-pro",
+          "name": "OpenAI: GPT-5.4 Pro",
+          "input_price_per_token": 3e-05,
+          "output_price_per_token": 0.00018,
+          "input_price_per_million_tokens": 30.0,
+          "output_price_per_million_tokens": 180.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.4-pro:batch",
+          "name": "OpenAI: GPT-5.4 Pro (batch)",
+          "input_price_per_token": 1.5e-05,
+          "output_price_per_token": 9e-05,
+          "input_price_per_million_tokens": 15.0,
+          "output_price_per_million_tokens": 90.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.4",
+          "name": "OpenAI: GPT-5.4",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1.5e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 15.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.4:batch",
+          "name": "OpenAI: GPT-5.4 (batch)",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 7.5e-06,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 7.5,
+          "context_length": 1050000
+        },
+        {
+          "id": "openai/gpt-5.3-codex",
+          "name": "OpenAI: GPT-5.3-Codex",
+          "input_price_per_token": 1.75e-06,
+          "output_price_per_token": 1.4e-05,
+          "input_price_per_million_tokens": 1.75,
+          "output_price_per_million_tokens": 14.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-audio",
+          "name": "OpenAI: GPT Audio",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-audio-mini",
+          "name": "OpenAI: GPT Audio Mini",
+          "input_price_per_token": 6e-07,
+          "output_price_per_token": 2.4e-06,
+          "input_price_per_million_tokens": 0.6,
+          "output_price_per_million_tokens": 2.4,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-5.2-codex",
+          "name": "OpenAI: GPT-5.2-Codex",
+          "input_price_per_token": 1.75e-06,
+          "output_price_per_token": 1.4e-05,
+          "input_price_per_million_tokens": 1.75,
+          "output_price_per_million_tokens": 14.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.2-chat",
+          "name": "OpenAI: GPT-5.2 Chat",
+          "input_price_per_token": 1.75e-06,
+          "output_price_per_token": 1.4e-05,
+          "input_price_per_million_tokens": 1.75,
+          "output_price_per_million_tokens": 14.0,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-5.2-pro",
+          "name": "OpenAI: GPT-5.2 Pro",
+          "input_price_per_token": 2.1e-05,
+          "output_price_per_token": 0.000168,
+          "input_price_per_million_tokens": 21.0,
+          "output_price_per_million_tokens": 168.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.2-pro:batch",
+          "name": "OpenAI: GPT-5.2 Pro (batch)",
+          "input_price_per_token": 1.05e-05,
+          "output_price_per_token": 8.4e-05,
+          "input_price_per_million_tokens": 10.5,
+          "output_price_per_million_tokens": 84.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.2",
+          "name": "OpenAI: GPT-5.2",
+          "input_price_per_token": 1.75e-06,
+          "output_price_per_token": 1.4e-05,
+          "input_price_per_million_tokens": 1.75,
+          "output_price_per_million_tokens": 14.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.2:batch",
+          "name": "OpenAI: GPT-5.2 (batch)",
+          "input_price_per_token": 8.75e-07,
+          "output_price_per_token": 7e-06,
+          "input_price_per_million_tokens": 0.875,
+          "output_price_per_million_tokens": 7.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.1-codex-max",
+          "name": "OpenAI: GPT-5.1-Codex-Max",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.1",
+          "name": "OpenAI: GPT-5.1",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.1:batch",
+          "name": "OpenAI: GPT-5.1 (batch)",
+          "input_price_per_token": 6.25e-07,
+          "output_price_per_token": 5e-06,
+          "input_price_per_million_tokens": 0.625,
+          "output_price_per_million_tokens": 5.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.1-codex",
+          "name": "OpenAI: GPT-5.1-Codex",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5.1-codex-mini",
+          "name": "OpenAI: GPT-5.1-Codex-Mini",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-oss-safeguard-20b",
+          "name": "OpenAI: gpt-oss-safeguard-20b",
+          "input_price_per_token": 7.5e-08,
+          "output_price_per_token": 3e-07,
+          "input_price_per_million_tokens": 0.075,
+          "output_price_per_million_tokens": 0.3,
+          "context_length": 131072
+        },
+        {
+          "id": "openai/gpt-5-image-mini",
+          "name": "OpenAI: GPT-5 Image Mini",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5-image",
+          "name": "OpenAI: GPT-5 Image",
+          "input_price_per_token": 1e-05,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 10.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5-pro",
+          "name": "OpenAI: GPT-5 Pro",
+          "input_price_per_token": 1.5e-05,
+          "output_price_per_token": 0.00012,
+          "input_price_per_million_tokens": 15.0,
+          "output_price_per_million_tokens": 120.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5-pro:batch",
+          "name": "OpenAI: GPT-5 Pro (batch)",
+          "input_price_per_token": 7.5e-06,
+          "output_price_per_token": 6e-05,
+          "input_price_per_million_tokens": 7.5,
+          "output_price_per_million_tokens": 60.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5",
+          "name": "OpenAI: GPT-5",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5:batch",
+          "name": "OpenAI: GPT-5 (batch)",
+          "input_price_per_token": 6.25e-07,
+          "output_price_per_token": 5e-06,
+          "input_price_per_million_tokens": 0.625,
+          "output_price_per_million_tokens": 5.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5-mini",
+          "name": "OpenAI: GPT-5 Mini",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5-mini:batch",
+          "name": "OpenAI: GPT-5 Mini (batch)",
+          "input_price_per_token": 1.25e-07,
+          "output_price_per_token": 1e-06,
+          "input_price_per_million_tokens": 0.125,
+          "output_price_per_million_tokens": 1.0,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5-nano",
+          "name": "OpenAI: GPT-5 Nano",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 4e-07,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.39999999999999997,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-5-nano:batch",
+          "name": "OpenAI: GPT-5 Nano (batch)",
+          "input_price_per_token": 2.5e-08,
+          "output_price_per_token": 2e-07,
+          "input_price_per_million_tokens": 0.024999999999999998,
+          "output_price_per_million_tokens": 0.19999999999999998,
+          "context_length": 400000
+        },
+        {
+          "id": "openai/gpt-oss-120b",
+          "name": "OpenAI: gpt-oss-120b",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 131072
+        },
+        {
+          "id": "openai/gpt-oss-120b:batch",
+          "name": "OpenAI: gpt-oss-120b (batch)",
+          "input_price_per_token": 2.96e-08,
+          "output_price_per_token": 1.36e-07,
+          "input_price_per_million_tokens": 0.0296,
+          "output_price_per_million_tokens": 0.136,
+          "context_length": 131072
+        },
+        {
+          "id": "openai/gpt-oss-20b",
+          "name": "OpenAI: gpt-oss-20b",
+          "input_price_per_token": 1.8e-08,
+          "output_price_per_token": 9e-08,
+          "input_price_per_million_tokens": 0.018,
+          "output_price_per_million_tokens": 0.09,
+          "context_length": 131072
+        },
+        {
+          "id": "openai/gpt-oss-20b:batch",
+          "name": "OpenAI: gpt-oss-20b (batch)",
+          "input_price_per_token": 2.4e-08,
+          "output_price_per_token": 1.12e-07,
+          "input_price_per_million_tokens": 0.024,
+          "output_price_per_million_tokens": 0.112,
+          "context_length": 131072
+        },
+        {
+          "id": "openai/o3-pro",
+          "name": "OpenAI: o3 Pro",
+          "input_price_per_token": 2e-05,
+          "output_price_per_token": 8e-05,
+          "input_price_per_million_tokens": 20.0,
+          "output_price_per_million_tokens": 80.0,
+          "context_length": 200000
+        },
+        {
+          "id": "openai/o4-mini-high",
+          "name": "OpenAI: o4 Mini High",
+          "input_price_per_token": 1.1e-06,
+          "output_price_per_token": 4.4e-06,
+          "input_price_per_million_tokens": 1.1,
+          "output_price_per_million_tokens": 4.4,
+          "context_length": 200000
+        },
+        {
+          "id": "openai/o3",
+          "name": "OpenAI: o3",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 8e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 8.0,
+          "context_length": 200000
+        },
+        {
+          "id": "openai/o3:batch",
+          "name": "OpenAI: o3 (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 4e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 4.0,
+          "context_length": 200000
+        },
+        {
+          "id": "openai/o4-mini",
+          "name": "OpenAI: o4 Mini",
+          "input_price_per_token": 1.1e-06,
+          "output_price_per_token": 4.4e-06,
+          "input_price_per_million_tokens": 1.1,
+          "output_price_per_million_tokens": 4.4,
+          "context_length": 200000
+        },
+        {
+          "id": "openai/o4-mini:batch",
+          "name": "OpenAI: o4 Mini (batch)",
+          "input_price_per_token": 5.5e-07,
+          "output_price_per_token": 2.2e-06,
+          "input_price_per_million_tokens": 0.55,
+          "output_price_per_million_tokens": 2.2,
+          "context_length": 200000
+        },
+        {
+          "id": "openai/gpt-4.1",
+          "name": "OpenAI: GPT-4.1",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 8e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 8.0,
+          "context_length": 1047576
+        },
+        {
+          "id": "openai/gpt-4.1:batch",
+          "name": "OpenAI: GPT-4.1 (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 4e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 4.0,
+          "context_length": 1047576
+        },
+        {
+          "id": "openai/gpt-4.1-mini",
+          "name": "OpenAI: GPT-4.1 Mini",
+          "input_price_per_token": 4e-07,
+          "output_price_per_token": 1.6e-06,
+          "input_price_per_million_tokens": 0.39999999999999997,
+          "output_price_per_million_tokens": 1.5999999999999999,
+          "context_length": 1047576
+        },
+        {
+          "id": "openai/gpt-4.1-mini:batch",
+          "name": "OpenAI: GPT-4.1 Mini (batch)",
+          "input_price_per_token": 2e-07,
+          "output_price_per_token": 8e-07,
+          "input_price_per_million_tokens": 0.19999999999999998,
+          "output_price_per_million_tokens": 0.7999999999999999,
+          "context_length": 1047576
+        },
+        {
+          "id": "openai/gpt-4.1-nano",
+          "name": "OpenAI: GPT-4.1 Nano",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 4e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.39999999999999997,
+          "context_length": 1047576
+        },
+        {
+          "id": "openai/gpt-4.1-nano:batch",
+          "name": "OpenAI: GPT-4.1 Nano (batch)",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 2e-07,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.19999999999999998,
+          "context_length": 1047576
+        },
+        {
+          "id": "openai/o1-pro",
+          "name": "OpenAI: o1-pro",
+          "input_price_per_token": 0.00015,
+          "output_price_per_token": 0.0006,
+          "input_price_per_million_tokens": 150.0,
+          "output_price_per_million_tokens": 600.0,
+          "context_length": 200000
+        },
+        {
+          "id": "openai/o3-mini-high",
+          "name": "OpenAI: o3 Mini High",
+          "input_price_per_token": 1.1e-06,
+          "output_price_per_token": 4.4e-06,
+          "input_price_per_million_tokens": 1.1,
+          "output_price_per_million_tokens": 4.4,
+          "context_length": 200000
+        },
+        {
+          "id": "openai/o3-mini",
+          "name": "OpenAI: o3 Mini",
+          "input_price_per_token": 1.1e-06,
+          "output_price_per_token": 4.4e-06,
+          "input_price_per_million_tokens": 1.1,
+          "output_price_per_million_tokens": 4.4,
+          "context_length": 200000
+        },
+        {
+          "id": "openai/o3-mini:batch",
+          "name": "OpenAI: o3 Mini (batch)",
+          "input_price_per_token": 5.5e-07,
+          "output_price_per_token": 2.2e-06,
+          "input_price_per_million_tokens": 0.55,
+          "output_price_per_million_tokens": 2.2,
+          "context_length": 200000
+        },
+        {
+          "id": "openai/o1",
+          "name": "OpenAI: o1",
+          "input_price_per_token": 1.5e-05,
+          "output_price_per_token": 6e-05,
+          "input_price_per_million_tokens": 15.0,
+          "output_price_per_million_tokens": 60.0,
+          "context_length": 200000
+        },
+        {
+          "id": "openai/gpt-4o-2024-11-20",
+          "name": "OpenAI: GPT-4o (2024-11-20)",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-4o-2024-08-06",
+          "name": "OpenAI: GPT-4o (2024-08-06)",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-4o-mini",
+          "name": "OpenAI: GPT-4o-mini",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-4o-mini-2024-07-18",
+          "name": "OpenAI: GPT-4o-mini (2024-07-18)",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-4o-mini:batch",
+          "name": "OpenAI: GPT-4o-mini (batch)",
+          "input_price_per_token": 7.5e-08,
+          "output_price_per_token": 3e-07,
+          "input_price_per_million_tokens": 0.075,
+          "output_price_per_million_tokens": 0.3,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-4o",
+          "name": "OpenAI: GPT-4o",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-4o-2024-05-13",
+          "name": "OpenAI: GPT-4o (2024-05-13)",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 1.5e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 15.0,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-4o:batch",
+          "name": "OpenAI: GPT-4o (batch)",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 5e-06,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 5.0,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-4-turbo",
+          "name": "OpenAI: GPT-4 Turbo",
+          "input_price_per_token": 1e-05,
+          "output_price_per_token": 3e-05,
+          "input_price_per_million_tokens": 10.0,
+          "output_price_per_million_tokens": 30.0,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-4-turbo:batch",
+          "name": "OpenAI: GPT-4 Turbo (batch)",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 1.5e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 15.0,
+          "context_length": 128000
+        },
+        {
+          "id": "openai/gpt-3.5-turbo-0613",
+          "name": "OpenAI: GPT-3.5 Turbo (older v0613)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 4095
+        },
+        {
+          "id": "openai/gpt-3.5-turbo-instruct",
+          "name": "OpenAI: GPT-3.5 Turbo Instruct",
+          "input_price_per_token": 1.5e-06,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 1.5,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 4095
+        },
+        {
+          "id": "openai/gpt-3.5-turbo-16k",
+          "name": "OpenAI: GPT-3.5 Turbo 16k",
+          "input_price_per_token": 3e-06,
+          "output_price_per_token": 4e-06,
+          "input_price_per_million_tokens": 3.0,
+          "output_price_per_million_tokens": 4.0,
+          "context_length": 16385
+        },
+        {
+          "id": "openai/gpt-3.5-turbo",
+          "name": "OpenAI: GPT-3.5 Turbo",
+          "input_price_per_token": 5e-07,
+          "output_price_per_token": 1.5e-06,
+          "input_price_per_million_tokens": 0.5,
+          "output_price_per_million_tokens": 1.5,
+          "context_length": 16385
+        },
+        {
+          "id": "openai/gpt-3.5-turbo:batch",
+          "name": "OpenAI: GPT-3.5 Turbo (batch)",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 7.5e-07,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 0.75,
+          "context_length": 16385
+        },
+        {
+          "id": "openai/gpt-4",
+          "name": "OpenAI: GPT-4",
+          "input_price_per_token": 3e-05,
+          "output_price_per_token": 6e-05,
+          "input_price_per_million_tokens": 30.0,
+          "output_price_per_million_tokens": 60.0,
+          "context_length": 8191
+        }
+      ]
+    },
+    {
+      "model": "typesafe",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "typesafe/jev-router",
+          "name": "TypeSafe: Jev Router",
+          "input_price_per_token": -1.0,
+          "output_price_per_token": -1.0,
+          "input_price_per_million_tokens": -1000000.0,
+          "output_price_per_million_tokens": -1000000.0,
+          "context_length": 1000000
+        }
+      ]
+    },
+    {
+      "model": "perceptron",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "perceptron/perceptron-mk1.5",
+          "name": "Perceptron: Perceptron Mk1.5",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 1.5e-06,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 1.5,
+          "context_length": 36864
+        },
+        {
+          "id": "perceptron/perceptron-mk1",
+          "name": "Perceptron: Perceptron Mk1",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 1.5e-06,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 1.5,
+          "context_length": 32768
+        }
+      ]
+    },
+    {
+      "model": "fireworks",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "fireworks/ember-1",
+          "name": "Fireworks: Ember-1",
+          "input_price_per_token": 3e-06,
+          "output_price_per_token": 1.5e-05,
+          "input_price_per_million_tokens": 3.0,
+          "output_price_per_million_tokens": 15.0,
+          "context_length": 1048576
+        }
+      ]
+    },
+    {
+      "model": "z-ai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "z-ai/glm-5.3-prime",
+          "name": "Z.ai: GLM 5.3 Prime",
+          "input_price_per_token": 2.8e-06,
+          "output_price_per_token": 8.8e-06,
+          "input_price_per_million_tokens": 2.8,
+          "output_price_per_million_tokens": 8.8,
+          "context_length": 1000000
+        },
+        {
+          "id": "z-ai/glm-5.3-flashx",
+          "name": "Z.ai: GLM 5.3 FlashX",
+          "input_price_per_token": 3.7e-07,
+          "output_price_per_token": 1.25e-06,
+          "input_price_per_million_tokens": 0.37,
+          "output_price_per_million_tokens": 1.25,
+          "context_length": 1048576
+        },
+        {
+          "id": "z-ai/glm-5.3-flash",
+          "name": "Z.ai: GLM 5.3 Flash",
+          "input_price_per_token": 4.1191e-08,
+          "output_price_per_token": 1.2e-07,
+          "input_price_per_million_tokens": 0.041191,
+          "output_price_per_million_tokens": 0.12,
+          "context_length": 1048576
+        },
+        {
+          "id": "z-ai/glm-5.3-flash:batch",
+          "name": "Z.ai: GLM 5.3 Flash (batch)",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 1.8e-07,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.18,
+          "context_length": 1048576
+        },
+        {
+          "id": "z-ai/glm-5.3",
+          "name": "Z.ai: GLM 5.3",
+          "input_price_per_token": 7.9e-08,
+          "output_price_per_token": 1.4e-06,
+          "input_price_per_million_tokens": 0.079,
+          "output_price_per_million_tokens": 1.4,
+          "context_length": 1048576
+        },
+        {
+          "id": "z-ai/glm-5.3:batch",
+          "name": "Z.ai: GLM 5.3 (batch)",
+          "input_price_per_token": 4.5e-07,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 0.44999999999999996,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "z-ai/glm-5.2",
+          "name": "Z.ai: GLM 5.2",
+          "input_price_per_token": 3.41e-08,
+          "output_price_per_token": 7e-06,
+          "input_price_per_million_tokens": 0.0341,
+          "output_price_per_million_tokens": 7.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "z-ai/glm-5.1",
+          "name": "Z.ai: GLM 5.1",
+          "input_price_per_token": 1.4e-06,
+          "output_price_per_token": 4.4e-06,
+          "input_price_per_million_tokens": 1.4,
+          "output_price_per_million_tokens": 4.4,
+          "context_length": 204800
+        },
+        {
+          "id": "z-ai/glm-5v-turbo",
+          "name": "Z.ai: GLM 5V Turbo",
+          "input_price_per_token": 1.2e-06,
+          "output_price_per_token": 4e-06,
+          "input_price_per_million_tokens": 1.2,
+          "output_price_per_million_tokens": 4.0,
+          "context_length": 202752
+        },
+        {
+          "id": "z-ai/glm-5-turbo",
+          "name": "Z.ai: GLM 5 Turbo",
+          "input_price_per_token": 1.2e-06,
+          "output_price_per_token": 4e-06,
+          "input_price_per_million_tokens": 1.2,
+          "output_price_per_million_tokens": 4.0,
+          "context_length": 202752
+        },
+        {
+          "id": "z-ai/glm-5",
+          "name": "Z.ai: GLM 5",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 3.2e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 3.1999999999999997,
+          "context_length": 204800
+        },
+        {
+          "id": "z-ai/glm-4.7-flash",
+          "name": "Z.ai: GLM 4.7 Flash",
+          "input_price_per_token": 6.05e-08,
+          "output_price_per_token": 4e-07,
+          "input_price_per_million_tokens": 0.060500000000000005,
+          "output_price_per_million_tokens": 0.39999999999999997,
+          "context_length": 200000
+        },
+        {
+          "id": "z-ai/glm-4.7",
+          "name": "Z.ai: GLM 4.7",
+          "input_price_per_token": 5.4e-07,
+          "output_price_per_token": 1.98e-06,
+          "input_price_per_million_tokens": 0.54,
+          "output_price_per_million_tokens": 1.9800000000000002,
+          "context_length": 204800
+        },
+        {
+          "id": "z-ai/glm-4.6v",
+          "name": "Z.ai: GLM 4.6V",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 9e-07,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 0.8999999999999999,
+          "context_length": 131072
+        },
+        {
+          "id": "z-ai/glm-4.6",
+          "name": "Z.ai: GLM 4.6",
+          "input_price_per_token": 5.5e-07,
+          "output_price_per_token": 2.2e-06,
+          "input_price_per_million_tokens": 0.55,
+          "output_price_per_million_tokens": 2.2,
+          "context_length": 204800
+        },
+        {
+          "id": "z-ai/glm-4.5v",
+          "name": "Z.ai: GLM 4.5V",
+          "input_price_per_token": 6e-07,
+          "output_price_per_token": 1.8e-06,
+          "input_price_per_million_tokens": 0.6,
+          "output_price_per_million_tokens": 1.7999999999999998,
+          "context_length": 65536
+        },
+        {
+          "id": "z-ai/glm-4.5",
+          "name": "Z.ai: GLM 4.5",
+          "input_price_per_token": 6e-07,
+          "output_price_per_token": 2.2e-06,
+          "input_price_per_million_tokens": 0.6,
+          "output_price_per_million_tokens": 2.2,
+          "context_length": 131072
+        },
+        {
+          "id": "z-ai/glm-4.5-air",
+          "name": "Z.ai: GLM 4.5 Air",
+          "input_price_per_token": 1.3e-07,
+          "output_price_per_token": 8.5e-07,
+          "input_price_per_million_tokens": 0.13,
+          "output_price_per_million_tokens": 0.85,
+          "context_length": 131072
+        }
+      ]
+    },
+    {
+      "model": "qwen",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "qwen/qwen3.8-max-prime",
+          "name": "Qwen: Qwen3.8 Max Prime",
+          "input_price_per_token": 4e-06,
+          "output_price_per_token": 1.2e-05,
+          "input_price_per_million_tokens": 4.0,
+          "output_price_per_million_tokens": 12.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.8-omni-flash",
+          "name": "Qwen: Qwen3.8 Omni Flash",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 4.7e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.47,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.8-max-0902",
+          "name": "Qwen: Qwen3.8 Max (0902)",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.8-flash",
+          "name": "Qwen: Qwen3.8 Flash",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 4.7e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.47,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.8-27b",
+          "name": "Qwen: Qwen3.8 27B",
+          "input_price_per_token": 4e-08,
+          "output_price_per_token": 1.35e-06,
+          "input_price_per_million_tokens": 0.04,
+          "output_price_per_million_tokens": 1.35,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.8-2.4t-a95b",
+          "name": "Qwen: Qwen3.8 2.4T A95B",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "qwen/qwen3.7-flash",
+          "name": "Qwen: Qwen3.7 Flash",
+          "input_price_per_token": 3e-08,
+          "output_price_per_token": 1.3e-07,
+          "input_price_per_million_tokens": 0.03,
+          "output_price_per_million_tokens": 0.13,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.7-plus",
+          "name": "Qwen: Qwen3.7 Plus",
+          "input_price_per_token": 3.2e-07,
+          "output_price_per_token": 1.28e-06,
+          "input_price_per_million_tokens": 0.32,
+          "output_price_per_million_tokens": 1.28,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.7-plus:batch",
+          "name": "Qwen: Qwen3.7 Plus (batch)",
+          "input_price_per_token": 2.3e-07,
+          "output_price_per_token": 9.2e-07,
+          "input_price_per_million_tokens": 0.22999999999999998,
+          "output_price_per_million_tokens": 0.9199999999999999,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3.7-max",
+          "name": "Qwen: Qwen3.7 Max",
+          "input_price_per_token": 1.475e-06,
+          "output_price_per_token": 4.425e-06,
+          "input_price_per_million_tokens": 1.475,
+          "output_price_per_million_tokens": 4.425,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.5-plus-20260420",
+          "name": "Qwen: Qwen3.5 Plus 2026-04-20",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 1.8e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 1.7999999999999998,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.6-flash",
+          "name": "Qwen: Qwen3.6 Flash",
+          "input_price_per_token": 1.875e-07,
+          "output_price_per_token": 1.125e-06,
+          "input_price_per_million_tokens": 0.1875,
+          "output_price_per_million_tokens": 1.125,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.6-35b-a3b",
+          "name": "Qwen: Qwen3.6 35B A3B",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 9.5e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.95,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3.6-27b",
+          "name": "Qwen: Qwen3.6 27B",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3.6-plus",
+          "name": "Qwen: Qwen3.6 Plus",
+          "input_price_per_token": 3.25e-07,
+          "output_price_per_token": 1.95e-06,
+          "input_price_per_million_tokens": 0.325,
+          "output_price_per_million_tokens": 1.95,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.5-9b",
+          "name": "Qwen: Qwen3.5-9B",
+          "input_price_per_token": 8e-08,
+          "output_price_per_token": 1.3e-07,
+          "input_price_per_million_tokens": 0.08,
+          "output_price_per_million_tokens": 0.13,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3.5-35b-a3b",
+          "name": "Qwen: Qwen3.5-35B-A3B",
+          "input_price_per_token": 1.4e-07,
+          "output_price_per_token": 1e-06,
+          "input_price_per_million_tokens": 0.14,
+          "output_price_per_million_tokens": 1.0,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3.5-27b",
+          "name": "Qwen: Qwen3.5-27B",
+          "input_price_per_token": 2.7e-07,
+          "output_price_per_token": 2.16e-06,
+          "input_price_per_million_tokens": 0.27,
+          "output_price_per_million_tokens": 2.16,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3.5-122b-a10b",
+          "name": "Qwen: Qwen3.5-122B-A10B",
+          "input_price_per_token": 2.6e-07,
+          "output_price_per_token": 2.08e-06,
+          "input_price_per_million_tokens": 0.26,
+          "output_price_per_million_tokens": 2.08,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3.5-flash-02-23",
+          "name": "Qwen: Qwen3.5-Flash",
+          "input_price_per_token": 6.5e-08,
+          "output_price_per_token": 2.6e-07,
+          "input_price_per_million_tokens": 0.065,
+          "output_price_per_million_tokens": 0.26,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.5-plus-02-15",
+          "name": "Qwen: Qwen3.5 Plus 2026-02-15",
+          "input_price_per_token": 2.6e-07,
+          "output_price_per_token": 1.56e-06,
+          "input_price_per_million_tokens": 0.26,
+          "output_price_per_million_tokens": 1.56,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3.5-397b-a17b",
+          "name": "Qwen: Qwen3.5 397B A17B",
+          "input_price_per_token": 3.9e-07,
+          "output_price_per_token": 2.34e-06,
+          "input_price_per_million_tokens": 0.39,
+          "output_price_per_million_tokens": 2.34,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3-coder-next",
+          "name": "Qwen: Qwen3 Coder Next",
+          "input_price_per_token": 1.2e-07,
+          "output_price_per_token": 8e-07,
+          "input_price_per_million_tokens": 0.12,
+          "output_price_per_million_tokens": 0.7999999999999999,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3-vl-8b-instruct",
+          "name": "Qwen: Qwen3 VL 8B Instruct",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 7.5e-07,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 0.75,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3-vl-30b-a3b-thinking",
+          "name": "Qwen: Qwen3 VL 30B A3B Thinking",
+          "input_price_per_token": 2.9e-07,
+          "output_price_per_token": 1e-06,
+          "input_price_per_million_tokens": 0.29,
+          "output_price_per_million_tokens": 1.0,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3-vl-30b-a3b-instruct",
+          "name": "Qwen: Qwen3 VL 30B A3B Instruct",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3-vl-235b-a22b-instruct",
+          "name": "Qwen: Qwen3 VL 235B A22B Instruct",
+          "input_price_per_token": 2.1e-07,
+          "output_price_per_token": 1.9e-06,
+          "input_price_per_million_tokens": 0.21,
+          "output_price_per_million_tokens": 1.9,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3-coder-flash",
+          "name": "Qwen: Qwen3 Coder Flash",
+          "input_price_per_token": 1.95e-07,
+          "output_price_per_token": 9.75e-07,
+          "input_price_per_million_tokens": 0.195,
+          "output_price_per_million_tokens": 0.975,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen3-next-80b-a3b-thinking",
+          "name": "Qwen: Qwen3 Next 80B A3B Thinking",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 1.2e-06,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 1.2,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3-next-80b-a3b-instruct",
+          "name": "Qwen: Qwen3 Next 80B A3B Instruct",
+          "input_price_per_token": 9e-08,
+          "output_price_per_token": 1.1e-06,
+          "input_price_per_million_tokens": 0.09,
+          "output_price_per_million_tokens": 1.1,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3-coder-30b-a3b-instruct",
+          "name": "Qwen: Qwen3 Coder 30B A3B Instruct",
+          "input_price_per_token": 7e-08,
+          "output_price_per_token": 2.8e-07,
+          "input_price_per_million_tokens": 0.07,
+          "output_price_per_million_tokens": 0.28,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3-30b-a3b-instruct-2507",
+          "name": "Qwen: Qwen3 30B A3B Instruct 2507",
+          "input_price_per_token": 9e-08,
+          "output_price_per_token": 3e-07,
+          "input_price_per_million_tokens": 0.09,
+          "output_price_per_million_tokens": 0.3,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3-235b-a22b-thinking-2507",
+          "name": "Qwen: Qwen3 235B A22B Thinking 2507",
+          "input_price_per_token": 4.5e-07,
+          "output_price_per_token": 3.5e-06,
+          "input_price_per_million_tokens": 0.44999999999999996,
+          "output_price_per_million_tokens": 3.5,
+          "context_length": 128000
+        },
+        {
+          "id": "qwen/qwen3-coder",
+          "name": "Qwen: Qwen3 Coder 480B A35B",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 1e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 1.0,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3-235b-a22b-2507",
+          "name": "Qwen: Qwen3 235B A22B Instruct 2507",
+          "input_price_per_token": 9e-08,
+          "output_price_per_token": 5.5e-07,
+          "input_price_per_million_tokens": 0.09,
+          "output_price_per_million_tokens": 0.55,
+          "context_length": 262144
+        },
+        {
+          "id": "qwen/qwen3-30b-a3b",
+          "name": "Qwen: Qwen3 30B A3B",
+          "input_price_per_token": 1.2e-07,
+          "output_price_per_token": 5e-07,
+          "input_price_per_million_tokens": 0.12,
+          "output_price_per_million_tokens": 0.5,
+          "context_length": 40960
+        },
+        {
+          "id": "qwen/qwen3-14b",
+          "name": "Qwen: Qwen3 14B",
+          "input_price_per_token": 1.2e-07,
+          "output_price_per_token": 2.4e-07,
+          "input_price_per_million_tokens": 0.12,
+          "output_price_per_million_tokens": 0.24,
+          "context_length": 40960
+        },
+        {
+          "id": "qwen/qwen3-32b",
+          "name": "Qwen: Qwen3 32B",
+          "input_price_per_token": 8e-08,
+          "output_price_per_token": 2.8e-07,
+          "input_price_per_million_tokens": 0.08,
+          "output_price_per_million_tokens": 0.28,
+          "context_length": 131072
+        },
+        {
+          "id": "qwen/qwen2.5-vl-72b-instruct",
+          "name": "Qwen: Qwen2.5 VL 72B Instruct",
+          "input_price_per_token": 8e-07,
+          "output_price_per_token": 1e-06,
+          "input_price_per_million_tokens": 0.7999999999999999,
+          "output_price_per_million_tokens": 1.0,
+          "context_length": 128000
+        },
+        {
+          "id": "qwen/qwen-plus",
+          "name": "Qwen: Qwen-Plus",
+          "input_price_per_token": 2.6e-07,
+          "output_price_per_token": 7.8e-07,
+          "input_price_per_million_tokens": 0.26,
+          "output_price_per_million_tokens": 0.78,
+          "context_length": 1000000
+        },
+        {
+          "id": "qwen/qwen-2.5-coder-32b-instruct",
+          "name": "Qwen2.5 Coder 32B Instruct",
+          "input_price_per_token": 6.6e-07,
+          "output_price_per_token": 1e-06,
+          "input_price_per_million_tokens": 0.66,
+          "output_price_per_million_tokens": 1.0,
+          "context_length": 32768
+        },
+        {
+          "id": "qwen/qwen-2.5-7b-instruct",
+          "name": "Qwen: Qwen2.5 7B Instruct",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 2e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.19999999999999998,
+          "context_length": 32768
+        },
+        {
+          "id": "qwen/qwen-2.5-72b-instruct",
+          "name": "Qwen2.5 72B Instruct",
+          "input_price_per_token": 3.6e-07,
+          "output_price_per_token": 4e-07,
+          "input_price_per_million_tokens": 0.36,
+          "output_price_per_million_tokens": 0.39999999999999997,
+          "context_length": 32768
+        }
+      ]
+    },
+    {
+      "model": "aion-labs",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "aion-labs/aion-3.5-mini",
+          "name": "AionLabs: Aion 3.5 Mini",
+          "input_price_per_token": 7e-07,
+          "output_price_per_token": 1.4e-06,
+          "input_price_per_million_tokens": 0.7,
+          "output_price_per_million_tokens": 1.4,
+          "context_length": 262144
+        },
+        {
+          "id": "aion-labs/aion-3.5",
+          "name": "AionLabs: Aion 3.5",
+          "input_price_per_token": 3e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 3.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 262144
+        },
+        {
+          "id": "aion-labs/aion-3.0-mini",
+          "name": "AionLabs: Aion-3.0-Mini",
+          "input_price_per_token": 7e-07,
+          "output_price_per_token": 1.4e-06,
+          "input_price_per_million_tokens": 0.7,
+          "output_price_per_million_tokens": 1.4,
+          "context_length": 131072
+        },
+        {
+          "id": "aion-labs/aion-3.0",
+          "name": "AionLabs: Aion-3.0",
+          "input_price_per_token": 3e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 3.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 131072
+        },
+        {
+          "id": "aion-labs/aion-2.0",
+          "name": "AionLabs: Aion-2.0",
+          "input_price_per_token": 8e-07,
+          "output_price_per_token": 1.6e-06,
+          "input_price_per_million_tokens": 0.7999999999999999,
+          "output_price_per_million_tokens": 1.5999999999999999,
+          "context_length": 131072
+        },
+        {
+          "id": "aion-labs/aion-rp-llama-3.1-8b",
+          "name": "AionLabs: Aion-RP 1.0 (8B)",
+          "input_price_per_token": 8e-07,
+          "output_price_per_token": 1.6e-06,
+          "input_price_per_million_tokens": 0.7999999999999999,
+          "output_price_per_million_tokens": 1.5999999999999999,
+          "context_length": 32768
+        }
+      ]
+    },
+    {
+      "model": "upstage",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "upstage/solar-mini4",
+          "name": "Upstage: Solar Mini 4",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 2e-07,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.19999999999999998,
+          "context_length": 524288
+        },
+        {
+          "id": "upstage/solar-pro4",
+          "name": "Upstage: Solar Pro 4",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 524288
+        },
+        {
+          "id": "upstage/solar-pro-3",
+          "name": "Upstage: Solar Pro 3",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 131072
+        }
+      ]
+    },
+    {
+      "model": "cohere",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "cohere/command-a-plus",
+          "name": "Cohere: Command A+",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 1.5e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 1.5,
+          "context_length": 192000
+        },
+        {
+          "id": "cohere/north-mini-code:free",
+          "name": "Cohere: North Mini Code (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 256000
+        },
+        {
+          "id": "cohere/command-a",
+          "name": "Cohere: Command A",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 256000
+        },
+        {
+          "id": "cohere/command-r7b-12-2024",
+          "name": "Cohere: Command R7B (12-2024)",
+          "input_price_per_token": 3.75e-08,
+          "output_price_per_token": 1.5e-07,
+          "input_price_per_million_tokens": 0.0375,
+          "output_price_per_million_tokens": 0.15,
+          "context_length": 128000
+        },
+        {
+          "id": "cohere/command-r-08-2024",
+          "name": "Cohere: Command R (08-2024)",
+          "input_price_per_token": 1.5e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.15,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 128000
+        },
+        {
+          "id": "cohere/command-r-plus-08-2024",
+          "name": "Cohere: Command R+ (08-2024)",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 128000
+        }
+      ]
+    },
+    {
+      "model": "xiaomi",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "xiaomi/mimo-v2.6-pro-ultraspeed",
+          "name": "Xiaomi: MiMo-V2.6-Pro-UltraSpeed",
+          "input_price_per_token": 4.35e-06,
+          "output_price_per_token": 8.7e-06,
+          "input_price_per_million_tokens": 4.35,
+          "output_price_per_million_tokens": 8.7,
+          "context_length": 1048576
+        },
+        {
+          "id": "xiaomi/mimo-v2.6-flash",
+          "name": "Xiaomi: MiMo-V2.6-Flash",
+          "input_price_per_token": 1.4e-07,
+          "output_price_per_token": 2.8e-07,
+          "input_price_per_million_tokens": 0.14,
+          "output_price_per_million_tokens": 0.28,
+          "context_length": 1050000
+        },
+        {
+          "id": "xiaomi/mimo-v2.6-pro",
+          "name": "Xiaomi: MiMo-V2.6-Pro",
+          "input_price_per_token": 4.35e-07,
+          "output_price_per_token": 8.7e-07,
+          "input_price_per_million_tokens": 0.435,
+          "output_price_per_million_tokens": 0.87,
+          "context_length": 1050000
+        },
+        {
+          "id": "xiaomi/mimo-v2.5-pro",
+          "name": "Xiaomi: MiMo-V2.5-Pro",
+          "input_price_per_token": 3.045e-07,
+          "output_price_per_token": 6.09e-07,
+          "input_price_per_million_tokens": 0.3045,
+          "output_price_per_million_tokens": 0.609,
+          "context_length": 1050000
+        },
+        {
+          "id": "xiaomi/mimo-v2.5",
+          "name": "Xiaomi: MiMo-V2.5",
+          "input_price_per_token": 1.19e-07,
+          "output_price_per_token": 2.38e-07,
+          "input_price_per_million_tokens": 0.119,
+          "output_price_per_million_tokens": 0.238,
+          "context_length": 1050000
+        }
+      ]
+    },
+    {
+      "model": "x-ai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "x-ai/grok-4.7",
+          "name": "SpaceXAI: Grok 4.7",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 500000
+        },
+        {
+          "id": "x-ai/grok-4.6",
+          "name": "SpaceXAI: Grok 4.6",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 500000
+        },
+        {
+          "id": "x-ai/grok-4.5",
+          "name": "SpaceXAI: Grok 4.5",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 500000
+        },
+        {
+          "id": "x-ai/grok-build-0.1",
+          "name": "SpaceXAI: Grok Build 0.1",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 256000
+        },
+        {
+          "id": "x-ai/grok-4.3",
+          "name": "SpaceXAI: Grok 4.3",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 1000000
+        },
+        {
+          "id": "x-ai/grok-4.3:batch",
+          "name": "SpaceXAI: Grok 4.3 (batch)",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "x-ai/grok-4.20-multi-agent",
+          "name": "SpaceXAI: Grok 4.20 Multi-Agent",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 2000000
+        },
+        {
+          "id": "x-ai/grok-4.20",
+          "name": "SpaceXAI: Grok 4.20",
+          "input_price_per_token": 1.25e-06,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 1.25,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 2000000
+        }
+      ]
+    },
+    {
+      "model": "prism-ml",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "prism-ml/ternary-bonsai-2-27b",
+          "name": "PrismML: Ternary Bonsai 2 27B",
+          "input_price_per_token": 7.5e-08,
+          "output_price_per_token": 5e-07,
+          "input_price_per_million_tokens": 0.075,
+          "output_price_per_million_tokens": 0.5,
+          "context_length": 262144
+        }
+      ]
+    },
+    {
+      "model": "~deepseek",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "~deepseek/deepseek-pro-latest",
+          "name": "DeepSeek: DeepSeek Pro Latest",
+          "input_price_per_token": 1.817e-07,
+          "output_price_per_token": 8e-06,
+          "input_price_per_million_tokens": 0.1817,
+          "output_price_per_million_tokens": 8.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "~deepseek/deepseek-flash-latest",
+          "name": "DeepSeek: DeepSeek Flash Latest",
+          "input_price_per_token": 4.9e-08,
+          "output_price_per_token": 3.75e-07,
+          "input_price_per_million_tokens": 0.049,
+          "output_price_per_million_tokens": 0.375,
+          "context_length": 1048576
+        },
+        {
+          "id": "~deepseek/deepseek-v4-flash-latest",
+          "name": "DeepSeek: DeepSeek V4 Flash Latest",
+          "input_price_per_token": 4.708e-08,
+          "output_price_per_token": 1.4124e-07,
+          "input_price_per_million_tokens": 0.047080000000000004,
+          "output_price_per_million_tokens": 0.14124,
+          "context_length": 1048576
+        }
+      ]
+    },
+    {
+      "model": "inference-net",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "inference-net/schematron-v2-turbo",
+          "name": "Inference.net: Schematron V2 Turbo",
+          "input_price_per_token": 3e-08,
+          "output_price_per_token": 1.5e-07,
+          "input_price_per_million_tokens": 0.03,
+          "output_price_per_million_tokens": 0.15,
+          "context_length": 128000
+        },
+        {
+          "id": "inference-net/schematron-v2-small",
+          "name": "Inference.net: Schematron V2 Small",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 2.3e-07,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.22999999999999998,
+          "context_length": 128000
+        }
+      ]
+    },
+    {
+      "model": "~openai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "~openai/gpt-astra-latest",
+          "name": "OpenAI: GPT Astra Latest",
+          "input_price_per_token": 1e-05,
+          "output_price_per_token": 5e-05,
+          "input_price_per_million_tokens": 10.0,
+          "output_price_per_million_tokens": 50.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "~openai/gpt-sol-latest",
+          "name": "OpenAI: GPT Sol Latest",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "~openai/gpt-terra-latest",
+          "name": "OpenAI: GPT Terra Latest",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1.2e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 12.0,
+          "context_length": 1050000
+        },
+        {
+          "id": "~openai/gpt-luna-latest",
+          "name": "OpenAI: GPT Luna Latest",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 5e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.5,
+          "context_length": 1050000
+        },
+        {
+          "id": "~openai/gpt-mini-latest",
+          "name": "OpenAI: GPT Mini Latest",
+          "input_price_per_token": 7.5e-07,
+          "output_price_per_token": 4.5e-06,
+          "input_price_per_million_tokens": 0.75,
+          "output_price_per_million_tokens": 4.5,
+          "context_length": 400000
+        }
+      ]
+    },
+    {
+      "model": "sakana",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "sakana/fugu-ultra-v2",
+          "name": "Sakana: Fugu Ultra v2",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 3e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 30.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "sakana/fugu-max",
+          "name": "Sakana: Fugu Max",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "sakana/sakana-namazu",
+          "name": "Sakana: Sakana Namazu",
+          "input_price_per_token": 9.5e-07,
+          "output_price_per_token": 4e-06,
+          "input_price_per_million_tokens": 0.95,
+          "output_price_per_million_tokens": 4.0,
+          "context_length": 262144
+        },
+        {
+          "id": "sakana/fugu-ultra",
+          "name": "Sakana: Fugu Ultra",
+          "input_price_per_token": 5e-06,
+          "output_price_per_token": 3e-05,
+          "input_price_per_million_tokens": 5.0,
+          "output_price_per_million_tokens": 30.0,
+          "context_length": 1000000
+        }
+      ]
+    },
+    {
+      "model": "nex-agi",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "nex-agi/nex-n2.5-mini",
+          "name": "Nex AGI: Nex-N2.5-Mini",
+          "input_price_per_token": 2.5e-08,
+          "output_price_per_token": 1e-07,
+          "input_price_per_million_tokens": 0.024999999999999998,
+          "output_price_per_million_tokens": 0.09999999999999999,
+          "context_length": 262144
+        },
+        {
+          "id": "nex-agi/nex-n2.5-pro",
+          "name": "Nex AGI: Nex-N2.5-Pro",
+          "input_price_per_token": 7.5e-08,
+          "output_price_per_token": 2.5e-07,
+          "input_price_per_million_tokens": 0.075,
+          "output_price_per_million_tokens": 0.25,
+          "context_length": 262144
+        }
+      ]
+    },
+    {
+      "model": "ibm-granite",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "ibm-granite/granite-4.2-8b",
+          "name": "IBM: Granite 4.2 8B",
+          "input_price_per_token": 6e-08,
+          "output_price_per_token": 2.5e-07,
+          "input_price_per_million_tokens": 0.06,
+          "output_price_per_million_tokens": 0.25,
+          "context_length": 131072
+        },
+        {
+          "id": "ibm-granite/granite-4.0-h-micro",
+          "name": "IBM: Granite 4.0 Micro",
+          "input_price_per_token": 1.7e-08,
+          "output_price_per_token": 1.12e-07,
+          "input_price_per_million_tokens": 0.017,
+          "output_price_per_million_tokens": 0.112,
+          "context_length": 131000
+        }
+      ]
+    },
+    {
+      "model": "tencent",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "tencent/hy4-preview",
+          "name": "Tencent: Hy4 preview",
+          "input_price_per_token": 8.34e-07,
+          "output_price_per_token": 2.501e-06,
+          "input_price_per_million_tokens": 0.834,
+          "output_price_per_million_tokens": 2.501,
+          "context_length": 1048576
+        },
+        {
+          "id": "tencent/hy-mt2-1.8b",
+          "name": "Tencent: Hy-MT2-1.8B",
+          "input_price_per_token": 4.4e-08,
+          "output_price_per_token": 1.77e-07,
+          "input_price_per_million_tokens": 0.044,
+          "output_price_per_million_tokens": 0.17700000000000002,
+          "context_length": 8192
+        },
+        {
+          "id": "tencent/hy-mt2-30b-a3b",
+          "name": "Tencent: Hy-MT2-30B-A3B",
+          "input_price_per_token": 7.4e-08,
+          "output_price_per_token": 2.95e-07,
+          "input_price_per_million_tokens": 0.074,
+          "output_price_per_million_tokens": 0.295,
+          "context_length": 8192
+        },
+        {
+          "id": "tencent/hy-mt2-7b",
+          "name": "Tencent: Hy-MT2-7B",
+          "input_price_per_token": 7.4e-08,
+          "output_price_per_token": 2.95e-07,
+          "input_price_per_million_tokens": 0.074,
+          "output_price_per_million_tokens": 0.295,
+          "context_length": 8192
+        },
+        {
+          "id": "tencent/hy3",
+          "name": "Tencent: Hy3",
+          "input_price_per_token": 1.32e-07,
+          "output_price_per_token": 5.28e-07,
+          "input_price_per_million_tokens": 0.13199999999999998,
+          "output_price_per_million_tokens": 0.5279999999999999,
+          "context_length": 262144
+        },
+        {
+          "id": "tencent/hy3-preview",
+          "name": "Tencent: Hy3 preview",
+          "input_price_per_token": 1.8e-07,
+          "output_price_per_token": 6e-07,
+          "input_price_per_million_tokens": 0.18,
+          "output_price_per_million_tokens": 0.6,
+          "context_length": 262144
+        },
+        {
+          "id": "tencent/hunyuan-a13b-instruct",
+          "name": "Tencent: Hunyuan A13B Instruct",
+          "input_price_per_token": 1.4e-07,
+          "output_price_per_token": 5.7e-07,
+          "input_price_per_million_tokens": 0.14,
+          "output_price_per_million_tokens": 0.5700000000000001,
+          "context_length": 131072
+        }
+      ]
+    },
+    {
+      "model": "~z-ai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "~z-ai/glm-flash-latest",
+          "name": "Z.ai: GLM Flash Latest",
+          "input_price_per_token": 4.1191e-08,
+          "output_price_per_token": 1.2e-07,
+          "input_price_per_million_tokens": 0.041191,
+          "output_price_per_million_tokens": 0.12,
+          "context_length": 1048576
+        },
+        {
+          "id": "~z-ai/glm-latest",
+          "name": "Z.ai: GLM Latest",
+          "input_price_per_token": 7.9e-08,
+          "output_price_per_token": 1.4e-06,
+          "input_price_per_million_tokens": 0.079,
+          "output_price_per_million_tokens": 1.4,
+          "context_length": 1048576
+        }
+      ]
+    },
+    {
+      "model": "dots-studio",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "dots-studio/dots-3-note-preview:free",
+          "name": "Dots Studio: Dots3-Note Preview (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 512000
+        }
+      ]
+    },
+    {
+      "model": "bytedance-seed",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "bytedance-seed/seed-2-1-turbo",
+          "name": "ByteDance Seed: Seed 2.1 Turbo",
+          "input_price_per_token": 5e-07,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 0.5,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 262144
+        },
+        {
+          "id": "bytedance-seed/seed-2.0-code",
+          "name": "ByteDance Seed: Seed-2.0-Code",
+          "input_price_per_token": 5e-07,
+          "output_price_per_token": 3e-06,
+          "input_price_per_million_tokens": 0.5,
+          "output_price_per_million_tokens": 3.0,
+          "context_length": 262144
+        },
+        {
+          "id": "bytedance-seed/seed-2.0-lite",
+          "name": "ByteDance Seed: Seed-2.0-Lite",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 262144
+        },
+        {
+          "id": "bytedance-seed/seed-2.0-mini",
+          "name": "ByteDance Seed: Seed-2.0-Mini",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 4e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.39999999999999997,
+          "context_length": 262144
+        },
+        {
+          "id": "bytedance-seed/seed-1.6-flash",
+          "name": "ByteDance Seed: Seed 1.6 Flash",
+          "input_price_per_token": 7.5e-08,
+          "output_price_per_token": 3e-07,
+          "input_price_per_million_tokens": 0.075,
+          "output_price_per_million_tokens": 0.3,
+          "context_length": 262144
+        },
+        {
+          "id": "bytedance-seed/seed-1.6",
+          "name": "ByteDance Seed: Seed 1.6",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 2e-06,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 2.0,
+          "context_length": 262144
+        }
+      ]
+    },
+    {
+      "model": "thinkingmachines",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "thinkingmachines/inkling-small",
+          "name": "Thinking Machines: Inkling Small",
+          "input_price_per_token": 4.5e-07,
+          "output_price_per_token": 1.2e-06,
+          "input_price_per_million_tokens": 0.44999999999999996,
+          "output_price_per_million_tokens": 1.2,
+          "context_length": 524288
+        },
+        {
+          "id": "thinkingmachines/inkling-small:free",
+          "name": "Thinking Machines: Inkling Small (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "thinkingmachines/inkling",
+          "name": "Thinking Machines: Inkling",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 4.05e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 4.05,
+          "context_length": 524288
+        },
+        {
+          "id": "thinkingmachines/inkling:free",
+          "name": "Thinking Machines: Inkling (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 1048576
+        }
+      ]
+    },
+    {
+      "model": "poolside",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "poolside/laguna-s-2.1",
+          "name": "Poolside: Laguna S 2.1",
+          "input_price_per_token": 9e-08,
+          "output_price_per_token": 1.8e-07,
+          "input_price_per_million_tokens": 0.09,
+          "output_price_per_million_tokens": 0.18,
+          "context_length": 1048576
+        },
+        {
+          "id": "poolside/laguna-s-2.1:free",
+          "name": "Poolside: Laguna S 2.1 (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 262144
+        },
+        {
+          "id": "poolside/laguna-xs-2.1",
+          "name": "Poolside: Laguna XS 2.1",
+          "input_price_per_token": 6e-08,
+          "output_price_per_token": 1.2e-07,
+          "input_price_per_million_tokens": 0.06,
+          "output_price_per_million_tokens": 0.12,
+          "context_length": 262144
+        },
+        {
+          "id": "poolside/laguna-xs-2.1:free",
+          "name": "Poolside: Laguna XS 2.1 (free)",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 262144
+        }
+      ]
+    },
+    {
+      "model": "meituan",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "meituan/longcat-2.0",
+          "name": "Meituan: LongCat 2.0",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 1.2e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 1.2,
+          "context_length": 1048756
+        }
+      ]
+    },
+    {
+      "model": "openrouter",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "openrouter/auto-beta",
+          "name": "Auto Router (Beta)",
+          "input_price_per_token": -1.0,
+          "output_price_per_token": -1.0,
+          "input_price_per_million_tokens": -1000000.0,
+          "output_price_per_million_tokens": -1000000.0,
+          "context_length": 2000000
+        },
+        {
+          "id": "openrouter/fusion",
+          "name": "OpenRouter: Fusion",
+          "input_price_per_token": -1.0,
+          "output_price_per_token": -1.0,
+          "input_price_per_million_tokens": -1000000.0,
+          "output_price_per_million_tokens": -1000000.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "openrouter/pareto-code",
+          "name": "Pareto Code Router",
+          "input_price_per_token": -1.0,
+          "output_price_per_token": -1.0,
+          "input_price_per_million_tokens": -1000000.0,
+          "output_price_per_million_tokens": -1000000.0,
+          "context_length": 2000000
+        },
+        {
+          "id": "openrouter/free",
+          "name": "Free Models Router",
+          "input_price_per_token": 0.0,
+          "output_price_per_token": 0.0,
+          "input_price_per_million_tokens": 0.0,
+          "output_price_per_million_tokens": 0.0,
+          "context_length": 200000
+        },
+        {
+          "id": "openrouter/bodybuilder",
+          "name": "Body Builder (beta)",
+          "input_price_per_token": -1.0,
+          "output_price_per_token": -1.0,
+          "input_price_per_million_tokens": -1000000.0,
+          "output_price_per_million_tokens": -1000000.0,
+          "context_length": 128000
+        },
+        {
+          "id": "openrouter/auto",
+          "name": "Auto Router",
+          "input_price_per_token": -1.0,
+          "output_price_per_token": -1.0,
+          "input_price_per_million_tokens": -1000000.0,
+          "output_price_per_million_tokens": -1000000.0,
+          "context_length": 2000000
+        }
+      ]
+    },
+    {
+      "model": "moonshotai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "moonshotai/kimi-k3",
+          "name": "MoonshotAI: Kimi K3",
+          "input_price_per_token": 2.39e-07,
+          "output_price_per_token": 1.1936e-05,
+          "input_price_per_million_tokens": 0.23900000000000002,
+          "output_price_per_million_tokens": 11.936,
+          "context_length": 1048576
+        },
+        {
+          "id": "moonshotai/kimi-k3:batch",
+          "name": "MoonshotAI: Kimi K3 (batch)",
+          "input_price_per_token": 2.28e-06,
+          "output_price_per_token": 1.14e-05,
+          "input_price_per_million_tokens": 2.2800000000000002,
+          "output_price_per_million_tokens": 11.399999999999999,
+          "context_length": 1048576
+        },
+        {
+          "id": "moonshotai/kimi-k2.7-code",
+          "name": "MoonshotAI: Kimi K2.7 Code",
+          "input_price_per_token": 6.712e-07,
+          "output_price_per_token": 3.35e-06,
+          "input_price_per_million_tokens": 0.6712,
+          "output_price_per_million_tokens": 3.35,
+          "context_length": 262144
+        },
+        {
+          "id": "moonshotai/kimi-k2.6",
+          "name": "MoonshotAI: Kimi K2.6",
+          "input_price_per_token": 6.5e-07,
+          "output_price_per_token": 3.41e-06,
+          "input_price_per_million_tokens": 0.65,
+          "output_price_per_million_tokens": 3.41,
+          "context_length": 262144
+        },
+        {
+          "id": "moonshotai/kimi-k2.5",
+          "name": "MoonshotAI: Kimi K2.5",
+          "input_price_per_token": 5e-07,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 0.5,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 262144
+        },
+        {
+          "id": "moonshotai/kimi-k2-thinking",
+          "name": "MoonshotAI: Kimi K2 Thinking",
+          "input_price_per_token": 6e-07,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 0.6,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 262144
+        },
+        {
+          "id": "moonshotai/kimi-k2-0905",
+          "name": "MoonshotAI: Kimi K2 0905",
+          "input_price_per_token": 6e-07,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 0.6,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 262144
+        },
+        {
+          "id": "moonshotai/kimi-k2",
+          "name": "MoonshotAI: Kimi K2 0711",
+          "input_price_per_token": 5.7e-07,
+          "output_price_per_token": 2.3e-06,
+          "input_price_per_million_tokens": 0.5700000000000001,
+          "output_price_per_million_tokens": 2.3,
+          "context_length": 131072
+        }
+      ]
+    },
+    {
+      "model": "~x-ai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "~x-ai/grok-latest",
+          "name": "xAI: Grok Latest",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 500000
+        }
+      ]
+    },
+    {
+      "model": "~anthropic",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "~anthropic/claude-fable-latest",
+          "name": "Anthropic: Claude Fable Latest",
+          "input_price_per_token": 1e-05,
+          "output_price_per_token": 5e-05,
+          "input_price_per_million_tokens": 10.0,
+          "output_price_per_million_tokens": 50.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "~anthropic/claude-haiku-latest",
+          "name": "Anthropic: Claude Haiku Latest",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 5e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.5,
+          "context_length": 1000000
+        },
+        {
+          "id": "~anthropic/claude-sonnet-latest",
+          "name": "Anthropic: Claude Sonnet Latest",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1000000
+        },
+        {
+          "id": "~anthropic/claude-opus-latest",
+          "name": "Anthropic: Claude Opus Latest",
+          "input_price_per_token": 4e-06,
+          "output_price_per_token": 2e-05,
+          "input_price_per_million_tokens": 4.0,
+          "output_price_per_million_tokens": 20.0,
+          "context_length": 1000000
+        }
+      ]
+    },
+    {
+      "model": "~google",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "~google/gemini-pro-latest",
+          "name": "Google: Gemini Pro Latest",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 1e-05,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 10.0,
+          "context_length": 1048576
+        },
+        {
+          "id": "~google/gemini-flash-latest",
+          "name": "Google: Gemini Flash Latest",
+          "input_price_per_token": 7.5e-07,
+          "output_price_per_token": 3.75e-06,
+          "input_price_per_million_tokens": 0.75,
+          "output_price_per_million_tokens": 3.75,
+          "context_length": 1048576
+        }
+      ]
+    },
+    {
+      "model": "~moonshotai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "~moonshotai/kimi-latest",
+          "name": "MoonshotAI: Kimi Latest",
+          "input_price_per_token": 2.38e-07,
+          "output_price_per_token": 1.6e-05,
+          "input_price_per_million_tokens": 0.238,
+          "output_price_per_million_tokens": 16.0,
+          "context_length": 1048576
+        }
+      ]
+    },
+    {
+      "model": "arcee-ai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "arcee-ai/trinity-large-thinking",
+          "name": "Arcee AI: Trinity Large Thinking",
+          "input_price_per_token": 2.5e-07,
+          "output_price_per_token": 8e-07,
+          "input_price_per_million_tokens": 0.25,
+          "output_price_per_million_tokens": 0.7999999999999999,
+          "context_length": 262144
+        }
+      ]
+    },
+    {
+      "model": "rekaai",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "rekaai/reka-edge",
+          "name": "Reka Edge",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 1e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.09999999999999999,
+          "context_length": 16384
+        },
+        {
+          "id": "rekaai/reka-flash-3",
+          "name": "Reka Flash 3",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 2e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.19999999999999998,
+          "context_length": 65536
+        }
+      ]
+    },
+    {
+      "model": "writer",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "writer/palmyra-x5",
+          "name": "Writer: Palmyra X5",
+          "input_price_per_token": 6e-07,
+          "output_price_per_token": 6e-06,
+          "input_price_per_million_tokens": 0.6,
+          "output_price_per_million_tokens": 6.0,
+          "context_length": 1040000
+        }
+      ]
+    },
+    {
+      "model": "relace",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "relace/relace-search",
+          "name": "Relace: Relace Search",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 3e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 3.0,
+          "context_length": 256000
+        },
+        {
+          "id": "relace/relace-apply-3",
+          "name": "Relace: Relace Apply 3",
+          "input_price_per_token": 8.5e-07,
+          "output_price_per_token": 1.25e-06,
+          "input_price_per_million_tokens": 0.85,
+          "output_price_per_million_tokens": 1.25,
+          "context_length": 256000
+        }
+      ]
+    },
+    {
+      "model": "amazon",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "amazon/nova-2-lite-v1",
+          "name": "Amazon: Nova 2 Lite",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 2.5e-06,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 2.5,
+          "context_length": 1000000
+        },
+        {
+          "id": "amazon/nova-premier-v1",
+          "name": "Amazon: Nova Premier 1.0",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 1.25e-05,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 12.5,
+          "context_length": 1000000
+        },
+        {
+          "id": "amazon/nova-lite-v1",
+          "name": "Amazon: Nova Lite 1.0",
+          "input_price_per_token": 6e-08,
+          "output_price_per_token": 2.4e-07,
+          "input_price_per_million_tokens": 0.06,
+          "output_price_per_million_tokens": 0.24,
+          "context_length": 300000
+        },
+        {
+          "id": "amazon/nova-micro-v1",
+          "name": "Amazon: Nova Micro 1.0",
+          "input_price_per_token": 3.5e-08,
+          "output_price_per_token": 1.4e-07,
+          "input_price_per_million_tokens": 0.035,
+          "output_price_per_million_tokens": 0.14,
+          "context_length": 128000
+        },
+        {
+          "id": "amazon/nova-pro-v1",
+          "name": "Amazon: Nova Pro 1.0",
+          "input_price_per_token": 8e-07,
+          "output_price_per_token": 3.2e-06,
+          "input_price_per_million_tokens": 0.7999999999999999,
+          "output_price_per_million_tokens": 3.1999999999999997,
+          "context_length": 300000
+        }
+      ]
+    },
+    {
+      "model": "perplexity",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "perplexity/sonar-pro-search",
+          "name": "Perplexity: Sonar Pro Search",
+          "input_price_per_token": 3e-06,
+          "output_price_per_token": 1.5e-05,
+          "input_price_per_million_tokens": 3.0,
+          "output_price_per_million_tokens": 15.0,
+          "context_length": 200000
+        },
+        {
+          "id": "perplexity/sonar-reasoning-pro",
+          "name": "Perplexity: Sonar Reasoning Pro",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 8e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 8.0,
+          "context_length": 128000
+        },
+        {
+          "id": "perplexity/sonar-pro",
+          "name": "Perplexity: Sonar Pro",
+          "input_price_per_token": 3e-06,
+          "output_price_per_token": 1.5e-05,
+          "input_price_per_million_tokens": 3.0,
+          "output_price_per_million_tokens": 15.0,
+          "context_length": 200000
+        },
+        {
+          "id": "perplexity/sonar-deep-research",
+          "name": "Perplexity: Sonar Deep Research",
+          "input_price_per_token": 2e-06,
+          "output_price_per_token": 8e-06,
+          "input_price_per_million_tokens": 2.0,
+          "output_price_per_million_tokens": 8.0,
+          "context_length": 128000
+        },
+        {
+          "id": "perplexity/sonar",
+          "name": "Perplexity: Sonar",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 1e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 1.0,
+          "context_length": 127072
+        }
+      ]
+    },
+    {
+      "model": "thedrummer",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "thedrummer/cydonia-24b-v4.1",
+          "name": "TheDrummer: Cydonia 24B V4.1",
+          "input_price_per_token": 3e-07,
+          "output_price_per_token": 5e-07,
+          "input_price_per_million_tokens": 0.3,
+          "output_price_per_million_tokens": 0.5,
+          "context_length": 131072
+        },
+        {
+          "id": "thedrummer/skyfall-36b-v2",
+          "name": "TheDrummer: Skyfall 36B V2",
+          "input_price_per_token": 5.5e-07,
+          "output_price_per_token": 8e-07,
+          "input_price_per_million_tokens": 0.55,
+          "output_price_per_million_tokens": 0.7999999999999999,
+          "context_length": 32768
+        },
+        {
+          "id": "thedrummer/unslopnemo-12b",
+          "name": "TheDrummer: UnslopNemo 12B",
+          "input_price_per_token": 4e-07,
+          "output_price_per_token": 4e-07,
+          "input_price_per_million_tokens": 0.39999999999999997,
+          "output_price_per_million_tokens": 0.39999999999999997,
+          "context_length": 1024000
+        }
+      ]
+    },
+    {
+      "model": "nousresearch",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "nousresearch/hermes-4-405b",
+          "name": "Nous: Hermes 4 405B",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 3e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 3.0,
+          "context_length": 131072
+        },
+        {
+          "id": "nousresearch/hermes-3-llama-3.1-70b",
+          "name": "Nous: Hermes 3 70B Instruct",
+          "input_price_per_token": 7e-07,
+          "output_price_per_token": 7e-07,
+          "input_price_per_million_tokens": 0.7,
+          "output_price_per_million_tokens": 0.7,
+          "context_length": 131072
+        },
+        {
+          "id": "nousresearch/hermes-3-llama-3.1-405b",
+          "name": "Nous: Hermes 3 405B Instruct",
+          "input_price_per_token": 1e-06,
+          "output_price_per_token": 1e-06,
+          "input_price_per_million_tokens": 1.0,
+          "output_price_per_million_tokens": 1.0,
+          "context_length": 131072
+        }
+      ]
+    },
+    {
+      "model": "bytedance",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "bytedance/ui-tars-1.5-7b",
+          "name": "ByteDance: UI-TARS 7B ",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 2e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.19999999999999998,
+          "context_length": 128000
+        }
+      ]
+    },
+    {
+      "model": "cognitivecomputations",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "cognitivecomputations/dolphin-mistral-24b-venice-edition",
+          "name": "Venice: Uncensored",
+          "input_price_per_token": 2e-07,
+          "output_price_per_token": 9e-07,
+          "input_price_per_million_tokens": 0.19999999999999998,
+          "output_price_per_million_tokens": 0.8999999999999999,
+          "context_length": 128000
+        }
+      ]
+    },
+    {
+      "model": "morph",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "morph/morph-v3-large",
+          "name": "Morph: Morph V3 Large",
+          "input_price_per_token": 9e-07,
+          "output_price_per_token": 1.9e-06,
+          "input_price_per_million_tokens": 0.8999999999999999,
+          "output_price_per_million_tokens": 1.9,
+          "context_length": 262144
+        },
+        {
+          "id": "morph/morph-v3-fast",
+          "name": "Morph: Morph V3 Fast",
+          "input_price_per_token": 8e-07,
+          "output_price_per_token": 1.2e-06,
+          "input_price_per_million_tokens": 0.7999999999999999,
+          "output_price_per_million_tokens": 1.2,
+          "context_length": 262144
+        }
+      ]
+    },
+    {
+      "model": "meta-llama",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "meta-llama/llama-guard-4-12b",
+          "name": "Meta: Llama Guard 4 12B",
+          "input_price_per_token": 1.8e-07,
+          "output_price_per_token": 1.8e-07,
+          "input_price_per_million_tokens": 0.18,
+          "output_price_per_million_tokens": 0.18,
+          "context_length": 163840
+        },
+        {
+          "id": "meta-llama/llama-4-maverick",
+          "name": "Meta: Llama 4 Maverick",
+          "input_price_per_token": 1.875e-07,
+          "output_price_per_token": 6.525e-07,
+          "input_price_per_million_tokens": 0.1875,
+          "output_price_per_million_tokens": 0.6525,
+          "context_length": 524288
+        },
+        {
+          "id": "meta-llama/llama-4-scout",
+          "name": "Meta: Llama 4 Scout",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 3e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.3,
+          "context_length": 1310720
+        },
+        {
+          "id": "meta-llama/llama-3.3-70b-instruct",
+          "name": "Meta: Llama 3.3 70B Instruct",
+          "input_price_per_token": 1e-07,
+          "output_price_per_token": 3.2e-07,
+          "input_price_per_million_tokens": 0.09999999999999999,
+          "output_price_per_million_tokens": 0.32,
+          "context_length": 131072
+        },
+        {
+          "id": "meta-llama/llama-3.2-1b-instruct",
+          "name": "Meta: Llama 3.2 1B Instruct",
+          "input_price_per_token": 2.7e-08,
+          "output_price_per_token": 2.01e-07,
+          "input_price_per_million_tokens": 0.027,
+          "output_price_per_million_tokens": 0.201,
+          "context_length": 60000
+        },
+        {
+          "id": "meta-llama/llama-3.2-3b-instruct",
+          "name": "Meta: Llama 3.2 3B Instruct",
+          "input_price_per_token": 5.09e-08,
+          "output_price_per_token": 3.35e-07,
+          "input_price_per_million_tokens": 0.0509,
+          "output_price_per_million_tokens": 0.335,
+          "context_length": 131072
+        },
+        {
+          "id": "meta-llama/llama-3.1-70b-instruct",
+          "name": "Meta: Llama 3.1 70B Instruct",
+          "input_price_per_token": 4e-07,
+          "output_price_per_token": 4e-07,
+          "input_price_per_million_tokens": 0.39999999999999997,
+          "output_price_per_million_tokens": 0.39999999999999997,
+          "context_length": 131072
+        },
+        {
+          "id": "meta-llama/llama-3.1-8b-instruct",
+          "name": "Meta: Llama 3.1 8B Instruct",
+          "input_price_per_token": 5e-08,
+          "output_price_per_token": 8e-08,
+          "input_price_per_million_tokens": 0.049999999999999996,
+          "output_price_per_million_tokens": 0.08,
+          "context_length": 131072
+        }
+      ]
+    },
+    {
+      "model": "microsoft",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "microsoft/phi-4",
+          "name": "Microsoft: Phi 4",
+          "input_price_per_token": 7e-08,
+          "output_price_per_token": 1.4e-07,
+          "input_price_per_million_tokens": 0.07,
+          "output_price_per_million_tokens": 0.14,
+          "context_length": 16384
+        }
+      ]
+    },
+    {
+      "model": "anthracite-org",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "anthracite-org/magnum-v4-72b",
+          "name": "Magnum v4 72B",
+          "input_price_per_token": 2.5e-06,
+          "output_price_per_token": 5e-06,
+          "input_price_per_million_tokens": 2.5,
+          "output_price_per_million_tokens": 5.0,
+          "context_length": 32768
+        }
+      ]
+    },
+    {
+      "model": "sao10k",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "sao10k/l3.1-euryale-70b",
+          "name": "Sao10K: Llama 3.1 Euryale 70B v2.2",
+          "input_price_per_token": 8.5e-07,
+          "output_price_per_token": 8.5e-07,
+          "input_price_per_million_tokens": 0.85,
+          "output_price_per_million_tokens": 0.85,
+          "context_length": 131072
+        },
+        {
+          "id": "sao10k/l3-lunaris-8b",
+          "name": "Sao10K: Llama 3 8B Lunaris",
+          "input_price_per_token": 4e-08,
+          "output_price_per_token": 5e-08,
+          "input_price_per_million_tokens": 0.04,
+          "output_price_per_million_tokens": 0.049999999999999996,
+          "context_length": 8192
+        }
+      ]
+    },
+    {
+      "model": "mancer",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "mancer/weaver",
+          "name": "Mancer: Weaver (alpha)",
+          "input_price_per_token": 4e-07,
+          "output_price_per_token": 7.5e-07,
+          "input_price_per_million_tokens": 0.39999999999999997,
+          "output_price_per_million_tokens": 0.75,
+          "context_length": 8000
+        }
+      ]
+    },
+    {
+      "model": "undi95",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "undi95/remm-slerp-l2-13b",
+          "name": "ReMM SLERP 13B",
+          "input_price_per_token": 3.5e-07,
+          "output_price_per_token": 6.5e-07,
+          "input_price_per_million_tokens": 0.35,
+          "output_price_per_million_tokens": 0.65,
+          "context_length": 6144
+        }
+      ]
+    },
+    {
+      "model": "gryphe",
+      "base_url": "https://openrouter.ai/api/v1",
+      "sub_models": [
+        {
+          "id": "gryphe/mythomax-l2-13b",
+          "name": "MythoMax 13B",
+          "input_price_per_token": 8e-08,
+          "output_price_per_token": 1.1e-07,
+          "input_price_per_million_tokens": 0.08,
+          "output_price_per_million_tokens": 0.11,
+          "context_length": 8192
+        }
+      ]
+    }
+  ]
+}

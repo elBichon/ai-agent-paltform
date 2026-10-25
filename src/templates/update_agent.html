@@ -1,0 +1,306 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<div class="create-agent-wrapper">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <div class="card-sleek">
+
+        <div class="card-header-sleek">
+          <h3>
+            <i class="fas fa-pen-fancy"></i>
+            Update Agent: <span class="agent-name">{{ agent.name }}</span>
+          </h3>
+        </div>
+
+        <div class="card-body-sleek">
+          <form method="POST" id="updateForm">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+            <div class="mb-3">
+              <label for="name" class="form-label-sleek">
+                <i class="fas fa-tag"></i> Name <span class="required-star">*</span>
+              </label>
+              <input type="text" class="form-control form-control-sleek" id="name" name="name" value="{{ agent.name }}" placeholder="e.g. Financial Analyst Agent" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="description" class="form-label-sleek">
+                <i class="fas fa-align-left"></i> Description
+              </label>
+              <textarea class="form-control form-control-sleek" id="description" name="description" rows="2" placeholder="What does this agent do?">{{ agent.description }}</textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label-sleek">
+                <i class="fas fa-tags"></i> Agent Assignment Groups (Tags)
+              </label>
+              <div class="form-check-group">
+                {% for g_name in groups %}
+                <div class="form-check-sleek-item">
+                  <input type="checkbox" name="tags" value="{{ g_name }}" id="tag_group_{{ g_name }}" {% if g_name in agent_tags %}checked{% endif %}>
+                  <label for="tag_group_{{ g_name }}">
+                    <i class="fas fa-folder text-muted" style="margin-right: 4px; font-size: 0.8rem;"></i> {{ g_name }}
+                  </label>
+                </div>
+                {% else %}
+                <div class="text-muted small py-2">No groups have been created yet.</div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="status" class="form-label-sleek">
+                  <i class="fas fa-eye"></i> Status
+                </label>
+                <select class="form-select form-select-sleek" id="status" name="status">
+                  <option value="private" {% if agent.status == 'private' %}selected{% endif %}>Private</option>
+                  <option value="public" {% if agent.status == 'public' %}selected{% endif %}>Public</option>
+                </select>
+              </div>
+              <div class="col-md-6 d-flex align-items-end">
+                <div class="form-check-sleek">
+                  <input class="form-check-input" type="checkbox" id="rag_enabled" name="rag_enabled" {% if agent.rag_enabled %}checked{% endif %}>
+                  <label class="form-check-label" for="rag_enabled">
+                    <i class="fas fa-database" style="color: #2563eb;"></i> Enable RAG
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <div class="section-title">
+              <i class="fas fa-sliders-h"></i> Agent Configuration
+            </div>
+
+            <div class="mb-3">
+              <label for="prompt" class="form-label-sleek">
+                <i class="fas fa-comment-dots"></i> System Prompt <span class="required-star">*</span>
+              </label>
+              <textarea class="form-control form-control-sleek" id="prompt" name="prompt" rows="4" placeholder="Tell the agent what to do..." required>{{ prompt.prompt }}</textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="rules" class="form-label-sleek">
+                <i class="fas fa-gavel"></i> Rules
+              </label>
+              <textarea class="form-control form-control-sleek" id="rules" name="rules" rows="2" placeholder="Strict rules to follow...">{{ prompt.rules }}</textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="skills" class="form-label-sleek">
+                <i class="fas fa-brain"></i> Skills
+              </label>
+              <textarea class="form-control form-control-sleek" id="skills" name="skills" rows="2" placeholder="Capabilities of the agent...">{{ prompt.skills }}</textarea>
+            </div>
+
+            <hr class="section-divider">
+
+            <div class="section-title">
+              <i class="fas fa-tools"></i> Infrastructure Tools
+            </div>
+
+            <div class="cascade-row mb-3">
+              <div class="cascade-col">
+                <label class="form-label-sleek" for="serverSelect">
+                  <i class="fas fa-server"></i> 1. Select MCP Server
+                </label>
+                <select class="form-select form-select-sleek" id="serverSelect" onchange="handleServerChange()">
+                  <option value="">Choose an MCP Server...</option>
+                  {% for server in servers %}
+                  <option value="{{ server.id }}" data-name="{{ server.name }}" data-tools='{{ server.tool_names | tojson }}'>
+                    {{ server.name }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div class="cascade-col tool-dropdown-container" id="toolDropdownWrapper">
+                <label class="form-label-sleek" for="toolSelect">
+                  <i class="fas fa-wrench"></i> 2. Select Associated Tool
+                </label>
+                <select class="form-select form-select-sleek" id="toolSelect">
+                  <option value="">Select a server first...</option>
+                </select>
+              </div>
+
+              <div class="cascade-btn-col">
+                <button class="btn-add-sleek" type="button" onclick="addIntegration()">
+                  <i class="fas fa-plus"></i> Add Tool
+                </button>
+              </div>
+            </div>
+
+            <div id="selectedIntegrations" class="mb-4">
+              <label class="form-label-sleek">
+                <i class="fas fa-list"></i> Target Agent Active Capability Stack
+              </label>
+              <ul id="integrationList" class="integration-list-sleek">
+                {% for int in current_integrations %}
+                <li data-token="{{ int.id }}::all">
+                  <div>
+                    <span class="badge-type me-2">MCP Node</span>
+                    <span class="integration-name">{{ int.name }}</span>
+                    <span class="tool-name-text text-muted"><i>Active Context</i></span>
+                  </div>
+                  <div>
+                    <input type="hidden" name="integrations" value="{{ int.id }}">
+                    <button type="button" class="btn-remove" onclick="removeIntegration(this, '{{ int.id }}::all')">
+                      <i class="fas fa-times"></i> Disconnect
+                    </button>
+                  </div>
+                </li>
+                {% endfor %}
+                {% if not current_integrations %}
+                <li class="empty-integrations" id="emptyMessage">
+                  <i class="fas fa-inbox" style="color: #94a3b8; margin-right: 8px;"></i>
+                  No integration parameters mapped to this layout context yet.
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+
+            <div class="alert-info-sleek">
+              <i class="fas fa-info-circle"></i>
+              <span>Saving updates generates a new configuration release version <strong>(Current tracking sequence: v{{ prompt.version }})</strong>.</span>
+            </div>
+
+            <div class="form-actions-right">
+              <a href="/dashboard" class="btn-secondary-sleek">Cancel</a>
+              <button type="submit" class="btn-success-sleek-lg">
+                <i class="fas fa-save"></i> Save System Parameters
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const selectedIds = new Set();
+const integrationList = document.getElementById('integrationList');
+const emptyMessage = document.getElementById('emptyMessage');
+const serverSelect = document.getElementById('serverSelect');
+const toolSelect = document.getElementById('toolSelect');
+const toolDropdownWrapper = document.getElementById('toolDropdownWrapper');
+
+// Initialize with database-backed active records on DOM load
+document.querySelectorAll('#integrationList li').forEach(li => {
+    const token = li.getAttribute('data-token');
+    if (token) selectedIds.add(token);
+});
+
+// Executed when a parent MCP cluster node changes
+function handleServerChange() {
+    const selectedOption = serverSelect.options[serverSelect.selectedIndex];
+    const rawTools = selectedOption?.getAttribute('data-tools');
+
+    // Clear old downstream entries
+    toolSelect.innerHTML = '';
+
+    if (!selectedOption.value || !rawTools) {
+        toolSelect.innerHTML = '<option value="">Select a server first...</option>';
+        toolDropdownWrapper.classList.remove('active');
+        return;
+    }
+
+    try {
+        const toolsArr = JSON.parse(rawTools);
+
+        if (toolsArr && toolsArr.length > 0) {
+            toolSelect.innerHTML = '<option value="">Choose a specific tool execution frame...</option>';
+            toolsArr.forEach(toolName => {
+                const opt = document.createElement('option');
+                opt.value = toolName;
+                opt.textContent = toolName;
+                toolSelect.appendChild(opt);
+            });
+            toolDropdownWrapper.classList.add('active');
+        } else {
+            toolSelect.innerHTML = '<option value="">No tools declared on this node server.</option>';
+            toolDropdownWrapper.classList.add('active');
+        }
+    } catch (e) {
+        console.error("Error parsing target node mapping list parameters", e);
+        toolSelect.innerHTML = '<option value="">Error compiling capabilities mapping...</option>';
+    }
+}
+
+// Staging action mapping
+function addIntegration() {
+    const serverId = serverSelect.value;
+    const serverOption = serverSelect.options[serverSelect.selectedIndex];
+    const serverName = serverOption?.getAttribute('data-name');
+    const toolName = toolSelect.value;
+
+    if (!serverId || !serverName) {
+        alert('Please select a structural framework server context.');
+        return;
+    }
+
+    // Creating unique composite keys to prevent duplicate links
+    const uniqueMappingToken = `${serverId}::${toolName || 'all'}`;
+
+    if (selectedIds.has(uniqueMappingToken)) {
+        alert('This specific capability route routing framework has already been staged.');
+        return;
+    }
+
+    selectedIds.add(uniqueMappingToken);
+
+    const emptyMsg = document.getElementById('emptyMessage');
+    if (emptyMsg) {
+        emptyMsg.remove();
+    }
+
+    const li = document.createElement('li');
+    li.setAttribute('data-token', uniqueMappingToken);
+
+    // Set text display if a specific target sub-tool choice was specified
+    const toolSpecifierHtml = toolName
+        ? `<span class="tool-name-text"><i class="fas fa-caret-right text-muted"></i> ${toolName}</span>`
+        : `<span class="tool-name-text text-muted"><i>Full Server Access</i></span>`;
+
+    li.innerHTML = `
+        <div>
+            <span class="badge-type me-2">MCP Node</span>
+            <span class="integration-name">${serverName}</span>
+            ${toolSpecifierHtml}
+        </div>
+        <div>
+            <input type="hidden" name="integrations" value="${serverId}">
+            <button type="button" class="btn-remove" onclick="removeIntegration(this, '${uniqueMappingToken}')">
+                <i class="fas fa-times"></i> Disconnect
+            </button>
+        </div>
+    `;
+    integrationList.appendChild(li);
+
+    // Reset selectors
+    serverSelect.value = '';
+    toolSelect.innerHTML = '<option value="">Select a server first...</option>';
+    toolDropdownWrapper.classList.remove('active');
+}
+
+function removeIntegration(btn, token) {
+    const li = btn.closest('li');
+    li.remove();
+    selectedIds.delete(token);
+
+    if (integrationList.querySelectorAll('li:not(#emptyMessage)').length === 0) {
+        const empty = document.createElement('li');
+        empty.className = 'empty-integrations';
+        empty.id = 'emptyMessage';
+        empty.innerHTML = '<i class="fas fa-inbox" style="color: #94a3b8; margin-right: 8px;"></i> No integration parameters mapped to this layout context yet.';
+        integrationList.appendChild(empty);
+    }
+}
+</script>
+{% endblock %}
